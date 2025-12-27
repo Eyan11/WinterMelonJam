@@ -4,7 +4,7 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private RopeMovement ropeMove;
-    private int plateState = 0;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     /*void Start()
