@@ -7,6 +7,7 @@ TagManager:
   - Breakable
   - Non-Breakable
   - Collectable
+  - Rope
   layers:
   - Default
   - TransparentFX
