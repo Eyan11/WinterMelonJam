@@ -29,7 +29,7 @@ public class Shell : MonoBehaviour
             lifetime -= Time.fixedDeltaTime;
             if (lifetime < 0) BreakShell();
         }
-        else if ((shellStartPos-transform.position).sqrMagnitude >= maxDistanceSquared || body.linearVelocityX < 0.5f)
+        else if ((shellStartPos - transform.position).sqrMagnitude >= maxDistanceSquared || Mathf.Abs(body.linearVelocityX) < 0.5f)
         {
             body.linearVelocity = Vector3.zero;
             body.bodyType = RigidbodyType2D.Static;

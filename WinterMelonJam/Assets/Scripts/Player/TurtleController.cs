@@ -30,6 +30,10 @@ public class TurtleController : MonoBehaviour
     {
         if (CheckForShell()) body.linearVelocityX = moveInput * turtleNoShellMoveSpeed;
         else body.linearVelocityX = moveInput * turtleNormalMoveSpeed;
+
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        shellThrowDirection = (worldMousePos - transform.position).x;
+        shellThrowDirection = shellThrowDirection / Mathf.Abs(shellThrowDirection); // Normalizes
     }
 
     // Called when entering this mask transformation
@@ -55,27 +59,18 @@ public class TurtleController : MonoBehaviour
         if (gameObject.activeInHierarchy == false) return;
 
         moveInput = context.ReadValue<Vector2>().x;
-        if (moveInput != 0 && shell == null) shellThrowDirection = moveInput;
     }
 
     // Uses InputAction to track when the interaction key is used; when used, try to charge
     public void OnInteract(InputAction.CallbackContext context)
     {
-        // Prevents ability unless button was initialized and there is no shell
+        // Prevents ability unless button was released and there is no shell
         if (gameObject.activeInHierarchy == false) return;
-        if (context.started == false) return;
+        if (context.canceled == false) return;
         if (CheckForShell()) return;
 
-        shell = Instantiate(shellTemplate);
+        shell = Instantiate(shellTemplate, transform.position, Quaternion.identity);
         Rigidbody2D shellBody = shell.GetComponent<Rigidbody2D>();
-        if (shellBody == null)
-        {
-            Destroy(shell);
-            shell = null;
-            Debug.LogError("ERROR: Shell is missing a rigidbody! Clearing shell!");
-            return;
-        }
-        shell.transform.position = transform.position;
-        shellBody.linearVelocity = new Vector2(shellThrowDirection * shellThrowSpeed, 0);
+        shellBody.linearVelocityX = shellThrowDirection * shellThrowSpeed;
     }
 }

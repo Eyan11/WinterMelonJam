@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7033905382859404500}
   - component: {fileID: 5383794371500564131}
   - component: {fileID: 6558330897841077460}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shell
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 7415577588723904582}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.50596, y: -3.69, z: 0}
-  m_LocalScale: {x: 1.4131773, y: 1.327, z: 1.327}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -166,7 +166,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6558330897841077460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shell
   maxLifetime: 6
-  maxDistanceSquared: 5
+  maxDistanceSquared: 10
   lifetime: 0
