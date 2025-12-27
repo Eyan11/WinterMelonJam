@@ -44,6 +44,18 @@ public class RhinoController : MonoBehaviour
         else body.linearVelocity = new Vector2(moveInput * rhinoMoveSpeed, body.linearVelocity.y);
     }
 
+    // Called when entering this mask transformation
+    public void OnMaskEnter()
+    {
+
+    }
+
+    // Called when leaving this mask transformation
+    public void OnMaskExit()
+    {
+
+    }
+
     // **********************************************
     // HELPER FUNCTIONS
 

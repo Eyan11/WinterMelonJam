@@ -44,7 +44,7 @@ public class MaskManager : MonoBehaviour
                 monkeyObj.SetActive(false);
                 break;
             case MaskType.Rhino:
-                //rhinoController.OnMaskExit();
+                rhinoController.OnMaskExit();
                 rhinoObj.SetActive(false);
                 break;
             case MaskType.Turtle:
@@ -72,7 +72,7 @@ public class MaskManager : MonoBehaviour
                 break;
             case 'R':
                 curMask = MaskType.Rhino;
-                //rhinoController.OnMaskEnter();
+                rhinoController.OnMaskEnter();
                 rhinoObj.SetActive(true);
                 break;
             case 'T':
