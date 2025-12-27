@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;  // IMPORTANT: make sure you have this to work with input system
 
@@ -7,14 +6,21 @@ public class RhinoController : MonoBehaviour
     // Settings for charge cooldown and speed
     [SerializeField] private float rhinoMoveSpeed;
     [SerializeField] private float rhinoChargeSpeed;
+    [SerializeField] private float stunDuration;
     [SerializeField] private float maxChargeDuration;
     [SerializeField] private float chargeCooldownDuration;
+    // State management
     private bool charging = false;
+    private bool stunned = false;
     private float chargeDirection = 1;
     private float chargeTimeLeft;
-    private Rigidbody2D body;
+    private float stunTimeLeft;
     private float moveInput;
     private float nextChargeTick;
+    private int environmentMask;
+    // Player info
+    private Vector3 scale;
+    private Rigidbody2D body;
 
     // **********************************************
     // UNITY ACTIONS
@@ -23,25 +29,50 @@ public class RhinoController : MonoBehaviour
     private void Awake()
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
+        scale = transform.localScale;
+        environmentMask = LayerMask.GetMask("Default", "Interactable");
     }
 
     // Handles changes to rigidbody velocity
     private void FixedUpdate()
     {
         // If charging, then use the direction that the player is facing
-        if (chargeTimeLeft > 0)
+        if (charging)
         {
             chargeTimeLeft -= Time.fixedDeltaTime;
             if (chargeTimeLeft < 0)
             {
                 DeactivateCharge();
-                return;
+                goto SpeedControl;
             }
-           // Physics2D[] objs = Physics2D.BoxCastAll(transform.position, transform.size);
+
+            float angle = chargeDirection == 1 ? 0 : 180;
+            RaycastHit2D[] objs = Physics2D.BoxCastAll(transform.position + Vector3.right * scale.x * chargeDirection / 2,
+                scale - Vector3.down * 0.1f, 0, Vector2.zero, 0.01f, environmentMask
+            );
+
+            foreach (RaycastHit2D obj in objs)
+            {
+                if (obj.transform.CompareTag("Breakable") == true) Destroy(obj.transform.gameObject);
+                else
+                {
+                    DeactivateCharge();
+                    stunTimeLeft = stunDuration;
+                    stunned = true;
+                    goto SpeedControl;
+                }
+            }
         }
+        SpeedControl:
         // Move at charge speed if charging
         if (charging) body.linearVelocity = new Vector2(chargeDirection * rhinoChargeSpeed, body.linearVelocity.y);
-        else body.linearVelocity = new Vector2(moveInput * rhinoMoveSpeed, body.linearVelocity.y);
+        else if (stunned == false) body.linearVelocity = new Vector2(moveInput * rhinoMoveSpeed, body.linearVelocity.y);
+
+        if (stunned == true)
+        {
+            stunTimeLeft -= Time.fixedDeltaTime;
+            if (stunTimeLeft <= 0) stunned = false;
+        }
     }
 
     // Called when entering this mask transformation
