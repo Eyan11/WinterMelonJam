@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 public class TurtleController : MonoBehaviour
 {
     // Settings for throw distance, speed, and what the hell the shell is
-    [SerializeField] private float turtleMoveSpeed;
+    [SerializeField] private float turtleNormalMoveSpeed;
+    [SerializeField] private float turtleNoShellMoveSpeed;
     [SerializeField] private float shellThrowSpeed;
     [SerializeField] private GameObject shellTemplate;
     // Shell data (shell shock!)
@@ -27,7 +28,8 @@ public class TurtleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.linearVelocity = new Vector2(moveInput * turtleMoveSpeed, body.linearVelocity.y);
+        if (CheckForShell()) body.linearVelocityX = moveInput * turtleNoShellMoveSpeed;
+        else body.linearVelocityX = moveInput * turtleNormalMoveSpeed;
     }
 
     // Called when entering this mask transformation
@@ -35,6 +37,14 @@ public class TurtleController : MonoBehaviour
 
     // Called when leaving this mask transformation
     public void OnMaskExit() {}
+
+    // **********************************************
+    // HELPER FUNCTIONS
+
+    private bool CheckForShell()
+    {
+        return (shell != null && shell.IsDestroyed() == false);
+    }
 
     // **********************************************
     // EVENTS
@@ -54,7 +64,7 @@ public class TurtleController : MonoBehaviour
         // Prevents ability unless button was initialized and there is no shell
         if (gameObject.activeInHierarchy == false) return;
         if (context.started == false) return;
-        if (shell != null && shell.IsDestroyed() == false) return;
+        if (CheckForShell()) return;
 
         shell = Instantiate(shellTemplate);
         Rigidbody2D shellBody = shell.GetComponent<Rigidbody2D>();
@@ -65,6 +75,7 @@ public class TurtleController : MonoBehaviour
             Debug.LogError("ERROR: Shell is missing a rigidbody! Clearing shell!");
             return;
         }
+        shell.transform.position = transform.position;
         shellBody.linearVelocity = new Vector2(shellThrowDirection * shellThrowSpeed, 0);
     }
 }

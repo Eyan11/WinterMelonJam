@@ -259,13 +259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ac7d5aa6cb27409f60188fb3d8f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyController
-  interactRadius: 0
+  interactRadius: 0.5
   climbSpeed: 1
   throwSpeed: 1
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 0
-  moveSpeed: 1
+    m_Bits: 128
+  moveSpeed: 3
 --- !u!1 &2034059708840420919
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2184555444c5adc48b7d0c3b009fa83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GiraffeController
-  flamingoWalkSpeed: 2
+  flamingoMoveSpeed: 3
   updraftPower: 5
 --- !u!1 &2239850967413529913
 GameObject:
@@ -690,6 +690,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 856489611420222593}
+        m_TargetAssemblyTypeName: RhinoController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6042971975778970719}
+        m_TargetAssemblyTypeName: TurtleController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: aad7f61d-4ca6-4d64-8fd5-a9b4a7ec33ee
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -857,7 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5868db018b5c454c82485654651e7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurtleController
-  turtleMoveSpeed: 0.5
+  turtleNormalMoveSpeed: 1
+  turtleNoShellMoveSpeed: 3
   shellThrowSpeed: 5
   shellTemplate: {fileID: 7415577588723904582, guid: b1722e248151686428c002617de960dd, type: 3}
 --- !u!1 &4900587880370665766

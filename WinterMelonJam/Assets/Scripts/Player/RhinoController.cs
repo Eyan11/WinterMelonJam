@@ -17,7 +17,7 @@ public class RhinoController : MonoBehaviour
     private float stunTimeLeft;
     private float moveInput;
     private float nextChargeTick;
-    private int environmentMask;
+    private int solidMask;
     // Player info
     private Vector3 scale;
     private Rigidbody2D body;
@@ -30,7 +30,7 @@ public class RhinoController : MonoBehaviour
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
         scale = transform.localScale;
-        environmentMask = LayerMask.GetMask("Default", "Interactable");
+        solidMask = LayerMask.GetMask("Floor", "Default", "Interactable");
     }
 
     // Handles changes to rigidbody velocity
@@ -48,7 +48,7 @@ public class RhinoController : MonoBehaviour
 
             float angle = chargeDirection == 1 ? 0 : 180;
             RaycastHit2D[] objs = Physics2D.BoxCastAll(transform.position + Vector3.right * scale.x * chargeDirection / 2,
-                scale - Vector3.down * 0.1f, 0, Vector2.zero, 0.01f, environmentMask
+                scale - Vector3.down * 0.1f, 0, Vector2.zero, 0.01f, solidMask
             );
 
             foreach (RaycastHit2D obj in objs)
