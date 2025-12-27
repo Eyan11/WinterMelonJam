@@ -37,29 +37,32 @@ public class MaskManager : MonoBehaviour
         switch(curMask)
         {
             case MaskType.Default:
+                if(maskChar == 'D')
+                    return;
+                
                 defaultController.OnMaskExit();
                 defaultObj.SetActive(false);
                 break;
             case MaskType.Monkey:
-                if (numMasksUnlocked < 1)
+                if (numMasksUnlocked < 1 || maskChar == 'M')
                     return;
                 monkeyController.OnMaskExit();
                 monkeyObj.SetActive(false);
                 break;
             case MaskType.Rhino:
-                if (numMasksUnlocked < 2)
+                if (numMasksUnlocked < 2 || maskChar == 'R')
                     return;
                 rhinoController.OnMaskExit();
                 rhinoObj.SetActive(false);
                 break;
             case MaskType.Turtle:
-                if (numMasksUnlocked < 3)
+                if (numMasksUnlocked < 3 || maskChar == 'T')
                     return;
                 turtleController.OnMaskExit();
                 turtleObj.SetActive(false);
                 break;
             case MaskType.Flamingo:
-                if (numMasksUnlocked < 4)
+                if (numMasksUnlocked < 4 || maskChar == 'F')
                     return;
                 flamingoController.OnMaskExit();
                 flamingoObj.SetActive(false);
@@ -71,28 +74,29 @@ public class MaskManager : MonoBehaviour
         {
             case 'D':
                 curMask = MaskType.Default;
-                defaultController.OnMaskEnter();
                 defaultObj.SetActive(true);
+                defaultController.OnMaskEnter();
                 break;
             case 'M':
                 curMask = MaskType.Monkey;
-                monkeyController.OnMaskEnter();
                 monkeyObj.SetActive(true);
+                monkeyController.OnMaskEnter();
                 break;
             case 'R':
                 curMask = MaskType.Rhino;
-                rhinoController.OnMaskEnter();
                 rhinoObj.SetActive(true);
+                rhinoController.OnMaskEnter();
                 break;
             case 'T':
                 curMask = MaskType.Turtle;
-                turtleController.OnMaskEnter();
                 turtleObj.SetActive(true);
+                turtleController.OnMaskEnter();
                 break;
             case 'F':
                 curMask = MaskType.Flamingo;
-                flamingoController.OnMaskEnter();
                 flamingoObj.SetActive(true);
+                flamingoController.OnMaskEnter();
+
                 break;
             default:
                 Debug.LogError("Incorrect character input in PlayerController.SwitchMask");

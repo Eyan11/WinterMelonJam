@@ -20,7 +20,7 @@ public class MonkeyController : MonoBehaviour
 
 
     // Handles changes to rigidbody velocity
-    private void FixedUpdate()
+    private void Update()
     {
         body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
     }
@@ -29,6 +29,9 @@ public class MonkeyController : MonoBehaviour
     // Handles movement input. Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
+        if(!gameObject.activeInHierarchy)
+            return;
+        
         moveInput = context.ReadValue<Vector2>().x;
     }
 
@@ -58,6 +61,6 @@ public class MonkeyController : MonoBehaviour
     // Called when leaving this mask transformation
     public void OnMaskExit()
     {
-        
+        moveInput = 0f;
     }
 }

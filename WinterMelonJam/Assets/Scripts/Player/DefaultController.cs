@@ -36,8 +36,6 @@ public class DefaultController : MonoBehaviour
         body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
         GroundCheck();
         JumpCalculations();
-        //Debug.Log("canJumpTimer: " + canJumpTimer);
-        //Debug.Log("jumpInputTimer: " + jumpInputTimer);
     }
 
 
@@ -54,7 +52,6 @@ public class DefaultController : MonoBehaviour
             if(hits[i].transform.gameObject.layer == floorMask)
             {
                 canJumpTimer = coyoteTime; 
-                Debug.Log("Hitting Floor Layer");
                 return;
             }
             else if(hits[i].transform.gameObject.layer == interactableMask)
@@ -62,7 +59,6 @@ public class DefaultController : MonoBehaviour
                 if(hits[i].transform.gameObject.CompareTag("Breakable") || hits[i].transform.gameObject.CompareTag("Non-Breakable"))
                 {
                     canJumpTimer = coyoteTime;
-                    Debug.Log("Hitting Breakable or Non-Breakable tag");
                     return;
                 }
             }
@@ -94,7 +90,11 @@ public class DefaultController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
+        if(!gameObject.activeInHierarchy)
+            return;
+        
         moveInput = context.ReadValue<Vector2>().x;
+
         if (moveInput != 0) 
             moveInput = Mathf.Sign(moveInput);
             moveDir = moveInput;
@@ -103,6 +103,9 @@ public class DefaultController : MonoBehaviour
     // Uses InputAction to get the jump input
     public void OnJump(InputAction.CallbackContext context)
     {
+        if(!gameObject.activeInHierarchy)
+            return;
+        
         if(context.started)
         {
             jumpInputTimer = jumpBufferTime;
@@ -121,6 +124,8 @@ public class DefaultController : MonoBehaviour
     // Called when leaving this mask transformation
     public void OnMaskExit()
     {
-        
+        jumpInputTimer = -1f;
+        canJumpTimer = -1f;
+        moveInput = 0f;
     }
 }
