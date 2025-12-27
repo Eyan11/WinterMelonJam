@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7489071410266120305
 Transform:
   m_ObjectHideFlags: 0
@@ -127,6 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0658f80a24fbe4cb497b47cda9ee6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhinoController
+  rhinoMoveSpeed: 0
+  rhinoChargeSpeed: 0
+  stunDuration: 0
+  maxChargeDuration: 0
+  chargeCooldownDuration: 0
 --- !u!1 &2002174383957274292
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7149685031828932262
 Transform:
   m_ObjectHideFlags: 0
@@ -279,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &102308885717086902
 Transform:
   m_ObjectHideFlags: 0
@@ -606,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8671833542026736296
 Transform:
   m_ObjectHideFlags: 0
