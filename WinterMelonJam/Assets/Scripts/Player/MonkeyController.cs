@@ -9,7 +9,6 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float moveSpeed;
     private Rigidbody2D body;
-    private float climbInput;
     private float moveInput;
 
 

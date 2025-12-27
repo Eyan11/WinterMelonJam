@@ -210,9 +210,9 @@ GameObject:
   - component: {fileID: 496147820}
   - component: {fileID: 496147819}
   - component: {fileID: 496147818}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 603760670}
   - component: {fileID: 603760669}
   - component: {fileID: 603760668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,9 +745,9 @@ GameObject:
   - component: {fileID: 963151245}
   - component: {fileID: 963151244}
   - component: {fileID: 963151243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Block (1)
-  m_TagString: Untagged
+  m_TagString: Non-Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 1275631201}
   - component: {fileID: 1275631200}
   - component: {fileID: 1275631199}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1507,22 +1507,6 @@ PrefabInstance:
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
       value: 'Player/StopSwitchingMasks[/Keyboard/q]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2034059708840420919, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_Name
