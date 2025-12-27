@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 1011277583}
   - component: {fileID: 1011277582}
   - component: {fileID: 1011277581}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MiddleRope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1570,7 +1570,7 @@ GameObject:
   - component: {fileID: 2058486415}
   - component: {fileID: 2058486414}
   - component: {fileID: 2058486413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RopeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
