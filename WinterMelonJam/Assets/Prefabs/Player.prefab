@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0658f80a24fbe4cb497b47cda9ee6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhinoController
-  rhinoMoveSpeed: 0
-  rhinoChargeSpeed: 0
-  stunDuration: 0
-  maxChargeDuration: 0
-  chargeCooldownDuration: 0
+  rhinoMoveSpeed: 2
+  rhinoChargeSpeed: 6
+  stunDuration: 2
+  maxChargeDuration: 5
+  chargeCooldownDuration: 4
 --- !u!1 &2002174383957274292
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2184555444c5adc48b7d0c3b009fa83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GiraffeController
+  flamingoWalkSpeed: 2
+  updraftPower: 5
 --- !u!1 &2239850967413529913
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +598,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 856489611420222593}
+        m_TargetAssemblyTypeName: RhinoController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6042971975778970719}
+        m_TargetAssemblyTypeName: TurtleController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5076337422347266572}
+        m_TargetAssemblyTypeName: FlamingoController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 335b972f-9821-4939-8278-1a680574c920
     m_ActionName: 'Player/Move[/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
@@ -612,12 +650,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5076337422347266572}
+        m_TargetAssemblyTypeName: FlamingoController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d7a0ef76-3eca-4d2c-88bb-1cfd23ca7b46
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8594295822144802863}
         m_TargetAssemblyTypeName: MonkeyController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5076337422347266572}
+        m_TargetAssemblyTypeName: FlamingoController, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -795,9 +857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5868db018b5c454c82485654651e7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurtleController
-  turtleMoveSpeed: 0
-  shellThrowSpeed: 0
-  shellTemplate: {fileID: 0}
+  turtleMoveSpeed: 0.5
+  shellThrowSpeed: 5
+  shellTemplate: {fileID: 7415577588723904582, guid: b1722e248151686428c002617de960dd, type: 3}
 --- !u!1 &4900587880370665766
 GameObject:
   m_ObjectHideFlags: 0

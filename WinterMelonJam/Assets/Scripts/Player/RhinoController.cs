@@ -36,7 +36,7 @@ public class RhinoController : MonoBehaviour
     // Handles changes to rigidbody velocity
     private void FixedUpdate()
     {
-        // If charging, then use the direction that the player is facing
+        // If charging, lower charge timer and check for collisions
         if (charging)
         {
             chargeTimeLeft -= Time.fixedDeltaTime;
@@ -76,16 +76,10 @@ public class RhinoController : MonoBehaviour
     }
 
     // Called when entering this mask transformation
-    public void OnMaskEnter()
-    {
-
-    }
+    public void OnMaskEnter() {}
 
     // Called when leaving this mask transformation
-    public void OnMaskExit()
-    {
-
-    }
+    public void OnMaskExit() {}
 
     // **********************************************
     // HELPER FUNCTIONS
@@ -102,6 +96,7 @@ public class RhinoController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (gameObject.activeInHierarchy == false) return;
         moveInput = context.ReadValue<Vector2>().x;
         if (moveInput != 0 && charging == false) chargeDirection = moveInput;
     }
@@ -109,6 +104,9 @@ public class RhinoController : MonoBehaviour
     // Uses InputAction to track when the interaction key is used; when used, try to charge
     public void OnInteract(InputAction.CallbackContext context)
     {
+        // Does ability only when the button is initialized and cooldown is off
+        if (gameObject.activeInHierarchy == false) return;
+        if (context.started == false) return;
         float currentTime = Time.fixedTime;
         if (nextChargeTick > currentTime || charging == true) return;
 
