@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchMasks",
+                    "type": "Button",
+                    "id": "9f01c0f1-5c13-47b3-a220-cbc75fd86225",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -111,6 +120,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bbfc54eb-9ec1-4cf3-89a3-7e246d1f6187",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchMasks",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

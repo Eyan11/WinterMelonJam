@@ -10,7 +10,7 @@ public class MaskManager : MonoBehaviour
 
     private enum MaskType { Default, Monkey, Rhino, Turtle, Flamingo }
     private MaskType curMask = MaskType.Default;
-    private MaskType masksUnlocked = MaskType.Default;
+    private int numMasksUnlocked = 4;   // Start with all masks unlocked
     private DefaultController defaultController;
     private MonkeyController monkeyController;
     private RhinoController rhinoController;
@@ -19,7 +19,7 @@ public class MaskManager : MonoBehaviour
 
 
     private void Awake()
-    {
+    {   
         defaultController = defaultObj.GetComponent<DefaultController>();
         monkeyController = monkeyObj.GetComponent<MonkeyController>();
         rhinoController = rhinoObj.GetComponent<RhinoController>();
@@ -32,6 +32,7 @@ public class MaskManager : MonoBehaviour
     // Switches mask by exiting/disabling previous mask and entering/enabling new mask
     public void SwitchMask(char maskChar)
     {
+
         // Exit old mask
         switch(curMask)
         {
@@ -40,18 +41,26 @@ public class MaskManager : MonoBehaviour
                 defaultObj.SetActive(false);
                 break;
             case MaskType.Monkey:
+                if (numMasksUnlocked < 1)
+                    return;
                 monkeyController.OnMaskExit();
                 monkeyObj.SetActive(false);
                 break;
             case MaskType.Rhino:
+                if (numMasksUnlocked < 2)
+                    return;
                 rhinoController.OnMaskExit();
                 rhinoObj.SetActive(false);
                 break;
             case MaskType.Turtle:
+                if (numMasksUnlocked < 3)
+                    return;
                 turtleController.OnMaskExit();
                 turtleObj.SetActive(false);
                 break;
             case MaskType.Flamingo:
+                if (numMasksUnlocked < 4)
+                    return;
                 flamingoController.OnMaskExit();
                 flamingoObj.SetActive(false);
                 break;
