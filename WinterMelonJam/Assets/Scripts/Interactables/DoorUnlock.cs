@@ -6,6 +6,7 @@ public class DoorUnlock : MonoBehaviour
     [SerializeField] private KeyCollection doorKey;
     
     
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created   
     void Start()
     {
@@ -15,7 +16,7 @@ public class DoorUnlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
     
     private void OnTriggerEnter2D(Collider2D interactor)
@@ -25,5 +26,15 @@ public class DoorUnlock : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+
+    public void OpenDoor()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void CloseDoor()
+    {
+        this.gameObject.SetActive(true);
+    }
+
 
 }

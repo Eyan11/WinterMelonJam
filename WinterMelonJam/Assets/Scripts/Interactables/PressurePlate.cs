@@ -4,6 +4,8 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private RopeMovement ropeMove;
+    [SerializeField] private DoorUnlock door;
+    public bool plateState;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,8 +26,18 @@ public class PressurePlate : MonoBehaviour
     {
         if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable"))
         {
+            plateState = true;
             GetComponent<SpriteRenderer>().color = Color.blue; 
-            ropeMove.LowerRope();
+            if (ropeMove == null)
+            {
+                door.OpenDoor();
+                return;
+            }
+            else
+            {
+                ropeMove.LowerRope();
+            }
+           
         }
     }
 
@@ -33,8 +45,17 @@ public class PressurePlate : MonoBehaviour
     {
         if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable"))
         {
+            plateState = false;
             GetComponent<SpriteRenderer>().color = Color.red;
-            ropeMove.RaiseRope(); 
+            if (ropeMove == null)
+            {
+                door.CloseDoor();
+                return;
+            }
+            else
+            {
+                ropeMove.RaiseRope();
+            }
         }
     }
 }
