@@ -31,16 +31,10 @@ public class TurtleController : MonoBehaviour
     }
 
     // Called when entering this mask transformation
-    public void OnMaskEnter()
-    {
-        
-    }
+    public void OnMaskEnter() {}
 
     // Called when leaving this mask transformation
-    public void OnMaskExit()
-    {
-        
-    }
+    public void OnMaskExit() {}
 
     // **********************************************
     // EVENTS
@@ -48,6 +42,8 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (gameObject.activeInHierarchy == false) return;
+
         moveInput = context.ReadValue<Vector2>().x;
         if (moveInput != 0 && shell == null) shellThrowDirection = moveInput;
     }
@@ -55,6 +51,9 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to track when the interaction key is used; when used, try to charge
     public void OnInteract(InputAction.CallbackContext context)
     {
+        // Prevents ability unless button was initialized and there is no shell
+        if (gameObject.activeInHierarchy == false) return;
+        if (context.started == false) return;
         if (shell != null && shell.IsDestroyed() == false) return;
 
         shell = Instantiate(shellTemplate);
