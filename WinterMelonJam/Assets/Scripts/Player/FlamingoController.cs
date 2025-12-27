@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class TurtleController : MonoBehaviour
+public class FlamingoController : MonoBehaviour
 {
-
 
 
     // Called when entering this mask transformation

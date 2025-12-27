@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TurtleController : MonoBehaviour
+public class DefaultController : MonoBehaviour
 {
 
 
