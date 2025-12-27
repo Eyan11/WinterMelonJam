@@ -31,7 +31,6 @@ public class MonkeyController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>().x;
-        Debug.Log("Moving:" + moveInput);
     }
 
 
