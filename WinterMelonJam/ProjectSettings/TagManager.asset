@@ -8,6 +8,8 @@ TagManager:
   - Non-Breakable
   - Collectable
   - Rope
+  - Wall
+  - Floor
   layers:
   - Default
   - TransparentFX
