@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     // Handles movement input. Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<float>();;
+        moveInput = context.ReadValue<Vector2>().x;
     }
 
 
