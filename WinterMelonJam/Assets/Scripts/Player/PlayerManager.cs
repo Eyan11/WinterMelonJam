@@ -89,4 +89,10 @@ public class PlayerManager : MonoBehaviour
             onUngroundedEvent();
     }
 
+    // Called when restart button is pressed from PlayerInput
+    public void OnRestart()
+    {
+        GameManager.Instance.RestartLevel();    // Make sure GameManager prefab is in your level for this to work
+    }
+
 }

@@ -68,6 +68,7 @@ public class RhinoController : MonoBehaviour
                 {
                     stunTimeLeft = stunDuration;
                     stunned = true;
+                    anim.SetBool("isStunned", stunned);
                     DeactivateCharge();
                 }
             }
@@ -83,6 +84,7 @@ public class RhinoController : MonoBehaviour
             if (stunTimeLeft <= 0)
             {
                 stunned = false;
+                anim.SetBool("isStunned", stunned);
                 maskWheelManager.LockWheel = false;
             }
         }
@@ -124,6 +126,7 @@ public class RhinoController : MonoBehaviour
     {
         nextChargeTick = Time.fixedTime + chargeCooldownDuration;
         charging = false;
+        anim.SetBool("isCharging", charging);
         if (stunned == false) maskWheelManager.LockWheel = false;
     }
 
@@ -149,6 +152,7 @@ public class RhinoController : MonoBehaviour
 
         chargeTimeLeft = maxChargeDuration;
         charging = true;
+        anim.SetBool("isCharging", charging);
         maskWheelManager.LockWheel = true;
     }
 }

@@ -1221,6 +1221,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 855114449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1396606698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 807536715633715693, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870997068987360953, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f189646ed733144e8488c4934c1dd54, type: 3}
 --- !u!1 &1465731655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,19 +1826,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_ActionId
-      value: 9f01c0f1-5c13-47b3-a220-cbc75fd86225
+      value: a5be14d6-f015-43c6-9a00-c8a8a1a19fba
       objectReference: {fileID: 0}
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_ActionId
-      value: 306d1bc8-73a2-4eb8-b1ef-5b51f690720d
+      value: 6ef2cb6d-e72c-49ba-b335-2b3a9e74099e
       objectReference: {fileID: 0}
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_ActionName
-      value: 'Player/StartSwitchingMasks[/Keyboard/q]'
+      value: 'Player/Restart[/Keyboard/r]'
       objectReference: {fileID: 0}
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
-      value: 'Player/StopSwitchingMasks[/Keyboard/q]'
+      value: 'UI/SwitchMasks[/Keyboard/q]'
       objectReference: {fileID: 0}
     - target: {fileID: 2034059708840420919, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_Name
@@ -1946,3 +2003,4 @@ SceneRoots:
   - {fileID: 2126444059891746346}
   - {fileID: 5342926125861573566}
   - {fileID: 3366836469753530670}
+  - {fileID: 1396606698}
