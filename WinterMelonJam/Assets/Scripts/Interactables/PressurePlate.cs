@@ -10,11 +10,11 @@ public class PressurePlate : MonoBehaviour
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    /*void Start()
+    void Start()
     {
-        
+        plateState = false;
     }
-    */
+    
 
     // Update is called once per frame
     void Update()
@@ -65,27 +65,4 @@ public class PressurePlate : MonoBehaviour
             }
         }
     }
-
-    /*
-    private void OnTriggerStay2D(Collider2D interactor)
-    {
-        if (interactor.CompareTag("Shell"))
-        {
-            plateState = true;
-            GetComponent<SpriteRenderer>().color = Color.blue; 
-            if (ropeMove != null)
-            {
-                ropeMove.LowerRope();
-            }
-            else if (door != null)
-            {
-                door.OpenDoor();
-            }
-            else if (platf != null)
-            {
-                platf.platOn();
-            }
-        }
-    }
-    */
 }

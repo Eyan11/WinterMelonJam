@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 344921115}
   m_Layer: 8
   m_Name: PressurePlat
-  m_TagString: Non-Breakable
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
