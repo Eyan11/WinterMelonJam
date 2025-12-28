@@ -20,7 +20,7 @@ public class MonkeyController : MonoBehaviour
     private int solidMask;
     private int interactableMask;
     private RaycastHit2D[] hits = new RaycastHit2D[20];
-    private bool isClimbing = false;
+    [SerializeField] private bool isClimbing = false;
     private float climbInput;
     private float maxClimbHeight;
     private float minClimbHeight;
@@ -32,7 +32,7 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float throwObjHeightOffset = 1f;
     [SerializeField] private float minThrowSpeed = 5f;
     [SerializeField] private float maxThrowSpeed = 50f;
-    private bool isThrowing = false;
+    [SerializeField] private bool isThrowing = false;
     private Camera cam;
     private Vector2 throwVector = Vector2.zero;
     private GameObject throwObj;
@@ -74,7 +74,6 @@ public class MonkeyController : MonoBehaviour
     {
         if (throwObj == null) return;
         bool testState = ValidateThrowPosition(throwObj);
-        Debug.Log("TESTING: " + testState);
         if (testState == false)
         {
             DropObject();
@@ -85,7 +84,6 @@ public class MonkeyController : MonoBehaviour
         throwBody.transform.rotation = Quaternion.identity;
         throwBody.linearVelocity = Vector2.zero;
         throwBody.angularVelocity = 0;
-
     }
 
     // Moves monkey vertically when climbing
@@ -161,6 +159,7 @@ public class MonkeyController : MonoBehaviour
 
     private void StartThrowing(GameObject obj)
     {
+        Debug.Log("HERE!");
         if (ValidateThrowPosition(obj) == false) return;
 
         Debug.Log("StartThrowing. Obj.name = " + obj.name);
@@ -209,14 +208,14 @@ public class MonkeyController : MonoBehaviour
         Debug.Log("Throwing Object at speed: " + throwVector);
     }
 
-    private void CheckForInteraction()
+    private List<Collider2D> GetSortedInteractables()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, interactableLayer);
         List<Collider2D> collList = new List<Collider2D>(hits);
 
         if (hits.Length <= 0)
-            return;
-        
+            return collList;
+
         // Use closest point of obj instead of its center/pivot point
         collList.Sort((a, b) => {
             float distA = ((Vector2)transform.position - a.ClosestPoint(transform.position)).sqrMagnitude;
@@ -224,19 +223,36 @@ public class MonkeyController : MonoBehaviour
             return distA.CompareTo(distB);
         });
 
+        return collList;
+    }
+
+    private void CheckForRope()
+    {
+        List<Collider2D> collList = GetSortedInteractables();
         GameObject hitObj = null;
-        foreach(Collider2D hit in collList)
+        foreach (Collider2D hit in collList)
         {
             hitObj = hit.transform.gameObject;
 
-            if(hitObj.CompareTag("Rope"))
+            if (hitObj.CompareTag("Rope"))
             {
                 StartClimbingRope(hit);
                 return;
             }
-            else if(hitObj.CompareTag("Non-Breakable"))
+        }
+    }
+
+    private void CheckForThrowables()
+    {
+        List<Collider2D> collList = GetSortedInteractables();
+        GameObject hitObj = null;
+        foreach (Collider2D hit in collList)
+        {
+            hitObj = hit.transform.gameObject;
+
+            if (hitObj.CompareTag("Non-Breakable"))
             {
-                StartThrowing(hitObj);
+                StartThrowing(hit.gameObject);
                 return;
             }
         }
@@ -293,18 +309,27 @@ public class MonkeyController : MonoBehaviour
             climbInput = Mathf.Sign(climbInput);
     }
 
+    // Called by the InputAction component on the Jump event.
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started && gameObject.activeInHierarchy)
+        {
+            if (isClimbing)
+                ExitRope();
+            else if (isThrowing) return; // No throwing while climbing
+            else CheckForRope();
+        }
+    }
 
     // Called by the InputAction component on the Interact event.
     public void OnInteract(InputAction.CallbackContext context)
     {
         if(context.started && gameObject.activeInHierarchy)
         {
-            if(isClimbing)
-                ExitRope();
-            else if(isThrowing)
+            if (isClimbing) return; // No climbing while throwing
+            else if (isThrowing)
                 ThrowObject();
-            else
-                CheckForInteraction();
+            else CheckForThrowables();
         }
     }
 
