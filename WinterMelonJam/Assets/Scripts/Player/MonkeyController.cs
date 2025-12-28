@@ -53,12 +53,22 @@ public class MonkeyController : MonoBehaviour
     // Handles movement update
     private void Update()
     {
+        LockThrowObject();
+
         if(isClimbing)
             ClimbingUpdate();
         else if(isThrowing)
             ThrowingUpdate();
         else
             MovementUpdate();
+    }
+
+    private void LockThrowObject()
+    {
+        if (throwObj == null) return;
+
+        throwObj.transform.position = transform.position + (Vector3.up * throwObjHeightOffset);
+        throwBody.linearVelocity = Vector2.zero;
     }
 
     // Moves monkey vertically when climbing
@@ -113,6 +123,20 @@ public class MonkeyController : MonoBehaviour
         body.linearVelocity = new Vector2(moveDir * moveSpeed, exitRopeJumpSpeed);
     }
 
+    // First checks if theres a clear path above the monkey for the box (clear line of sight)
+    // Then checks if the box itself can be in the spot
+    //private bool ValidateThrowPosition()
+    //{
+    //    if (throwObj == null)
+    //    {
+    //        Debug.LogError("ERROR: attempting to throw a null object!");
+    //        return;
+    //    }
+    //    Vector3 lookPosition = throwObj.transform.position - transform.position;
+
+    //    RaycastHit2D hit = Physics2D.BoxCast(transform.position, throwObj.transform.lossyScale, 0, Quaternion.LookRotation(lookPosition).eulerAngles, throwObjHeightOffset);
+    //}
+
     private void StartThrowing(GameObject obj)
     {
         Debug.Log("StartThrowing. Obj.name = " + obj.name);
@@ -123,7 +147,7 @@ public class MonkeyController : MonoBehaviour
         throwBody = throwObj.GetComponent<Rigidbody2D>();
         throwBody.gravityScale = 0f;
 
-        throwObj.transform.position = transform.position + (Vector3.up * throwObjHeightOffset);
+        LockThrowObject();
     }
 
     private void ThrowObject()
