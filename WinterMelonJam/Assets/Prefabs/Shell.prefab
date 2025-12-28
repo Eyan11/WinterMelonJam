@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7033905382859404500}
   - component: {fileID: 5383794371500564131}
   - component: {fileID: 6558330897841077460}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Shell
-  m_TagString: Breakable
+  m_TagString: Shell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,6 +5,7 @@ public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private RopeMovement ropeMove;
     [SerializeField] private DoorUnlock door;
+    [SerializeField] private PlatformTrigger platf;
     public bool plateState;
     
 
@@ -24,18 +25,21 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D interactor)
     {
-        if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable"))
+        if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable") || interactor.CompareTag("Shell"))
         {
             plateState = true;
             GetComponent<SpriteRenderer>().color = Color.blue; 
-            if (ropeMove == null)
-            {
-                door.OpenDoor();
-                return;
-            }
-            else
+            if (ropeMove != null)
             {
                 ropeMove.LowerRope();
+            }
+            else if (door != null)
+            {
+                door.OpenDoor();
+            }
+            else if (platf != null)
+            {
+                platf.platOn();
             }
            
         }
@@ -43,19 +47,45 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D interactor)
     {
-        if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable"))
+        if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable") || interactor.CompareTag("Shell"))
         {
             plateState = false;
             GetComponent<SpriteRenderer>().color = Color.red;
-            if (ropeMove == null)
-            {
-                door.CloseDoor();
-                return;
-            }
-            else
+            if (ropeMove != null)
             {
                 ropeMove.RaiseRope();
             }
+            else if (door != null)
+            {
+                door.CloseDoor();
+            }
+            else if (platf != null)
+            {
+                platf.platOff();
+            }
         }
     }
+
+    /*
+    private void OnTriggerStay2D(Collider2D interactor)
+    {
+        if (interactor.CompareTag("Shell"))
+        {
+            plateState = true;
+            GetComponent<SpriteRenderer>().color = Color.blue; 
+            if (ropeMove != null)
+            {
+                ropeMove.LowerRope();
+            }
+            else if (door != null)
+            {
+                door.OpenDoor();
+            }
+            else if (platf != null)
+            {
+                platf.platOn();
+            }
+        }
+    }
+    */
 }

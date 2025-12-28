@@ -10,6 +10,7 @@ TagManager:
   - Rope
   - Wall
   - Floor
+  - Shell
   layers:
   - Default
   - TransparentFX
