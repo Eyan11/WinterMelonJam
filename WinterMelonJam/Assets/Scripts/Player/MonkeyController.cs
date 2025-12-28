@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;      // IMPORTANT: make sure you have this to work with input system
-using System.Collections.Generic;   // Need to use List data structure
+using System.Collections.Generic;  // Need to use List data structure
 
 
 public class MonkeyController : MonoBehaviour
@@ -8,9 +8,11 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float interactRadius = 0.5f;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float moveSpeed = 2f;
+    private PlayerManager playerManager;
     private Rigidbody2D body;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
     private float moveInput;
-    private float moveDir = 1f;
 
     [Header ("Climbing")]
     [SerializeField] private float climbSpeed = 1f;
@@ -43,8 +45,11 @@ public class MonkeyController : MonoBehaviour
 
     private void Awake()
     {
+        playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
         body = transform.parent.gameObject.GetComponent<Rigidbody2D>();
         coll = transform.parent.gameObject.GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
         floorMask = LayerMask.NameToLayer("Floor");
         interactableMask = LayerMask.NameToLayer("Interactable");
@@ -92,6 +97,9 @@ public class MonkeyController : MonoBehaviour
         float newHeight = transform.position.y + (climbInput * climbSpeed * Time.deltaTime);
         newHeight = Mathf.Clamp(newHeight, minClimbHeight, maxClimbHeight);
         transform.parent.transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
+    
+        bool isMovingOnRope = climbInput != 0 && newHeight != minClimbHeight && newHeight != maxClimbHeight;
+        anim.SetBool("isMoving", isMovingOnRope);
     }
 
     // Horizontal movement and accounts for velocity when jumping off of a rope and prevents movement when throwing
@@ -100,7 +108,7 @@ public class MonkeyController : MonoBehaviour
         if(isUsingJumpHorVel)
         {
             // If grounded, stop using the jump velocity
-            if(IsGrounded())
+            if(playerManager.IsGrounded)
             {
                 isUsingJumpHorVel = false;
                 body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
@@ -108,6 +116,8 @@ public class MonkeyController : MonoBehaviour
         }
         else
             body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
+
+        anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
     }
 
     private void ThrowingUpdate()
@@ -123,6 +133,8 @@ public class MonkeyController : MonoBehaviour
     private void StartClimbingRope(Collider2D coll)
     {
         isClimbing = true;
+        anim.SetBool("isClimbing", isClimbing);
+        spriteRenderer.flipX = moveInput > 0;
         body.gravityScale = 0f;
         body.linearVelocity = Vector2.zero;
         transform.parent.transform.position = new Vector2(coll.transform.position.x, coll.ClosestPoint(transform.position).y);
@@ -134,10 +146,12 @@ public class MonkeyController : MonoBehaviour
     private void ExitRope()
     {
         isClimbing = false;
+        anim.SetBool("isClimbing", isClimbing);
+        spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
         body.gravityScale = 1f;
 
-        body.linearVelocity = new Vector2(moveDir * moveSpeed, exitRopeJumpSpeed);
+        body.linearVelocity = new Vector2(moveInput * moveSpeed, exitRopeJumpSpeed);
     }
 
     private bool ValidateThrowPosition(GameObject obj)
@@ -164,6 +178,7 @@ public class MonkeyController : MonoBehaviour
 
         Debug.Log("StartThrowing. Obj.name = " + obj.name);
         isThrowing = true;
+        anim.SetBool("isThrowing", isThrowing);
         body.linearVelocity = Vector2.zero;
 
         throwObj = obj;
@@ -176,6 +191,7 @@ public class MonkeyController : MonoBehaviour
     private void DropObject()
     {
         isThrowing = false;
+        anim.SetBool("isThrowing", isThrowing);
         throwBody.gravityScale = 1f;
         throwBody = null;
         throwObj = null;
@@ -184,6 +200,7 @@ public class MonkeyController : MonoBehaviour
     private void ThrowObject()
     {
         isThrowing = false;
+        anim.SetBool("isThrowing", isThrowing);
         throwVector *= throwSpeedMult;
         float throwMagnitude = throwVector.magnitude;
         Debug.Log("magnitude before update: " + throwMagnitude);
@@ -258,32 +275,6 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
-    // Returns true if monkey is on an object with floor layer, or interactable layer with breakable/non-breakable tag
-    private bool IsGrounded()
-    {
-        if(body.linearVelocity.y > 0.1)
-            return false;
-        
-        int numHits = coll.Cast(Vector2.down, hits, groundCheckDist);
-
-        for(int i = 0; i < numHits; i++)
-        {
-            if(hits[i].transform.gameObject.layer == floorMask)
-            {
-                return true;
-            }
-            else if(hits[i].transform.gameObject.layer == interactableMask)
-            {
-                if(hits[i].transform.gameObject.CompareTag("Breakable") || hits[i].transform.gameObject.CompareTag("Non-Breakable"))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
 
 
     // *** Events *************************************************************
@@ -301,8 +292,11 @@ public class MonkeyController : MonoBehaviour
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
-            moveDir = moveInput;
             isUsingJumpHorVel = false;
+            if(isClimbing)
+                spriteRenderer.flipX = moveInput > 0;
+            else
+                spriteRenderer.flipX = !(moveInput > 0);
         }
 
         if (climbInput != 0)
@@ -333,22 +327,40 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
+    private void OnGrounded()
+    {
+        anim.SetBool("isGrounded", true);
+    }
+
+    private void OnUngrounded()
+    {
+        anim.SetBool("isGrounded", false);
+    }
 
     // Called when entering this mask transformation
-    public void OnMaskEnter()
+    public void OnEnable()
     {
+        playerManager.onGroundedEvent += OnGrounded;
+        playerManager.onUngroundedEvent += OnUngrounded;
 
+        anim.SetBool("isGrounded", playerManager.IsGrounded);   // Initialize grounded anim bool
+        anim.SetBool("isClimbing", isClimbing);
+        anim.SetBool("isThrowing", isThrowing);
     }
 
     // Called when leaving this mask transformation
-    public void OnMaskExit()
+    public void OnDisable()
     {
+        playerManager.onGroundedEvent -= OnGrounded;
+        playerManager.onUngroundedEvent -= OnUngrounded;
+
         moveInput = 0f;
         isUsingJumpHorVel = false;
 
         if(isClimbing)
         {
             isClimbing = false;
+            anim.SetBool("isClimbing", isClimbing);
             body.gravityScale = 1f;
         }
         else if(isThrowing)

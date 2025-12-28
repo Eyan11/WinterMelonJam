@@ -38,10 +38,10 @@ public class TurtleController : MonoBehaviour
     }
 
     // Called when entering this mask transformation
-    public void OnMaskEnter() {}
+    public void OnEnable() {}
 
     // Called when leaving this mask transformation
-    public void OnMaskExit() {}
+    public void OnDisable() {}
 
     // **********************************************
     // HELPER FUNCTIONS

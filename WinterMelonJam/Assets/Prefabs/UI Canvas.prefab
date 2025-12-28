@@ -739,10 +739,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 9f01c0f1-5c13-47b3-a220-cbc75fd86225
-    m_ActionName: 'Player/SwitchMask[/Keyboard/q]'
+    m_ActionId: 6ef2cb6d-e72c-49ba-b335-2b3a9e74099e
+    m_ActionName: 'UI/SwitchMasks[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: d0f89bab-e224-41c7-9113-942d265f7bbb
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

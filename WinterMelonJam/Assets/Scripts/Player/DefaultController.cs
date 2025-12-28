@@ -4,66 +4,40 @@ using UnityEngine.InputSystem;  // IMPORTANT: make sure you have this to work wi
 public class DefaultController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
+    private PlayerManager playerManager;
     private Rigidbody2D body;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
     private float moveInput;
-    private float moveDir = 1;
 
     [Header ("Jump")]
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float jumpBufferTime = 0.1f;
-    [SerializeField] private float groundCheckDist = 0.1f;
-    private int floorMask;
-    private int interactableMask;
-    private CapsuleCollider2D coll;
     private float canJumpTimer;
     private float jumpInputTimer = 0f;
-    private RaycastHit2D[] hits = new RaycastHit2D[20];
 
 
 
     private void Awake()
     {
         body = transform.parent.gameObject.GetComponent<Rigidbody2D>();
-        coll = transform.parent.gameObject.GetComponent<CapsuleCollider2D>();
-        floorMask = LayerMask.NameToLayer("Floor");
-        interactableMask = LayerMask.NameToLayer("Interactable");
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
     }
 
 
     private void Update()
     {
         body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
-        GroundCheck();
+
+        anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
+
         JumpCalculations();
     }
 
 
-
-    private void GroundCheck()
-    {
-        if(body.linearVelocity.y > 0.1)
-            return;
-        
-        int numHits = coll.Cast(Vector2.down, hits, groundCheckDist);
-
-        for(int i = 0; i < numHits; i++)
-        {
-            if(hits[i].transform.gameObject.layer == floorMask)
-            {
-                canJumpTimer = coyoteTime; 
-                return;
-            }
-            else if(hits[i].transform.gameObject.layer == interactableMask)
-            {
-                if(hits[i].transform.gameObject.CompareTag("Breakable") || hits[i].transform.gameObject.CompareTag("Non-Breakable"))
-                {
-                    canJumpTimer = coyoteTime;
-                    return;
-                }
-            }
-        }
-    }
 
     /** Handles jump input and calling Jump() **/
     private void JumpCalculations() {
@@ -95,9 +69,14 @@ public class DefaultController : MonoBehaviour
         
         moveInput = context.ReadValue<Vector2>().x;
 
-        if (moveInput != 0) 
+        if (moveInput != 0)
+        {
             moveInput = Mathf.Sign(moveInput);
-            moveDir = moveInput;
+            if(moveInput > 0)
+                spriteRenderer.flipX = false;
+            else
+                spriteRenderer.flipX = true;
+        }
     }
 
     // Uses InputAction to get the jump input
@@ -110,20 +89,37 @@ public class DefaultController : MonoBehaviour
         {
             jumpInputTimer = jumpBufferTime;
 
-            if(canJumpTimer > 0f)
+            if(playerManager.IsGrounded || canJumpTimer > 0f)
                 Jump();
         }
     }
 
-    // Called when entering this mask transformation
-    public void OnMaskEnter()
+    private void OnGrounded()
     {
-        
+        anim.SetBool("isGrounded", true);
+    }
+
+    private void OnUngrounded()
+    {
+        canJumpTimer = coyoteTime; 
+        anim.SetBool("isGrounded", false);
+    }
+
+    // Called when entering this mask transformation
+    private void OnEnable()
+    {
+        playerManager.onGroundedEvent += OnGrounded;
+        playerManager.onUngroundedEvent += OnUngrounded;
+
+        anim.SetBool("isGrounded", playerManager.IsGrounded);   // Initialize grounded anim bool
     }
 
     // Called when leaving this mask transformation
-    public void OnMaskExit()
+    private void OnDisable()
     {
+        playerManager.onGroundedEvent -= OnGrounded;
+        playerManager.onUngroundedEvent -= OnUngrounded;
+
         jumpInputTimer = -1f;
         canJumpTimer = -1f;
         moveInput = 0f;
