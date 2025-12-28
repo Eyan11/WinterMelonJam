@@ -5,6 +5,7 @@ public class MaskStatus : MonoBehaviour
 {
     [SerializeField] private bool maskEnabled = true;
     public MaskType maskType = MaskType.None;
+    private bool managerLock = false;
     private bool maskSelected = false;
     private Image sliceSelector;
     private Color originalColor;
@@ -20,6 +21,7 @@ public class MaskStatus : MonoBehaviour
     {
         sliceSelector = GetComponent<Image>();
         originalColor = sliceSelector.color;
+        originalColor.a = 1; // Just incase its grabbing data while its off
         transparentOriginalColor = sliceSelector.color;
         transparentOriginalColor.a = 0.4f;
     }
@@ -28,7 +30,7 @@ public class MaskStatus : MonoBehaviour
     {
         if (sliceSelector == null) ObtainData();
 
-        if (maskEnabled)
+        if (maskEnabled && managerLock == false)
         {
             if (maskSelected == true) sliceSelector.color = originalColor;
             else sliceSelector.color = transparentOriginalColor;
@@ -51,5 +53,19 @@ public class MaskStatus : MonoBehaviour
         updateButton();
     }
 
+    public void setIndividualManagerLock(bool lockStatus)
+    {
+        managerLock = lockStatus;
+        updateButton();
+    }
+
     public bool getStatus() { return maskEnabled; }
+
+    public static void setManagerLock(bool lockStatus)
+    {
+        foreach (MaskStatus markStatus in FindObjectsByType<MaskStatus>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            markStatus.setIndividualManagerLock(lockStatus);
+        }
+    }
 }

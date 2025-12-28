@@ -9,6 +9,9 @@ public class MaskWheelManager : MonoBehaviour
     [SerializeField] private GameObject wheelObj;
     [SerializeField] private MaskManager maskManager;
 
+    private bool lockWheel = false;
+    public bool LockWheel { get { return lockWheel; } set { ToggleLock(value); } }
+
     private MaskType selectedMask = MaskType.None;
     private GameObject selectedMaskButton;
 
@@ -37,6 +40,7 @@ public class MaskWheelManager : MonoBehaviour
     private void Update()
     {
         if (wheelObj.activeInHierarchy == false) return;
+
         // Highlights the closest button
         Vector3 mousePos = Mouse.current.position.ReadValue();
 
@@ -76,8 +80,15 @@ public class MaskWheelManager : MonoBehaviour
         }
         else if(context.canceled)
         {
-            maskManager.SwitchMask(selectedMask);
+            if (lockWheel == false) maskManager.SwitchMask(selectedMask);
             wheelObj.SetActive(false);
         }
+    }
+
+    // Locks all buttons if false; unlocks if true
+    private void ToggleLock(bool status)
+    {
+        lockWheel = status;
+        MaskStatus.setManagerLock(lockWheel);
     }
 }

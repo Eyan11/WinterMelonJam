@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;  // IMPORTANT: make sure you have this to work with input system
 
@@ -9,6 +10,8 @@ public class RhinoController : MonoBehaviour
     [SerializeField] private float stunDuration;
     [SerializeField] private float maxChargeDuration;
     [SerializeField] private float chargeCooldownDuration;
+    // Managers
+    MaskWheelManager maskWheelManager;
     // State management
     private bool charging = false;
     private bool stunned = false;
@@ -31,6 +34,7 @@ public class RhinoController : MonoBehaviour
         body = transform.parent.GetComponent<Rigidbody2D>();
         scale = transform.localScale;
         solidMask = LayerMask.GetMask("Floor", "Default", "Interactable");
+        maskWheelManager = FindFirstObjectByType<MaskWheelManager>();
     }
 
     // Handles changes to rigidbody velocity
@@ -56,10 +60,9 @@ public class RhinoController : MonoBehaviour
                 if (obj.transform.CompareTag("Breakable") == true) Destroy(obj.transform.gameObject);
                 else
                 {
-                    DeactivateCharge();
                     stunTimeLeft = stunDuration;
                     stunned = true;
-                    goto SpeedControl;
+                    DeactivateCharge();
                 }
             }
         }
@@ -71,7 +74,11 @@ public class RhinoController : MonoBehaviour
         if (stunned == true)
         {
             stunTimeLeft -= Time.fixedDeltaTime;
-            if (stunTimeLeft <= 0) stunned = false;
+            if (stunTimeLeft <= 0)
+            {
+                stunned = false;
+                maskWheelManager.LockWheel = false;
+            }
         }
     }
 
@@ -88,6 +95,7 @@ public class RhinoController : MonoBehaviour
     {
         nextChargeTick = Time.fixedTime + chargeCooldownDuration;
         charging = false;
+        if (stunned == false) maskWheelManager.LockWheel = false;
     }
 
     // **********************************************
@@ -112,5 +120,6 @@ public class RhinoController : MonoBehaviour
 
         chargeTimeLeft = maxChargeDuration;
         charging = true;
+        maskWheelManager.LockWheel = true;
     }
 }
