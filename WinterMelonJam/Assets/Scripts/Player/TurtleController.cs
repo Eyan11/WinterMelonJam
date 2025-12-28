@@ -10,7 +10,8 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float turtleNoShellMoveSpeed;
     [SerializeField] private float shellThrowSpeed;
     [SerializeField] private GameObject shellTemplate;
-    // Shell data (shell shock!)
+    // State management
+    private bool destroyedShellEarly = false;
     private GameObject shell;
     private float shellThrowDirection = 1;
     // Player info
@@ -66,11 +67,24 @@ public class TurtleController : MonoBehaviour
     {
         // Prevents ability unless button was released and there is no shell
         if (gameObject.activeInHierarchy == false) return;
-        if (context.canceled == false) return;
-        if (CheckForShell()) return;
+        if (context.canceled == false)
+        {
+            if (CheckForShell() == false) return;
+            Destroy(shell);
+            shell = null;
+            destroyedShellEarly = true;
+            return;
+        }
+        // Only runs after the keystroke for destroying shell early
+        else if (context.canceled == true && destroyedShellEarly == true) 
+        {
+            destroyedShellEarly = false;
+            return;
+        }
 
         shell = Instantiate(shellTemplate, transform.position, Quaternion.identity);
         Rigidbody2D shellBody = shell.GetComponent<Rigidbody2D>();
         shellBody.linearVelocityX = shellThrowDirection * shellThrowSpeed;
+        destroyedShellEarly = false;
     }
 }

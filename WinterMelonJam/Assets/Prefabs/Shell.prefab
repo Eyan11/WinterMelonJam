@@ -179,6 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6864f2709b28be47b3367793c8c4574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shell
-  maxLifetime: 6
+  maxLifetime: 10
   maxDistanceSquared: 10
   lifetime: 0
