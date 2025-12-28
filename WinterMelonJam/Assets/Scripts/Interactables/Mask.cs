@@ -16,6 +16,7 @@ public class Mask : MonoBehaviour
 
         if (interactor.CompareTag("Player"))
         {
+            this.gameObject.SetActive(false);
             targetMask.setStatus(setStatus);
         }
     }
