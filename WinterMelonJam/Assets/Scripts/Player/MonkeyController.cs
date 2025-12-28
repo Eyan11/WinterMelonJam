@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;      // IMPORTANT: make sure you have this to work with input system
-using System.Collections.Generic;  // Need to use List data structure
+using System.Collections.Generic;
+using Unity.VisualScripting;  // Need to use List data structure
 
 
 public class MonkeyController : MonoBehaviour
@@ -18,27 +19,29 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float climbSpeed = 1f;
     [SerializeField] private float exitRopeJumpSpeed = 3f;
     [SerializeField] private float groundCheckDist = 0.1f;
-    private int floorMask;
+    private GameObject ropeObj;
+    private Rope ropeComp;
     private int solidMask;
-    private int interactableMask;
     private RaycastHit2D[] hits = new RaycastHit2D[20];
     [SerializeField] private bool isClimbing = false;
     private float climbInput;
-    private float maxClimbHeight;
-    private float minClimbHeight;
     private bool isUsingJumpHorVel = false;
-    private CapsuleCollider2D coll;
 
     [Header ("Throwing")]
     [SerializeField] private float throwSpeedMult = 0.5f;
     [SerializeField] private float throwObjHeightOffset = 1f;
     [SerializeField] private float minThrowSpeed = 5f;
     [SerializeField] private float maxThrowSpeed = 50f;
+    [SerializeField] private float chargeIncrement = 500f;
     [SerializeField] private bool isThrowing = false;
+    private int excludePlayerMask;
+    private bool isCharging = false;
     private Camera cam;
     private Vector2 throwVector = Vector2.zero;
+    private float chargePower = 0f;    
     private GameObject throwObj;
     private Rigidbody2D throwBody;
+    private Collider2D throwCollider;
 
 
 
@@ -47,13 +50,11 @@ public class MonkeyController : MonoBehaviour
     {
         playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
         body = transform.parent.gameObject.GetComponent<Rigidbody2D>();
-        coll = transform.parent.gameObject.GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
-        floorMask = LayerMask.NameToLayer("Floor");
-        interactableMask = LayerMask.NameToLayer("Interactable");
         solidMask = LayerMask.GetMask("Floor", "Default");
+        excludePlayerMask = ~LayerMask.GetMask("Player");
     }
 
 
@@ -72,18 +73,16 @@ public class MonkeyController : MonoBehaviour
 
     private Vector3 CalculateThrowWithOffsetVector()
     {
-        return transform.position + (Vector3.up * throwObjHeightOffset);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, throwCollider.bounds.size - new Vector3(throwCollider.bounds.size.x * 0.4f, 0, 0), 0, Vector3.up, throwObjHeightOffset, solidMask);
+        float height = throwObjHeightOffset;
+        if (hit == true) height = hit.distance;
+
+        return transform.position + (Vector3.up * height);
     }
 
     private void LockThrowObject()
     {
         if (throwObj == null) return;
-        bool testState = ValidateThrowPosition(throwObj);
-        if (testState == false)
-        {
-            DropObject();
-            return;
-        }
 
         throwObj.transform.position = CalculateThrowWithOffsetVector();
         throwBody.transform.rotation = Quaternion.identity;
@@ -91,14 +90,35 @@ public class MonkeyController : MonoBehaviour
         throwBody.angularVelocity = 0;
     }
 
+    private Vector3 CalculateClimbingPosition()
+    {
+        if (ropeComp.IsHorizontalMode() == false) // Vertical
+        {
+            float newHeight = transform.parent.transform.position.y + (climbInput * climbSpeed * Time.deltaTime);
+            newHeight = Mathf.Clamp(newHeight, ropeComp.MinRopeBound, ropeComp.MaxRopeBound);
+            return new Vector3(
+                ropeObj.transform.position.x, newHeight, ropeObj.transform.position.z
+            );
+        }
+        else
+        {
+            float newX = transform.parent.transform.position.x + (climbInput * climbSpeed * Time.deltaTime);
+            newX = Mathf.Clamp(newX, ropeComp.MinRopeBound, ropeComp.MaxRopeBound);
+            return new Vector3(
+                newX, ropeObj.transform.position.y, ropeObj.transform.position.z
+            );
+        }
+    }
+
     // Moves monkey vertically when climbing
     private void ClimbingUpdate()
     {
-        float newHeight = transform.position.y + (climbInput * climbSpeed * Time.deltaTime);
-        newHeight = Mathf.Clamp(newHeight, minClimbHeight, maxClimbHeight);
-        transform.parent.transform.position = new Vector3(transform.position.x, newHeight, transform.parent.transform.position.z);  // Using parent z so we can render player on top of everything
-    
-        bool isMovingOnRope = climbInput != 0 && newHeight != minClimbHeight && newHeight != maxClimbHeight;
+        if (body.linearVelocity != Vector2.zero) ExitRope();
+        
+        Vector3 oldVector3 = transform.parent.transform.position;
+        transform.parent.transform.position = CalculateClimbingPosition();
+
+        bool isMovingOnRope = climbInput != 0 && (oldVector3 - transform.parent.transform.position).sqrMagnitude != 0f;
         anim.SetBool("isMoving", isMovingOnRope);
     }
 
@@ -122,68 +142,87 @@ public class MonkeyController : MonoBehaviour
 
     private void ThrowingUpdate()
     {
-        Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
+        if (isCharging == false)
+        {
+            Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
 
-        Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
-        throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
+            Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
+            throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
 
-        MovementUpdate();
+            MovementUpdate();
+        }
+        else if (chargePower < maxThrowSpeed)
+        {
+            chargePower += chargeIncrement * Time.deltaTime;
+            chargePower = Mathf.Clamp(chargePower, minThrowSpeed, maxThrowSpeed);
+            //Debug.Log(chargePower);
+        }
     }
 
     private void StartClimbingRope(Collider2D coll)
     {
         isClimbing = true;
         anim.SetBool("isClimbing", isClimbing);
+        ropeObj = coll.gameObject;
+        ropeComp = ropeObj.GetComponent<Rope>();
         spriteRenderer.flipX = moveInput > 0;
         body.gravityScale = 0f;
         body.linearVelocity = Vector2.zero;
-        transform.parent.transform.position = new Vector3(coll.transform.position.x, coll.ClosestPoint(transform.position).y, transform.parent.transform.position.z);
+        climbInput = 0;
+        transform.parent.transform.position = CalculateClimbingPosition();
+    }
 
-        maxClimbHeight = coll.bounds.max.y;
-        minClimbHeight = coll.bounds.min.y;
+    private void UnsetRope()
+    {
+        isClimbing = false;
+        ropeObj = null;
+        ropeComp = null;
+        anim.SetBool("isClimbing", isClimbing);
+        body.gravityScale = 1f;
     }
 
     private void ExitRope()
     {
-        isClimbing = false;
+        UnsetRope();
         anim.SetBool("isClimbing", isClimbing);
         spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
-        body.gravityScale = 1f;
 
         body.linearVelocity = new Vector2(moveInput * moveSpeed, exitRopeJumpSpeed);
     }
 
-    private bool ValidateThrowPosition(GameObject obj)
-    {
-        if (obj == null)
-        {
-            Debug.LogError("ERROR: attempting to throw a null object!");
-            return false;
-        }
-        Vector3 lookPosition = transform.position - obj.transform.position;
+    //private bool ValidateThrowPosition(GameObject obj)
+    //{
+    //    if (obj == null)
+    //    {
+    //        Debug.LogError("ERROR: attempting to throw a null object!");
+    //        return false;
+    //    }
+    //    Vector3 lookPosition = transform.position - obj.transform.position;
 
-        // Checks if theres a clear path above the monkey for the box (clear line of sight)
-        BoxCollider2D collider = obj.transform.GetComponent<BoxCollider2D>();
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, collider.bounds.size, 0, Vector3.up, throwObjHeightOffset, solidMask);
-        if (hit == true) return false;
+    //    // Checks if theres a clear path above the monkey for the box (clear line of sight)
+    //    BoxCollider2D collider = obj.transform.GetComponent<BoxCollider2D>();
+    //    RaycastHit2D hit = Physics2D.BoxCast(transform.position, collider.bounds.size - new Vector3(collider.bounds.size.x * 0.4f, 0, 0), 0, Vector3.up, throwObjHeightOffset, solidMask);
+    //    if (hit == true) return false;
 
-        return true;
-    }
+    //    return true;
+    //}
 
     private void StartThrowing(GameObject obj)
     {
-        Debug.Log("HERE!");
-        if (ValidateThrowPosition(obj) == false) return;
+        //if (ValidateThrowPosition(obj) == false) return;
 
-        Debug.Log("StartThrowing. Obj.name = " + obj.name);
+        //Debug.Log("StartThrowing. Obj.name = " + obj.name);
         isThrowing = true;
+        chargePower = 0f;
         anim.SetBool("isThrowing", isThrowing);
         body.linearVelocity = Vector2.zero;
 
         throwObj = obj;
         throwBody = throwObj.GetComponent<Rigidbody2D>();
         throwBody.gravityScale = 0f;
+        throwCollider = throwObj.GetComponent<Collider2D>();
+        throwCollider.forceSendLayers = excludePlayerMask;
 
         LockThrowObject();
     }
@@ -191,8 +230,11 @@ public class MonkeyController : MonoBehaviour
     private void DropObject()
     {
         isThrowing = false;
+        isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
         throwBody.gravityScale = 1f;
+        throwCollider.forceSendLayers = Physics2D.AllLayers;
+        throwCollider = null;
         throwBody = null;
         throwObj = null;
     }
@@ -200,29 +242,19 @@ public class MonkeyController : MonoBehaviour
     private void ThrowObject()
     {
         isThrowing = false;
+        isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
-        throwVector *= throwSpeedMult;
-        float throwMagnitude = throwVector.magnitude;
-        Debug.Log("magnitude before update: " + throwMagnitude);
-
-        if (throwMagnitude > maxThrowSpeed)
-        {
-            throwVector.Normalize();
-            throwVector *= maxThrowSpeed;
-            Debug.Log("Min Throw Speed");
-        }
-        else if(throwMagnitude < minThrowSpeed)
-        {
-            throwVector.Normalize();
-            throwVector *= minThrowSpeed;
-            Debug.Log("Max Throw Speed");
-        }
+        throwVector.Normalize();
+        throwVector *= chargePower;
+        //Debug.Log("magnitude before update: " + throwMagnitude);
 
         throwBody.gravityScale = 1f;
         throwBody.AddForce(throwVector, ForceMode2D.Impulse);
+        throwCollider.forceSendLayers = Physics2D.AllLayers;
+        throwCollider = null;
         throwBody = null;
         throwObj = null;
-        Debug.Log("Throwing Object at speed: " + throwVector);
+        //Debug.Log("Throwing Object at speed: " + throwVector);
     }
 
     private List<Collider2D> GetSortedInteractables()
@@ -287,7 +319,13 @@ public class MonkeyController : MonoBehaviour
             return;
 
         moveInput = context.ReadValue<Vector2>().x;
-        climbInput = context.ReadValue<Vector2>().y;
+        if (ropeComp != null)
+        {
+            if (ropeComp.IsHorizontalMode() == false) // Vertical
+                climbInput = context.ReadValue<Vector2>().y;
+            else climbInput = moveInput;
+        }
+        else climbInput = 0;
 
         if (moveInput != 0)
         {
@@ -306,12 +344,22 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Jump event.
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy == false) return;
+        if (context.started)
         {
             if (isClimbing)
                 ExitRope();
             else if (isThrowing) return; // No throwing while climbing
             else CheckForRope();
+        }
+        else if (context.canceled && isThrowing == true) // Throwing
+        {
+            ThrowObject();
+        }
+        else if (isCharging == false)
+        {
+            isCharging = true;
+            chargePower = minThrowSpeed;
         }
     }
 
@@ -321,8 +369,7 @@ public class MonkeyController : MonoBehaviour
         if(context.started && gameObject.activeInHierarchy)
         {
             if (isClimbing) return; // No climbing while throwing
-            else if (isThrowing)
-                ThrowObject();
+            else if (isThrowing) return; // Throwing is handled with the jump button
             else CheckForThrowables();
         }
     }
@@ -359,9 +406,7 @@ public class MonkeyController : MonoBehaviour
 
         if(isClimbing)
         {
-            isClimbing = false;
-            anim.SetBool("isClimbing", isClimbing);
-            body.gravityScale = 1f;
+            UnsetRope();
         }
         else if(isThrowing)
         {
