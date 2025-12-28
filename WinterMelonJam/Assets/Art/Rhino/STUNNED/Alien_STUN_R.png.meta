@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: d48ce7abc6496a64db9ae7f91338de09
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2618695623822677535
+    second: Alien_STUN_R_0
+  - first:
+      213: -8623431073235035967
+    second: Alien_STUN_R_1
+  - first:
+      213: 4108612587544370982
+    second: Alien_STUN_R_2
+  - first:
+      213: 2656901176081440822
+    second: Alien_STUN_R_3
+  - first:
+      213: -3715339673289362214
+    second: Alien_STUN_R_4
+  - first:
+      213: 763660382782990357
+    second: Alien_STUN_R_5
+  - first:
+      213: -3621518649207104419
+    second: Alien_STUN_R_6
+  - first:
+      213: 4819998193986807321
+    second: Alien_STUN_R_7
+  - first:
+      213: 3968888314182056264
+    second: Alien_STUN_R_8
+  - first:
+      213: -8784498750708585479
+    second: Alien_STUN_R_9
+  - first:
+      213: -359926588546571753
+    second: Alien_STUN_R_10
+  - first:
+      213: -1046836965339287630
+    second: Alien_STUN_R_11
+  - first:
+      213: 4000309409376774927
+    second: Alien_STUN_R_12
+  - first:
+      213: -8537413957601166001
+    second: Alien_STUN_R_13
+  - first:
+      213: -1903131642596237525
+    second: Alien_STUN_R_14
+  - first:
+      213: 6805730516501335546
+    second: Alien_STUN_R_15
+  - first:
+      213: 4607036728912423548
+    second: Alien_STUN_R_16
+  - first:
+      213: -8328655691578391623
+    second: Alien_STUN_R_17
+  - first:
+      213: 1296729195761147896
+    second: Alien_STUN_R_18
+  - first:
+      213: -6549851836602543795
+    second: Alien_STUN_R_19
+  - first:
+      213: -7560478744429647766
+    second: Alien_STUN_R_20
+  - first:
+      213: -4135772686728149989
+    second: Alien_STUN_R_21
+  - first:
+      213: 6310224571470695412
+    second: Alien_STUN_R_22
+  - first:
+      213: 3019546773515221636
+    second: Alien_STUN_R_23
+  - first:
+      213: 5688214823246877178
+    second: Alien_STUN_R_24
+  - first:
+      213: -2117328272110360239
+    second: Alien_STUN_R_25
+  - first:
+      213: -5916684770293968749
+    second: Alien_STUN_R_26
+  - first:
+      213: -8023142570584076380
+    second: Alien_STUN_R_27
+  - first:
+      213: 7083268221584083207
+    second: Alien_STUN_R_28
+  - first:
+      213: 3005850299703799877
+    second: Alien_STUN_R_29
+  - first:
+      213: 5118895173049363651
+    second: Alien_STUN_R_30
+  - first:
+      213: -6676829937366152887
+    second: Alien_STUN_R_31
+  - first:
+      213: 7672975898141962989
+    second: Alien_STUN_R_32
+  - first:
+      213: 2037160564751494595
+    second: Alien_STUN_R_33
+  - first:
+      213: 4514188560844356048
+    second: Alien_STUN_R_34
+  - first:
+      213: 2262888093710848348
+    second: Alien_STUN_R_35
+  - first:
+      213: -6032528072890510365
+    second: Alien_STUN_R_36
+  - first:
+      213: 9092872357059265353
+    second: Alien_STUN_R_37
+  - first:
+      213: 362912849869810094
+    second: Alien_STUN_R_38
+  - first:
+      213: -6152809201929649799
+    second: Alien_STUN_R_39
+  - first:
+      213: 5906345334867446887
+    second: Alien_STUN_R_40
+  - first:
+      213: 3038286065671407020
+    second: Alien_STUN_R_41
+  - first:
+      213: 4868896687867298071
+    second: Alien_STUN_R_42
+  - first:
+      213: -8143227666170689316
+    second: Alien_STUN_R_43
+  - first:
+      213: 1726099252105995664
+    second: Alien_STUN_R_44
+  - first:
+      213: -576885023626069051
+    second: Alien_STUN_R_45
+  - first:
+      213: 158685045217422760
+    second: Alien_STUN_R_46
+  - first:
+      213: 6498570473257023759
+    second: Alien_STUN_R_47
+  - first:
+      213: -6418910942311570341
+    second: Alien_STUN_R_48
+  - first:
+      213: 568940641151103930
+    second: Alien_STUN_R_49
+  - first:
+      213: -2596103883887789948
+    second: Alien_STUN_R_50
+  - first:
+      213: 4115773049625562439
+    second: Alien_STUN_R_51
+  - first:
+      213: -4675629057688490175
+    second: Alien_STUN_R_52
+  - first:
+      213: -594917454763316596
+    second: Alien_STUN_R_53
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Alien_STUN_R_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9ed2f543688abd0800000000000000
+      internalID: -2618695623822677535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_1
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c892c6b02b635880800000000000000
+      internalID: -8623431073235035967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_2
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62fd7484169b40930800000000000000
+      internalID: 4108612587544370982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_3
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630e6a3fa853fd420800000000000000
+      internalID: 2656901176081440822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_4
+      rect:
+        serializedVersion: 2
+        x: 8192
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad4fba97046707cc0800000000000000
+      internalID: -3715339673289362214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 518a1d47211199a00800000000000000
+      internalID: 763660382782990357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_6
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5cde86e9f7cdbdc0800000000000000
+      internalID: -3621518649207104419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_7
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 916ab9ae1d214e240800000000000000
+      internalID: 4819998193986807321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_8
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8493508c4e2541730800000000000000
+      internalID: 3968888314182056264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_9
+      rect:
+        serializedVersion: 2
+        x: 8192
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fbe622bde0371680800000000000000
+      internalID: -8784498750708585479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 712a678bca8410bf0800000000000000
+      internalID: -359926588546571753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_11
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bf243f8353e871f0800000000000000
+      internalID: -1046836965339287630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_12
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0b2e899634f38730800000000000000
+      internalID: 4000309409376774927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_13
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d78bc1d33058980800000000000000
+      internalID: -8537413957601166001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_14
+      rect:
+        serializedVersion: 2
+        x: 8192
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2fde32bad7b695e0800000000000000
+      internalID: -1903131642596237525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd0911b8dfc27e50800000000000000
+      internalID: 6805730516501335546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7aa00eee7b7fef30800000000000000
+      internalID: 4607036728912423548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_17
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b34fee86cbaa6c80800000000000000
+      internalID: -8328655691578391623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_18
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff983b4558eef110800000000000000
+      internalID: 1296729195761147896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_STUN_R_19
+      rect:
+        serializedVersion: 2
+        x: 8192
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d419ddb05704a15a0800000000000000
+      internalID: -6549851836602543795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0e38bb75fd225d349be10a405c5d25fb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":4.0},"gridSpriteSize":{"x":2048.0,"y":2048.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Alien_STUN_R_0: -2618695623822677535
+      Alien_STUN_R_1: -8623431073235035967
+      Alien_STUN_R_10: -359926588546571753
+      Alien_STUN_R_11: -1046836965339287630
+      Alien_STUN_R_12: 4000309409376774927
+      Alien_STUN_R_13: -8537413957601166001
+      Alien_STUN_R_14: -1903131642596237525
+      Alien_STUN_R_15: 6805730516501335546
+      Alien_STUN_R_16: 4607036728912423548
+      Alien_STUN_R_17: -8328655691578391623
+      Alien_STUN_R_18: 1296729195761147896
+      Alien_STUN_R_19: -6549851836602543795
+      Alien_STUN_R_2: 4108612587544370982
+      Alien_STUN_R_3: 2656901176081440822
+      Alien_STUN_R_4: -3715339673289362214
+      Alien_STUN_R_5: 763660382782990357
+      Alien_STUN_R_6: -3621518649207104419
+      Alien_STUN_R_7: 4819998193986807321
+      Alien_STUN_R_8: 3968888314182056264
+      Alien_STUN_R_9: -8784498750708585479
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
