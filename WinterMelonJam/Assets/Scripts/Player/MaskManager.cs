@@ -8,9 +8,7 @@ public class MaskManager : MonoBehaviour
     [SerializeField] private GameObject turtleObj;
     [SerializeField] private GameObject flamingoObj;
 
-    private enum MaskType { Default, Monkey, Rhino, Turtle, Flamingo }
     private MaskType curMask = MaskType.Default;
-    private int numMasksUnlocked = 4;   // Start with all masks unlocked
     private DefaultController defaultController;
     private MonkeyController monkeyController;
     private RhinoController rhinoController;
@@ -30,76 +28,69 @@ public class MaskManager : MonoBehaviour
 
 
     // Switches mask by exiting/disabling previous mask and entering/enabling new mask
-    public void SwitchMask(char maskChar)
+    public void SwitchMask(MaskType nextMask)
     {
 
         // Exit old mask
+        if (curMask == nextMask) return;
+
         switch(curMask)
         {
             case MaskType.Default:
-                if(maskChar == 'D')
-                    return;
-                
                 defaultController.OnMaskExit();
                 defaultObj.SetActive(false);
                 break;
             case MaskType.Monkey:
-                if (numMasksUnlocked < 1 || maskChar == 'M')
-                    return;
                 monkeyController.OnMaskExit();
                 monkeyObj.SetActive(false);
                 break;
             case MaskType.Rhino:
-                if (numMasksUnlocked < 2 || maskChar == 'R')
-                    return;
                 rhinoController.OnMaskExit();
                 rhinoObj.SetActive(false);
                 break;
             case MaskType.Turtle:
-                if (numMasksUnlocked < 3 || maskChar == 'T')
-                    return;
                 turtleController.OnMaskExit();
                 turtleObj.SetActive(false);
                 break;
             case MaskType.Flamingo:
-                if (numMasksUnlocked < 4 || maskChar == 'F')
-                    return;
                 flamingoController.OnMaskExit();
                 flamingoObj.SetActive(false);
                 break;
         }
 
         // Enter new mask
-        switch(maskChar)
+        switch(nextMask)
         {
-            case 'D':
+            case MaskType.Default:
                 curMask = MaskType.Default;
                 defaultObj.SetActive(true);
                 defaultController.OnMaskEnter();
                 break;
-            case 'M':
+            case MaskType.Monkey:
                 curMask = MaskType.Monkey;
                 monkeyObj.SetActive(true);
                 monkeyController.OnMaskEnter();
                 break;
-            case 'R':
+            case MaskType.Rhino:
                 curMask = MaskType.Rhino;
                 rhinoObj.SetActive(true);
                 rhinoController.OnMaskEnter();
                 break;
-            case 'T':
+            case MaskType.Turtle:
                 curMask = MaskType.Turtle;
                 turtleObj.SetActive(true);
                 turtleController.OnMaskEnter();
                 break;
-            case 'F':
+            case MaskType.Flamingo:
                 curMask = MaskType.Flamingo;
                 flamingoObj.SetActive(true);
                 flamingoController.OnMaskEnter();
-
                 break;
             default:
-                Debug.LogError("Incorrect character input in PlayerController.SwitchMask");
+                curMask = MaskType.Default;
+                defaultObj.SetActive(true);
+                defaultController.OnMaskEnter();
+                Debug.LogError("Illegal mask input!");
                 break;
         }
     }

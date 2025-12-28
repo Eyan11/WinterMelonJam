@@ -1,19 +1,71 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+public enum MaskType { None, Default, Monkey, Rhino, Turtle, Flamingo }
 
 public class MaskWheelManager : MonoBehaviour
 {
     [SerializeField] private GameObject wheelObj;
     [SerializeField] private MaskManager maskManager;
 
-    private enum MaskType { None, Default, Monkey, Rhino, Turtle, Flamingo }
     private MaskType selectedMask = MaskType.None;
+    private GameObject selectedMaskButton;
+
+    private GameObject[] masks = new GameObject[5];
 
 
-    private void Awake()
+    private void Start()
     {
-        if(maskManager == null)
+        if (maskManager == null)
+        {
             Debug.LogError("maskManager is null in MaskWheelManager script in the UICanvas object. Drag and drop the reference from the Player in the scene.");
+            return;
+        }
+
+        int i = 0;
+        foreach (Transform child in wheelObj.transform)
+        {
+            if (child.GetComponent<MaskStatus>() == null) continue;
+
+            masks[i] = child.gameObject;
+            i++;
+        }
+    }
+
+    // Calculates which mask is selected based on which button is enabled
+    private void Update()
+    {
+        if (wheelObj.activeInHierarchy == false) return;
+        // Highlights the closest button
+        Vector3 mousePos = Mouse.current.position.ReadValue();
+
+        GameObject closestMaskButton = null;
+        float closestDistSquared = Mathf.Infinity;
+
+        foreach (GameObject mask in masks)
+        {
+            if (mask.GetComponent<MaskStatus>().getStatus() == false) continue;
+
+            RectTransform rectTransform = mask.GetComponent<RectTransform>();
+            float distSquared = (mousePos - rectTransform.position).sqrMagnitude;
+            if (closestMaskButton == null || distSquared < closestDistSquared)
+            {
+                closestDistSquared = distSquared;
+                closestMaskButton = mask;
+            }
+        }
+
+        MaskStatus closestMaskStatus = closestMaskButton.GetComponent<MaskStatus>();
+        MaskType hoverType = closestMaskStatus.maskType;
+        if (hoverType != selectedMask)
+        {
+            if (selectedMaskButton != null) selectedMaskButton.GetComponent<MaskStatus>().setSelected(false);
+
+            selectedMask = hoverType;
+            selectedMaskButton = closestMaskButton;
+            closestMaskStatus.setSelected(true);
+        }
     }
 
     public void ToggleMaskWheel(InputAction.CallbackContext context)
@@ -24,106 +76,8 @@ public class MaskWheelManager : MonoBehaviour
         }
         else if(context.canceled)
         {
-            switch(selectedMask)
-            {
-                case MaskType.None:
-                    break;
-                case MaskType.Default:
-                    maskManager.SwitchMask('D');
-                    break;
-                case MaskType.Monkey:
-                    maskManager.SwitchMask('M');
-                    break;
-                case MaskType.Rhino:
-                    maskManager.SwitchMask('R');
-                    break;
-                case MaskType.Turtle:
-                    maskManager.SwitchMask('T');
-                    break;
-                case MaskType.Flamingo:
-                    maskManager.SwitchMask('F');
-                    break;
-            }
+            maskManager.SwitchMask(selectedMask);
             wheelObj.SetActive(false);
         }
     }
-
-
-
-    // ******************************************************************
-    public void OnHoverDefaultMask(bool isEntered)
-    {
-        if(isEntered)
-            selectedMask = MaskType.Default;
-        else
-            selectedMask = MaskType.None;
-    }
-
-    public void OnHoverMonkeyMask(bool isEntered)
-    {
-        if(isEntered)
-            selectedMask = MaskType.Monkey;
-        else
-            selectedMask = MaskType.None;
-    }
-
-    public void OnHoverRhinoMask(bool isEntered)
-    {
-        if(isEntered)
-            selectedMask = MaskType.Rhino;
-        else
-            selectedMask = MaskType.None;
-    }
-
-    public void OnHoverTurtleMask(bool isEntered)
-    {
-        if(isEntered)
-            selectedMask = MaskType.Turtle;
-        else
-            selectedMask = MaskType.None;
-    }
-
-    public void OnHoverFlamingoMask(bool isEntered)
-    {
-        if(isEntered)
-            selectedMask = MaskType.Flamingo;
-        else
-            selectedMask = MaskType.None;
-    }
-
-    public void OnDefaultMaskClicked()
-    {
-        selectedMask = MaskType.None;
-        maskManager.SwitchMask('D');
-        wheelObj.SetActive(false);
-    }
-
-    public void OnMonkeyMaskClicked()
-    {
-        selectedMask = MaskType.None;
-        maskManager.SwitchMask('M');
-        wheelObj.SetActive(false);
-    }
-
-    public void OnRhinoMaskClicked()
-    {
-        selectedMask = MaskType.None;
-        maskManager.SwitchMask('R');
-        wheelObj.SetActive(false);
-    }
-
-    public void OnTurtleMaskClicked()
-    {
-        selectedMask = MaskType.None;
-        maskManager.SwitchMask('T');
-        wheelObj.SetActive(false);
-    }
-
-    public void OnFlamingoMaskClicked()
-    {
-        selectedMask = MaskType.None;
-        maskManager.SwitchMask('F');
-        wheelObj.SetActive(false);
-    }
-
 }

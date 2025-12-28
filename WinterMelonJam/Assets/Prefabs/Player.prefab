@@ -259,13 +259,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ac7d5aa6cb27409f60188fb3d8f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyController
-  interactRadius: 0.5
-  climbSpeed: 1
-  throwSpeed: 1
+  interactRadius: 0.75
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
   moveSpeed: 3
+  climbSpeed: 2
+  exitRopeJumpSpeed: 3
+  groundCheckDist: 0.1
+  throwSpeedMult: 70
+  throwObjHeightOffset: 1
+  minThrowSpeed: 150
+  maxThrowSpeed: 1000
 --- !u!1 &2034059708840420919
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +413,6 @@ GameObject:
   - component: {fileID: 843198206682216150}
   - component: {fileID: 3539142464245016024}
   - component: {fileID: 1154201071369641534}
-  - component: {fileID: 569341568871087586}
   - component: {fileID: 8262892819088414405}
   m_Layer: 6
   m_Name: Player
@@ -725,18 +729,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &569341568871087586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239850967413529913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aed4b15d5eaad44fb977ad8b74a9d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!114 &8262892819088414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
