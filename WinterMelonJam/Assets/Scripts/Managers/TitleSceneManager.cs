@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;  // To open scenes
 
 public class TitleSceneManager : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class TitleSceneManager : MonoBehaviour
 
     public void OpenLevelSelect()
     {
-        Debug.Log("TODO - OPEN LEVEL SELECT SCENE NOW");
+        SceneManager.LoadScene("LevelSelectScene");
     }
 
     public void QuitGame()
