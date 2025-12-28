@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;      // IMPORTANT: make sure you have this to work with input system
-using System.Collections.Generic; // Need to use List data structure
+using System.Collections.Generic;   // Need to use List data structure
 
 
 public class MonkeyController : MonoBehaviour
@@ -27,7 +27,16 @@ public class MonkeyController : MonoBehaviour
     private CapsuleCollider2D coll;
 
     [Header ("Throwing")]
-    [SerializeField] private float throwSpeed = 1f;
+    [SerializeField] private float throwSpeedMult = 0.5f;
+    [SerializeField] private float throwObjHeightOffset = 1f;
+    [SerializeField] private float minThrowSpeed = 5f;
+    [SerializeField] private float maxThrowSpeed = 50f;
+    private bool isThrowing = false;
+    private Camera cam;
+    private Vector2 throwVector = Vector2.zero;
+    private GameObject throwObj;
+    private Rigidbody2D throwBody;
+
 
 
 
@@ -35,6 +44,7 @@ public class MonkeyController : MonoBehaviour
     {
         body = transform.parent.gameObject.GetComponent<Rigidbody2D>();
         coll = transform.parent.gameObject.GetComponent<CapsuleCollider2D>();
+        cam = Camera.main;
         floorMask = LayerMask.NameToLayer("Floor");
         interactableMask = LayerMask.NameToLayer("Interactable");
     }
@@ -45,6 +55,8 @@ public class MonkeyController : MonoBehaviour
     {
         if(isClimbing)
             ClimbingUpdate();
+        else if(isThrowing)
+            ThrowingUpdate();
         else
             MovementUpdate();
     }
@@ -57,7 +69,7 @@ public class MonkeyController : MonoBehaviour
         transform.parent.transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
     }
 
-    // Horizontal movement and accounts for velocity when jumping off of a rope
+    // Horizontal movement and accounts for velocity when jumping off of a rope and prevents movement when throwing
     private void MovementUpdate()
     {
         if(isUsingJumpHorVel)
@@ -71,6 +83,14 @@ public class MonkeyController : MonoBehaviour
         }
         else
             body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
+    }
+
+    private void ThrowingUpdate()
+    {
+        Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
+
+        Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
+        throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
     }
 
     private void StartClimbingRope(Collider2D coll)
@@ -93,9 +113,44 @@ public class MonkeyController : MonoBehaviour
         body.linearVelocity = new Vector2(moveDir * moveSpeed, exitRopeJumpSpeed);
     }
 
-    private void InteractWithBox(GameObject obj)
+    private void StartThrowing(GameObject obj)
     {
-        Debug.Log("InteractWithBox. Obj.name = " + obj.name);
+        Debug.Log("StartThrowing. Obj.name = " + obj.name);
+        isThrowing = true;
+        body.linearVelocity = Vector2.zero;
+
+        throwObj = obj;
+        throwBody = throwObj.GetComponent<Rigidbody2D>();
+        throwBody.gravityScale = 0f;
+
+        throwObj.transform.position = transform.position + (Vector3.up * throwObjHeightOffset);
+    }
+
+    private void ThrowObject()
+    {
+        isThrowing = false;
+        throwVector *= throwSpeedMult;
+        float throwMagnitude = throwVector.magnitude;
+        Debug.Log("magnitude before update: " + throwMagnitude);
+
+        if (throwMagnitude > maxThrowSpeed)
+        {
+            throwVector.Normalize();
+            throwVector *= maxThrowSpeed;
+            Debug.Log("Min Throw Speed");
+        }
+        else if(throwMagnitude < minThrowSpeed)
+        {
+            throwVector.Normalize();
+            throwVector *= minThrowSpeed;
+            Debug.Log("Max Throw Speed");
+        }
+
+        throwBody.gravityScale = 1f;
+        throwBody.AddForce(throwVector, ForceMode2D.Impulse);
+        throwBody = null;
+        throwObj = null;
+        Debug.Log("Throwing Object at speed: " + throwVector);
     }
 
     private void CheckForInteraction()
@@ -123,9 +178,9 @@ public class MonkeyController : MonoBehaviour
                 StartClimbingRope(hit);
                 return;
             }
-            else if(hitObj.CompareTag("Breakable") || hitObj.CompareTag("Non-Breakable"))
+            else if(hitObj.CompareTag("Non-Breakable"))
             {
-                InteractWithBox(hitObj);
+                StartThrowing(hitObj);
                 return;
             }
         }
@@ -190,6 +245,8 @@ public class MonkeyController : MonoBehaviour
         {
             if(isClimbing)
                 ExitRope();
+            if(isThrowing)
+                ThrowObject();
             else
                 CheckForInteraction();
         }
@@ -207,5 +264,18 @@ public class MonkeyController : MonoBehaviour
     {
         moveInput = 0f;
         isUsingJumpHorVel = false;
+
+        if(isClimbing)
+        {
+            isClimbing = false;
+            body.gravityScale = 1f;
+        }
+        else if(isThrowing)
+        {
+            isThrowing = false;
+            throwBody.gravityScale = 1f;
+            throwObj = null;
+            throwBody = null;
+        }
     }
 }
