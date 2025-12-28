@@ -72,10 +72,7 @@ public class DefaultController : MonoBehaviour
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
-            if(moveInput > 0)
-                spriteRenderer.flipX = false;
-            else
-                spriteRenderer.flipX = true;
+            spriteRenderer.flipX = !(moveInput > 0);
         }
     }
 

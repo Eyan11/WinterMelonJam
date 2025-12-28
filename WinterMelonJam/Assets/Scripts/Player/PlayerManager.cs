@@ -4,6 +4,7 @@ using System;    // For Action reference (events)
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float groundCheckDist = 0.1f;
+    private AudioSource audioSource;
     private Rigidbody2D body;
     private BoxCollider2D coll;
     public bool IsGrounded {get; private set;}  // Public getter
@@ -20,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
         floorMask = LayerMask.NameToLayer("Floor");
         interactableMask = LayerMask.NameToLayer("Interactable");
     }
@@ -27,6 +29,13 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         GroundCheck();
+    }
+
+    // Plays a specific audio clip once without looping on the player
+    public void PlayOneShotSFX(AudioClip clip)
+    {
+        if (clip != null)
+            audioSource.PlayOneShot(clip);
     }
 
 
