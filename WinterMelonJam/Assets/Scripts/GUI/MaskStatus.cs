@@ -12,16 +12,22 @@ public class MaskStatus : MonoBehaviour
 
     private void Awake()
     {
+        ObtainData();
+        updateButton();
+    }
+
+    private void ObtainData()
+    {
         sliceSelector = GetComponent<Image>();
         originalColor = sliceSelector.color;
         transparentOriginalColor = sliceSelector.color;
         transparentOriginalColor.a = 0.4f;
-        
-        updateButton();
     }
 
     private void updateButton()
     {
+        if (sliceSelector == null) ObtainData();
+
         if (maskEnabled)
         {
             if (maskSelected == true) sliceSelector.color = originalColor;

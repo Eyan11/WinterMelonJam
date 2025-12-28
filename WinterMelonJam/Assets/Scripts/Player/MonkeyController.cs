@@ -245,7 +245,7 @@ public class MonkeyController : MonoBehaviour
         {
             if(isClimbing)
                 ExitRope();
-            if(isThrowing)
+            else if(isThrowing)
                 ThrowObject();
             else
                 CheckForInteraction();
@@ -256,7 +256,7 @@ public class MonkeyController : MonoBehaviour
     // Called when entering this mask transformation
     public void OnMaskEnter()
     {
-        
+
     }
 
     // Called when leaving this mask transformation
