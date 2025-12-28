@@ -1,0 +1,897 @@
+fileFormatVersion: 2
+guid: 396010407261aec4c8d6a9515902b43e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5101776996546416209
+    second: Alien_IDLE_D_0
+  - first:
+      213: 6820911689237435370
+    second: Alien_IDLE_D_1
+  - first:
+      213: -8908044392706729484
+    second: Alien_IDLE_D_2
+  - first:
+      213: 3799940489752573148
+    second: Alien_IDLE_D_3
+  - first:
+      213: -6656313144703528664
+    second: Alien_IDLE_D_4
+  - first:
+      213: -7336375191887899983
+    second: Alien_IDLE_D_5
+  - first:
+      213: 7765539593916248126
+    second: Alien_IDLE_D_6
+  - first:
+      213: -171494751588930081
+    second: Alien_IDLE_D_7
+  - first:
+      213: -4785832055843729426
+    second: Alien_IDLE_D_8
+  - first:
+      213: -3732860207930329233
+    second: Alien_IDLE_D_9
+  - first:
+      213: 552546855912400974
+    second: Alien_IDLE_D_10
+  - first:
+      213: -3439780771484559100
+    second: Alien_IDLE_D_11
+  - first:
+      213: 5129392133122994145
+    second: Alien_IDLE_D_12
+  - first:
+      213: 8856525933459772347
+    second: Alien_IDLE_D_13
+  - first:
+      213: -3610343285437882408
+    second: Alien_IDLE_D_14
+  - first:
+      213: 2896977099095957282
+    second: Alien_IDLE_D_15
+  - first:
+      213: 1008953344133112566
+    second: Alien_IDLE_D_16
+  - first:
+      213: -3286531666375280059
+    second: Alien_IDLE_D_17
+  - first:
+      213: -306772599652645495
+    second: Alien_IDLE_D_18
+  - first:
+      213: -4703479087867396506
+    second: Alien_IDLE_D_19
+  - first:
+      213: -1191172793734979272
+    second: Alien_IDLE_D_20
+  - first:
+      213: -4472157159310542692
+    second: Alien_IDLE_D_21
+  - first:
+      213: -8588745997501536476
+    second: Alien_IDLE_D_22
+  - first:
+      213: -2555843991997255558
+    second: Alien_IDLE_D_23
+  - first:
+      213: -8472775414996987773
+    second: Alien_IDLE_D_24
+  - first:
+      213: -726129828905382405
+    second: Alien_IDLE_D_25
+  - first:
+      213: -3229178182770787331
+    second: Alien_IDLE_D_26
+  - first:
+      213: 4448051628971153071
+    second: Alien_IDLE_D_27
+  - first:
+      213: -5833726455670977186
+    second: Alien_IDLE_D_28
+  - first:
+      213: -6396835650996308177
+    second: Alien_IDLE_D_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Alien_IDLE_D_0
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1779d1ad8d239b0800000000000000
+      internalID: -5101776996546416209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_1
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae39e49ea0fb8ae50800000000000000
+      internalID: 6820911689237435370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_2
+      rect:
+        serializedVersion: 2
+        x: 4629
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f91e4952d4406480800000000000000
+      internalID: -8908044392706729484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_3
+      rect:
+        serializedVersion: 2
+        x: 6677
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd473531eb91cb430800000000000000
+      internalID: 3799940489752573148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_4
+      rect:
+        serializedVersion: 2
+        x: 8725
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821de28267600a3a0800000000000000
+      internalID: -6656313144703528664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_5
+      rect:
+        serializedVersion: 2
+        x: 10773
+        y: 8362
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b2988cf1a5ff2a90800000000000000
+      internalID: -7336375191887899983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_6
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e30fb98fd1db4cb60800000000000000
+      internalID: 7765539593916248126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_7
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdda2ba9e6abe9df0800000000000000
+      internalID: -171494751588930081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_8
+      rect:
+        serializedVersion: 2
+        x: 4629
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eefc1c40a1f459db0800000000000000
+      internalID: -4785832055843729426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_9
+      rect:
+        serializedVersion: 2
+        x: 6677
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f673f1e1b67323cc0800000000000000
+      internalID: -3732860207930329233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_10
+      rect:
+        serializedVersion: 2
+        x: 8725
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e48ea6c107a0ba700800000000000000
+      internalID: 552546855912400974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_11
+      rect:
+        serializedVersion: 2
+        x: 10773
+        y: 6314
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4099172fc917340d0800000000000000
+      internalID: -3439780771484559100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_12
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1efaa78e7f24f2740800000000000000
+      internalID: 5129392133122994145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_13
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb397ef9963b8ea70800000000000000
+      internalID: 8856525933459772347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_14
+      rect:
+        serializedVersion: 2
+        x: 4629
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df124a09eb75edc0800000000000000
+      internalID: -3610343285437882408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_15
+      rect:
+        serializedVersion: 2
+        x: 6677
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22f5e02a251243820800000000000000
+      internalID: 2896977099095957282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_16
+      rect:
+        serializedVersion: 2
+        x: 8725
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f22ff788b5800e00800000000000000
+      internalID: 1008953344133112566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_17
+      rect:
+        serializedVersion: 2
+        x: 10773
+        y: 4266
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54af0aabcd4e362d0800000000000000
+      internalID: -3286531666375280059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_18
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98581ea22ff1ebbf0800000000000000
+      internalID: -306772599652645495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_19
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66e7f2f80b2e9beb0800000000000000
+      internalID: -4703479087867396506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_20
+      rect:
+        serializedVersion: 2
+        x: 4629
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831215bb7aa187fe0800000000000000
+      internalID: -1191172793734979272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_21
+      rect:
+        serializedVersion: 2
+        x: 6677
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c98339312c4bfe1c0800000000000000
+      internalID: -4472157159310542692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_22
+      rect:
+        serializedVersion: 2
+        x: 8725
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427ecd83505aec880800000000000000
+      internalID: -8588745997501536476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_23
+      rect:
+        serializedVersion: 2
+        x: 10773
+        y: 2218
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a70ffa34e61d78cd0800000000000000
+      internalID: -2555843991997255558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_24
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 380117796a7aa6a80800000000000000
+      internalID: -8472775414996987773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_25
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfd874f84c44ce5f0800000000000000
+      internalID: -726129828905382405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_26
+      rect:
+        serializedVersion: 2
+        x: 4629
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfb718b3d87af23d0800000000000000
+      internalID: -3229178182770787331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_27
+      rect:
+        serializedVersion: 2
+        x: 6677
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa65c67c367aabd30800000000000000
+      internalID: 4448051628971153071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_28
+      rect:
+        serializedVersion: 2
+        x: 8725
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5dceec62b07a0fa0800000000000000
+      internalID: -5833726455670977186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_IDLE_D_29
+      rect:
+        serializedVersion: 2
+        x: 10773
+        y: 170
+        width: 982
+        height: 1709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f277fc70edfd937a0800000000000000
+      internalID: -6396835650996308177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Alien_IDLE_D_0: -5101776996546416209
+      Alien_IDLE_D_1: 6820911689237435370
+      Alien_IDLE_D_10: 552546855912400974
+      Alien_IDLE_D_11: -3439780771484559100
+      Alien_IDLE_D_12: 5129392133122994145
+      Alien_IDLE_D_13: 8856525933459772347
+      Alien_IDLE_D_14: -3610343285437882408
+      Alien_IDLE_D_15: 2896977099095957282
+      Alien_IDLE_D_16: 1008953344133112566
+      Alien_IDLE_D_17: -3286531666375280059
+      Alien_IDLE_D_18: -306772599652645495
+      Alien_IDLE_D_19: -4703479087867396506
+      Alien_IDLE_D_2: -8908044392706729484
+      Alien_IDLE_D_20: -1191172793734979272
+      Alien_IDLE_D_21: -4472157159310542692
+      Alien_IDLE_D_22: -8588745997501536476
+      Alien_IDLE_D_23: -2555843991997255558
+      Alien_IDLE_D_24: -8472775414996987773
+      Alien_IDLE_D_25: -726129828905382405
+      Alien_IDLE_D_26: -3229178182770787331
+      Alien_IDLE_D_27: 4448051628971153071
+      Alien_IDLE_D_28: -5833726455670977186
+      Alien_IDLE_D_29: -6396835650996308177
+      Alien_IDLE_D_3: 3799940489752573148
+      Alien_IDLE_D_4: -6656313144703528664
+      Alien_IDLE_D_5: -7336375191887899983
+      Alien_IDLE_D_6: 7765539593916248126
+      Alien_IDLE_D_7: -171494751588930081
+      Alien_IDLE_D_8: -4785832055843729426
+      Alien_IDLE_D_9: -3732860207930329233
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

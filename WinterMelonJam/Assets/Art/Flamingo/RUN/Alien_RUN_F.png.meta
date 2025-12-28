@@ -1,0 +1,619 @@
+fileFormatVersion: 2
+guid: 9d4b97405de6d1445aed43f1a9a4928e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3528075442512143363
+    second: Alien_RUN_F_0
+  - first:
+      213: -5233681364697878109
+    second: Alien_RUN_F_1
+  - first:
+      213: 651587372449824324
+    second: Alien_RUN_F_2
+  - first:
+      213: -4631046323965223533
+    second: Alien_RUN_F_3
+  - first:
+      213: 6262765957762834672
+    second: Alien_RUN_F_4
+  - first:
+      213: 5224395369905099079
+    second: Alien_RUN_F_5
+  - first:
+      213: 4405290961665174011
+    second: Alien_RUN_F_6
+  - first:
+      213: 5530591410957165617
+    second: Alien_RUN_F_7
+  - first:
+      213: 8690989179983672494
+    second: Alien_RUN_F_8
+  - first:
+      213: 6746769760615385302
+    second: Alien_RUN_F_9
+  - first:
+      213: 8106382330144366935
+    second: Alien_RUN_F_10
+  - first:
+      213: 8913174392520695565
+    second: Alien_RUN_F_11
+  - first:
+      213: 3802304541899964345
+    second: Alien_RUN_F_12
+  - first:
+      213: 8806958076935563797
+    second: Alien_RUN_F_13
+  - first:
+      213: 3322341616450712437
+    second: Alien_RUN_F_14
+  - first:
+      213: -1507174917223333933
+    second: Alien_RUN_F_15
+  - first:
+      213: -8588882634369997455
+    second: Alien_RUN_F_16
+  - first:
+      213: -7472053919131501240
+    second: Alien_RUN_F_17
+  - first:
+      213: -7110182481721892687
+    second: Alien_RUN_F_18
+  - first:
+      213: -4611529226195004893
+    second: Alien_RUN_F_19
+  - first:
+      213: -9040000164135207497
+    second: Alien_RUN_F_20
+  - first:
+      213: -5252532975662562458
+    second: Alien_RUN_F_21
+  - first:
+      213: -6611598842543012986
+    second: Alien_RUN_F_22
+  - first:
+      213: 8522718633603420510
+    second: Alien_RUN_F_23
+  - first:
+      213: 1784871010781235706
+    second: Alien_RUN_F_24
+  - first:
+      213: -8235763546355058152
+    second: Alien_RUN_F_25
+  - first:
+      213: -1804546751304860733
+    second: Alien_RUN_F_26
+  - first:
+      213: 4938339986224622349
+    second: Alien_RUN_F_27
+  - first:
+      213: -7160709413214104480
+    second: Alien_RUN_F_28
+  - first:
+      213: 4502552452371072345
+    second: Alien_RUN_F_29
+  - first:
+      213: -2642592957036461796
+    second: Alien_RUN_F_30
+  - first:
+      213: 2714028221110172885
+    second: Alien_RUN_F_31
+  - first:
+      213: 3174499864687808521
+    second: Alien_RUN_F_32
+  - first:
+      213: 2527662198363655238
+    second: Alien_RUN_F_33
+  - first:
+      213: 1131589378061802197
+    second: Alien_RUN_F_34
+  - first:
+      213: 4339047224893382481
+    second: Alien_RUN_F_35
+  - first:
+      213: -5580839288547150495
+    second: Alien_RUN_F_36
+  - first:
+      213: -3883065750714116561
+    second: Alien_RUN_F_37
+  - first:
+      213: -6281280845541772334
+    second: Alien_RUN_F_38
+  - first:
+      213: -5425949809395180314
+    second: Alien_RUN_F_39
+  - first:
+      213: -7196899172070336541
+    second: Alien_RUN_F_40
+  - first:
+      213: 6819486742232423537
+    second: Alien_RUN_F_41
+  - first:
+      213: 1032570657844274471
+    second: Alien_RUN_F_42
+  - first:
+      213: -4678545790982640858
+    second: Alien_RUN_F_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Alien_RUN_F_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfbd84cd312c90fc0800000000000000
+      internalID: -3528075442512143363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_1
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a1f99d278a3e57b0800000000000000
+      internalID: -5233681364697878109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_2
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e70035347ea0900800000000000000
+      internalID: 651587372449824324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_3
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 6144
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39d9ca997e73bbfb0800000000000000
+      internalID: -4631046323965223533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f0ecdff470d9e650800000000000000
+      internalID: 6262765957762834672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_5
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 741936da8e7c08840800000000000000
+      internalID: 5224395369905099079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_6
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9aa461accb22d30800000000000000
+      internalID: 4405290961665174011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_7
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 4096
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134adeff59b90cc40800000000000000
+      internalID: 5530591410957165617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea4b0b3cc989c9870800000000000000
+      internalID: 8690989179983672494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_9
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d8c3d2f95751ad50800000000000000
+      internalID: 6746769760615385302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_10
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75122c1a7c7af7070800000000000000
+      internalID: 8106382330144366935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_11
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 2048
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0fdd4fc2e4f1bb70800000000000000
+      internalID: 8913174392520695565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf3dcbd5df74c430800000000000000
+      internalID: 3802304541899964345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_13
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51a608fa5b9983a70800000000000000
+      internalID: 8806958076935563797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_14
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 573ba0ff8145b1e20800000000000000
+      internalID: 3322341616450712437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alien_RUN_F_15
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3df368ce560751be0800000000000000
+      internalID: -1507174917223333933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8e0de9b466227ef4c84b558768934279
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":2048.0,"y":2048.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Alien_RUN_F_0: -3528075442512143363
+      Alien_RUN_F_1: -5233681364697878109
+      Alien_RUN_F_10: 8106382330144366935
+      Alien_RUN_F_11: 8913174392520695565
+      Alien_RUN_F_12: 3802304541899964345
+      Alien_RUN_F_13: 8806958076935563797
+      Alien_RUN_F_14: 3322341616450712437
+      Alien_RUN_F_15: -1507174917223333933
+      Alien_RUN_F_2: 651587372449824324
+      Alien_RUN_F_3: -4631046323965223533
+      Alien_RUN_F_4: 6262765957762834672
+      Alien_RUN_F_5: 5224395369905099079
+      Alien_RUN_F_6: 4405290961665174011
+      Alien_RUN_F_7: 5530591410957165617
+      Alien_RUN_F_8: 8690989179983672494
+      Alien_RUN_F_9: 6746769760615385302
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
