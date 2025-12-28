@@ -1678,6 +1678,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650093479463089056, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.9899998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650093479463089056, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 3043897388978469157, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_Name
       value: Camera Objects
@@ -1724,12 +1732,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3628425935588322119, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.111097336
+      value: -0.8261032
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628425935588322119, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4495441662590702832, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1933953336}
+    - target: {fileID: 7828069380329135675, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1744,12 +1760,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 592484087441518539, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592484087441518539, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: m_FlipY
-      value: 0
+      propertyPath: m_SortingLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1154201071369641534, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -1779,9 +1791,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4187663741589110772, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6767575252822721815, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.99
       objectReference: {fileID: 0}
     - target: {fileID: 6767575252822721815, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1819,6 +1835,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8568510260075239400, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8594295822144802863, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: moveSpeed
       value: 2
@@ -1849,6 +1869,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8594295822144802863, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: exitRopeJumpDeaccelSpeedX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757668072416514606, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

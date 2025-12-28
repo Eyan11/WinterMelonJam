@@ -12,6 +12,7 @@ public class RhinoController : MonoBehaviour
     [SerializeField] private float chargeCooldownDuration;
     // Managers
     MaskWheelManager maskWheelManager;
+    private PlayerManager playerManager;
     // State management
     private bool charging = false;
     private bool stunned = false;
@@ -24,18 +25,23 @@ public class RhinoController : MonoBehaviour
     // Player info
     private Vector3 scale;
     private Rigidbody2D body;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
 
     // **********************************************
     // UNITY ACTIONS
 
     // Retrieves components on object activation
-    private void Start()
+    private void Awake()
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
 
         scale = transform.parent.GetComponent<Collider2D>().bounds.size;
         solidMask = LayerMask.GetMask("Floor", "Default", "Interactable");
         maskWheelManager = FindFirstObjectByType<MaskWheelManager>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
     }
 
     // Handles changes to rigidbody velocity
@@ -82,11 +88,34 @@ public class RhinoController : MonoBehaviour
         }
     }
 
+
+    private void OnGrounded()
+    {
+        anim.SetBool("isGrounded", true);
+    }
+
+    private void OnUngrounded()
+    {
+        anim.SetBool("isGrounded", false);
+    }
+
+
     // Called when entering this mask transformation
-    public void OnEnable() {}
+    public void OnEnable()
+    {
+        playerManager.onGroundedEvent += OnGrounded;
+        playerManager.onUngroundedEvent += OnUngrounded;
+
+        anim.SetBool("isGrounded", playerManager.IsGrounded);
+        anim.SetBool("isMoving", false);
+    }
 
     // Called when leaving this mask transformation
-    public void OnDisable() {}
+    public void OnDisable()
+    {
+        playerManager.onGroundedEvent -= OnGrounded;
+        playerManager.onUngroundedEvent -= OnUngrounded;
+    }
 
     // **********************************************
     // HELPER FUNCTIONS

@@ -96,7 +96,7 @@ public class MonkeyController : MonoBehaviour
     {
         float newHeight = transform.position.y + (climbInput * climbSpeed * Time.deltaTime);
         newHeight = Mathf.Clamp(newHeight, minClimbHeight, maxClimbHeight);
-        transform.parent.transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
+        transform.parent.transform.position = new Vector3(transform.position.x, newHeight, transform.parent.transform.position.z);  // Using parent z so we can render player on top of everything
     
         bool isMovingOnRope = climbInput != 0 && newHeight != minClimbHeight && newHeight != maxClimbHeight;
         anim.SetBool("isMoving", isMovingOnRope);
@@ -137,7 +137,7 @@ public class MonkeyController : MonoBehaviour
         spriteRenderer.flipX = moveInput > 0;
         body.gravityScale = 0f;
         body.linearVelocity = Vector2.zero;
-        transform.parent.transform.position = new Vector2(coll.transform.position.x, coll.ClosestPoint(transform.position).y);
+        transform.parent.transform.position = new Vector3(coll.transform.position.x, coll.ClosestPoint(transform.position).y, transform.parent.transform.position.z);
 
         maxClimbHeight = coll.bounds.max.y;
         minClimbHeight = coll.bounds.min.y;

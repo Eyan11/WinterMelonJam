@@ -111,7 +111,8 @@ public class DefaultController : MonoBehaviour
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
 
-        anim.SetBool("isGrounded", playerManager.IsGrounded);   // Initialize grounded anim bool
+        anim.SetBool("isGrounded", playerManager.IsGrounded);
+        anim.SetBool("isMoving", false);
     }
 
     // Called when leaving this mask transformation
