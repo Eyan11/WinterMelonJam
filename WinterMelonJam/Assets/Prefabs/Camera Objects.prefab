@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932142577160585650}
   - component: {fileID: 3982206512699921883}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Camera Bounds - SET PER LEVEL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4495441662590702832}
   - component: {fileID: 5999340306447363330}
   - component: {fileID: 3034811720690176713}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CinemachineCamera - SET PLAYER AS TARGET
   m_TagString: Untagged
   m_Icon: {fileID: 0}

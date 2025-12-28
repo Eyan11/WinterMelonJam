@@ -17,6 +17,7 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float exitRopeJumpSpeed = 3f;
     [SerializeField] private float groundCheckDist = 0.1f;
     private int floorMask;
+    private int solidMask;
     private int interactableMask;
     private RaycastHit2D[] hits = new RaycastHit2D[20];
     private bool isClimbing = false;
@@ -47,6 +48,7 @@ public class MonkeyController : MonoBehaviour
         cam = Camera.main;
         floorMask = LayerMask.NameToLayer("Floor");
         interactableMask = LayerMask.NameToLayer("Interactable");
+        solidMask = LayerMask.GetMask("Floor", "Default");
     }
 
 
@@ -63,12 +65,27 @@ public class MonkeyController : MonoBehaviour
             MovementUpdate();
     }
 
+    private Vector3 CalculateThrowWithOffsetVector()
+    {
+        return transform.position + (Vector3.up * throwObjHeightOffset);
+    }
+
     private void LockThrowObject()
     {
         if (throwObj == null) return;
+        bool testState = ValidateThrowPosition(throwObj);
+        Debug.Log("TESTING: " + testState);
+        if (testState == false)
+        {
+            DropObject();
+            return;
+        }
 
-        throwObj.transform.position = transform.position + (Vector3.up * throwObjHeightOffset);
+        throwObj.transform.position = CalculateThrowWithOffsetVector();
+        throwBody.transform.rotation = Quaternion.identity;
         throwBody.linearVelocity = Vector2.zero;
+        throwBody.angularVelocity = 0;
+
     }
 
     // Moves monkey vertically when climbing
@@ -101,6 +118,8 @@ public class MonkeyController : MonoBehaviour
 
         Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
         throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
+
+        MovementUpdate();
     }
 
     private void StartClimbingRope(Collider2D coll)
@@ -123,22 +142,27 @@ public class MonkeyController : MonoBehaviour
         body.linearVelocity = new Vector2(moveDir * moveSpeed, exitRopeJumpSpeed);
     }
 
-    // First checks if theres a clear path above the monkey for the box (clear line of sight)
-    // Then checks if the box itself can be in the spot
-    //private bool ValidateThrowPosition()
-    //{
-    //    if (throwObj == null)
-    //    {
-    //        Debug.LogError("ERROR: attempting to throw a null object!");
-    //        return;
-    //    }
-    //    Vector3 lookPosition = throwObj.transform.position - transform.position;
+    private bool ValidateThrowPosition(GameObject obj)
+    {
+        if (obj == null)
+        {
+            Debug.LogError("ERROR: attempting to throw a null object!");
+            return false;
+        }
+        Vector3 lookPosition = transform.position - obj.transform.position;
 
-    //    RaycastHit2D hit = Physics2D.BoxCast(transform.position, throwObj.transform.lossyScale, 0, Quaternion.LookRotation(lookPosition).eulerAngles, throwObjHeightOffset);
-    //}
+        // Checks if theres a clear path above the monkey for the box (clear line of sight)
+        BoxCollider2D collider = obj.transform.GetComponent<BoxCollider2D>();
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, collider.bounds.size, 0, Vector3.up, throwObjHeightOffset, solidMask);
+        if (hit == true) return false;
+
+        return true;
+    }
 
     private void StartThrowing(GameObject obj)
     {
+        if (ValidateThrowPosition(obj) == false) return;
+
         Debug.Log("StartThrowing. Obj.name = " + obj.name);
         isThrowing = true;
         body.linearVelocity = Vector2.zero;
@@ -148,6 +172,14 @@ public class MonkeyController : MonoBehaviour
         throwBody.gravityScale = 0f;
 
         LockThrowObject();
+    }
+
+    private void DropObject()
+    {
+        isThrowing = false;
+        throwBody.gravityScale = 1f;
+        throwBody = null;
+        throwObj = null;
     }
 
     private void ThrowObject()
@@ -296,10 +328,7 @@ public class MonkeyController : MonoBehaviour
         }
         else if(isThrowing)
         {
-            isThrowing = false;
-            throwBody.gravityScale = 1f;
-            throwObj = null;
-            throwBody = null;
+            DropObject();
         }
     }
 }

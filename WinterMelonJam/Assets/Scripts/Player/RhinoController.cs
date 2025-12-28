@@ -29,10 +29,11 @@ public class RhinoController : MonoBehaviour
     // UNITY ACTIONS
 
     // Retrieves components on object activation
-    private void Awake()
+    private void Start()
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
-        scale = transform.localScale;
+
+        scale = transform.parent.GetComponent<Collider2D>().bounds.size;
         solidMask = LayerMask.GetMask("Floor", "Default", "Interactable");
         maskWheelManager = FindFirstObjectByType<MaskWheelManager>();
     }
@@ -50,9 +51,8 @@ public class RhinoController : MonoBehaviour
                 goto SpeedControl;
             }
 
-            float angle = chargeDirection == 1 ? 0 : 180;
-            RaycastHit2D[] objs = Physics2D.BoxCastAll(transform.position + Vector3.right * scale.x * chargeDirection / 2,
-                scale - Vector3.down * 0.1f, 0, Vector2.zero, 0.01f, solidMask
+            RaycastHit2D[] objs = Physics2D.BoxCastAll(transform.position,
+                scale, 0, Vector2.right * chargeDirection, 1f, solidMask
             );
 
             foreach (RaycastHit2D obj in objs)
@@ -110,7 +110,7 @@ public class RhinoController : MonoBehaviour
     }
 
     // Uses InputAction to track when the interaction key is used; when used, try to charge
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         // Does ability only when the button is initialized and cooldown is off
         if (gameObject.activeInHierarchy == false) return;

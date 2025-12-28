@@ -63,7 +63,7 @@ public class TurtleController : MonoBehaviour
     }
 
     // Uses InputAction to track when the interaction key is used; when used, try to charge
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         // Prevents ability unless button was released and there is no shell
         if (gameObject.activeInHierarchy == false) return;

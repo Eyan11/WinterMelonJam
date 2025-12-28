@@ -666,13 +666,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: d7a0ef76-3eca-4d2c-88bb-1cfd23ca7b46
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8594295822144802863}
-        m_TargetAssemblyTypeName: MonkeyController, Assembly-CSharp
-        m_MethodName: OnInteract
+      - m_Target: {fileID: 6042971975778970719}
+        m_TargetAssemblyTypeName: TurtleController, Assembly-CSharp
+        m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -682,6 +678,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 856489611420222593}
+        m_TargetAssemblyTypeName: RhinoController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d7a0ef76-3eca-4d2c-88bb-1cfd23ca7b46
+    m_ActionName: 'Player/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 5076337422347266572}
         m_TargetAssemblyTypeName: FlamingoController, Assembly-CSharp
         m_MethodName: OnInteract
@@ -696,18 +708,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 856489611420222593}
         m_TargetAssemblyTypeName: RhinoController, Assembly-CSharp
-        m_MethodName: OnInteract
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6042971975778970719}
-        m_TargetAssemblyTypeName: TurtleController, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
