@@ -31,6 +31,10 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float maxThrowSpeed = 50f;
     [SerializeField] private float chargeIncrement = 500f;
     [SerializeField] private AudioClip throwSfx;
+    [SerializeField] private float minArrowDist = 20f;
+    [SerializeField] private float maxArrowDist = 100f;
+    private Transform arrowBaseTran;
+    private Transform arrowVisualsTran;
     private bool isThrowing = false;
     private bool isCharging = false;
     private int excludePlayerMask;
@@ -48,6 +52,8 @@ public class MonkeyController : MonoBehaviour
         body = transform.parent.gameObject.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        arrowBaseTran = transform.GetChild(0);
+        arrowVisualsTran = arrowBaseTran.GetChild(0);
         cam = Camera.main;
         solidMask = LayerMask.GetMask("Floor", "Default");
         excludePlayerMask = ~LayerMask.GetMask("Player");
@@ -139,18 +145,24 @@ public class MonkeyController : MonoBehaviour
     private void ThrowingUpdate()
     {
         if (isCharging == false)
-        {
+        {            
             Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
-
             Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
             throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
 
+            float angle = Mathf.Atan2(throwVector.y, throwVector.x) * Mathf.Rad2Deg;
+            arrowBaseTran.rotation = Quaternion.Euler(0f, 0f, angle);
+            
             MovementUpdate();
         }
         else if (chargePower < maxThrowSpeed)
         {
             chargePower += chargeIncrement * Time.deltaTime;
             chargePower = Mathf.Clamp(chargePower, minThrowSpeed, maxThrowSpeed);
+
+            float chargePercent = (chargePower - minThrowSpeed) / (maxThrowSpeed - minThrowSpeed);
+            float arrowIncrement = minArrowDist + (chargePercent * (maxArrowDist - minArrowDist));
+            arrowVisualsTran.localPosition = new Vector3(arrowIncrement, 0f, 0f);
         }
     }
 
@@ -208,10 +220,11 @@ public class MonkeyController : MonoBehaviour
     {
         //if (ValidateThrowPosition(obj) == false) return;
 
-        //Debug.Log("StartThrowing. Obj.name = " + obj.name);
         isThrowing = true;
-        chargePower = 0f;
+        chargePower = minThrowSpeed;
         anim.SetBool("isThrowing", isThrowing);
+        arrowBaseTran.gameObject.SetActive(true);
+        arrowVisualsTran.localPosition = new Vector3(minArrowDist, 0f, 0f);
         body.linearVelocity = Vector2.zero;
 
         throwObj = obj;
@@ -228,6 +241,7 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+        arrowBaseTran.gameObject.SetActive(false);
         throwBody.gravityScale = 1f;
         throwCollider.forceSendLayers = Physics2D.AllLayers;
         ObjectClipping throwClip = throwObj.AddComponent<ObjectClipping>();
@@ -242,10 +256,10 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+        arrowBaseTran.gameObject.SetActive(false);
         playerManager.PlayOneShotSFX(throwSfx);
         throwVector.Normalize();
         throwVector *= chargePower;
-        //Debug.Log("magnitude before update: " + throwMagnitude);
 
         throwBody.gravityScale = 1f;
         throwBody.AddForce(throwVector, ForceMode2D.Impulse);
@@ -253,7 +267,7 @@ public class MonkeyController : MonoBehaviour
         throwCollider = null;
         throwBody = null;
         throwObj = null;
-        //Debug.Log("Throwing Object at speed: " + throwVector);
+        Debug.Log("Final Throw Speed: " + throwVector);
     }
 
     private List<Collider2D> GetSortedInteractables()
@@ -393,6 +407,7 @@ public class MonkeyController : MonoBehaviour
         anim.SetBool("isGrounded", false);
         anim.SetBool("isClimbing", false);
         anim.SetBool("isThrowing", false);
+        arrowBaseTran.gameObject.SetActive(false);
     }
 
     // Called when entering this mask transformation
@@ -405,6 +420,7 @@ public class MonkeyController : MonoBehaviour
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isClimbing", false);
         anim.SetBool("isThrowing", false);
+        arrowBaseTran.gameObject.SetActive(false);
 
         if(moveInput != 0)
             spriteRenderer.flipX = !(moveInput > 0);
