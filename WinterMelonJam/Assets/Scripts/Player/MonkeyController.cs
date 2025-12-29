@@ -404,7 +404,6 @@ public class MonkeyController : MonoBehaviour
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
 
-        moveInput = 0f;
         isUsingJumpHorVel = false;
 
         if(isClimbing)

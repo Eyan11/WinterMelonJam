@@ -70,6 +70,8 @@ public class DefaultController : MonoBehaviour
         {
             moveInput = Mathf.Sign(moveInput);
 
+            Debug.Log("moveInput: " + moveInput);
+
             if(!gameObject.activeInHierarchy) return;
 
             spriteRenderer.flipX = !(moveInput > 0);
@@ -123,6 +125,5 @@ public class DefaultController : MonoBehaviour
 
         jumpInputTimer = -1f;
         canJumpTimer = -1f;
-        moveInput = 0f;
     }
 }
