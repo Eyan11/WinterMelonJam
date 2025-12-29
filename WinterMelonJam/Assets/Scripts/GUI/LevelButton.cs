@@ -50,6 +50,7 @@ public class LevelButton : MonoBehaviour
         else
         {
             int stars = GameManager.Instance.GetSavedScore(level);
+            //Debug.Log("Level " + level + " has star count: " + stars);
 
             if (stars >= 1) imageFirstStar.sprite = fullStar;
             if (stars >= 2) imageSecondStar.sprite = fullStar;
