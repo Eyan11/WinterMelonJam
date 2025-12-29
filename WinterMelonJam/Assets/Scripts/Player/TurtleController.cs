@@ -143,6 +143,7 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (Time.timeScale <= 0.01f) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0 && aiming == false)
@@ -158,6 +159,7 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to track when the interaction key is used; when used, try to charge
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (Time.timeScale <= 0.01f) return;
         if (gameObject.activeInHierarchy == false) return;
 
         if (context.canceled == true && CheckForShell() == true)

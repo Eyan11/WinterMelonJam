@@ -38,7 +38,6 @@ public class PressurePlate : MonoBehaviour
             //}
             foreach (var p in puzzleBases)
             {
-                Debug.Log("attempting activate");
                 p.OnActivate();
             }
         }
@@ -64,7 +63,6 @@ public class PressurePlate : MonoBehaviour
             //}
             foreach (var p in puzzleBases)
             {
-                Debug.Log("attempting deactivate");
                 p.OnDeactivate();
             }
         }

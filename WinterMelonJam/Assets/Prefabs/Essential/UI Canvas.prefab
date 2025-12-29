@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameMenu
   enableNextLevelButton: 1
+  starPanel: {fileID: 4705587100017288110}
   objFirstStar: {fileID: 2496642384434322497}
   objSecondStar: {fileID: 5435357024251493412}
   objThirdStar: {fileID: 2859206852043434665}
@@ -1829,7 +1830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7374924482395357405
 RectTransform:
   m_ObjectHideFlags: 0

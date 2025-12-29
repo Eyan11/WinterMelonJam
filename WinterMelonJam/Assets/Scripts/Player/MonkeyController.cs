@@ -117,7 +117,7 @@ public class MonkeyController : MonoBehaviour
     // Moves monkey vertically when climbing
     private void ClimbingUpdate()
     {
-        if (body.linearVelocity != Vector2.zero) ExitRope();
+        if (body.linearVelocity != Vector2.zero || ropeObj.activeInHierarchy == false) ExitRope();
         
         Vector3 oldVector3 = transform.parent.transform.position;
         transform.parent.transform.position = CalculateClimbingPosition();
@@ -321,6 +321,7 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (Time.timeScale <= 0.01f) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
@@ -352,6 +353,7 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Jump event.
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (Time.timeScale <= 0.01f) return;
         if (gameObject.activeInHierarchy == false) return;
         if (context.started)
         {
@@ -374,7 +376,8 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Interact event.
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if(context.started && gameObject.activeInHierarchy)
+        if (Time.timeScale <= 0.01f) return;
+        if (context.started && gameObject.activeInHierarchy)
         {
             if (isClimbing) return; // No climbing while throwing
             else if (isThrowing) return; // Throwing is handled with the jump button

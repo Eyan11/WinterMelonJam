@@ -5,6 +5,7 @@ public class GameMenu : MonoBehaviour
 {
     [SerializeField] private bool enableNextLevelButton = true;
     [Header("Game Objects")]
+    [SerializeField] private GameObject starPanel;
     [SerializeField] private GameObject objFirstStar;
     [SerializeField] private GameObject objSecondStar;
     [SerializeField] private GameObject objThirdStar;
@@ -18,6 +19,7 @@ public class GameMenu : MonoBehaviour
     private Image imageThirdStar;
 
     private bool gameMenuEnabled = false;
+    private bool pauseMenuEnabled = false;
 
     private void SetEmptyStars()
     {
@@ -30,6 +32,8 @@ public class GameMenu : MonoBehaviour
         if (gameMenuEnabled == true) return;
         gameMenuEnabled = true;
 
+        starPanel.SetActive(true);
+        objNextLevelButton.SetActive(enableNextLevelButton);
         gameObject.SetActive(true);
 
         Time.timeScale = 0f;
@@ -45,7 +49,22 @@ public class GameMenu : MonoBehaviour
         if (stars >= 1) imageFirstStar.sprite = fullStar;
         if (stars >= 2) imageSecondStar.sprite = fullStar;
         if (stars >= 3) imageThirdStar.sprite = fullStar;
+    }
 
-        if (enableNextLevelButton == false) objNextLevelButton.SetActive(false);
+    public void TogglePauseMenu(bool state)
+    {
+        if (gameMenuEnabled == true) return;
+
+        pauseMenuEnabled = state;
+        if (pauseMenuEnabled == true)
+        {
+            starPanel.SetActive(false);
+            objNextLevelButton.SetActive(false);
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -76,11 +76,12 @@ public class MaskWheelManager : MonoBehaviour
     {
         if(context.started)
         {
+            if (Time.timeScale <= 0.01f) return;
             wheelObj.SetActive(true);
         }
         else if(context.canceled)
         {
-            if (lockWheel == false) maskManager.SwitchMask(selectedMask);
+            if (lockWheel == false && Time.timeScale > 0.01f) maskManager.SwitchMask(selectedMask);
             wheelObj.SetActive(false);
         }
     }
