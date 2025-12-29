@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;  // To open scenes
-using System.Collections.Generic;   // For dictionary
+using System.Collections.Generic;  // For dictionary
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
         public int twoStar;
         public int oneStar;
     }
-    [SerializeField] private LevelStarInfo[] levelStarInfo;
+    [SerializeField] private LevelStarInfo[] levelStarInfo = new LevelStarInfo[12];
 
-    private int[] levelStarScore;    // The actual star score player achieved
+    private int[] levelStarScore = new int[12];    // The actual star score player achieved
     private int curLevelMaskSwitches = 0;
 
     private void Awake() {
