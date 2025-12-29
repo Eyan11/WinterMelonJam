@@ -889,6 +889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   groundCheckDist: 0.1
+  landSfx: {fileID: 8300000, guid: 904cbef0ccb3893418d5c1ed07b42344, type: 3}
+  footstepSfx: {fileID: 8300000, guid: af81287ed2004bd43b563120cfc9f5c7, type: 3}
 --- !u!114 &8262892819088414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,6 +1270,7 @@ MonoBehaviour:
   jumpSpeed: 6
   coyoteTime: 0.2
   jumpBufferTime: 0.2
+  jumpSfx: {fileID: 8300000, guid: 57ccc8de6ba37ce488d77343eabc7be6, type: 3}
 --- !u!1 &6914028591761858070
 GameObject:
   m_ObjectHideFlags: 0

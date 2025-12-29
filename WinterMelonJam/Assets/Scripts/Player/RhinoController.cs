@@ -193,4 +193,10 @@ public class RhinoController : MonoBehaviour
         vfxAnim.SetTrigger("startCharging");
         playerManager.PlayOneShotSFX(rhinoChargeSfx);
     }
+
+    // Called by animation event in run animation when foot hits ground
+    private void PlayFootstepSfx()
+    {
+        playerManager.PlayFootstepSfx();
+    }
 }

@@ -4,6 +4,8 @@ using System;    // For Action reference (events)
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float groundCheckDist = 0.1f;
+    [SerializeField] private AudioClip landSfx;
+    [SerializeField] private AudioClip footstepSfx;
     private AudioSource audioSource;
     private Rigidbody2D body;
     private BoxCollider2D coll;
@@ -36,6 +38,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (clip != null)
             audioSource.PlayOneShot(clip);
+    }
+
+    public void PlayFootstepSfx()
+    {
+        PlayOneShotSFX(footstepSfx);
     }
 
 
@@ -74,13 +81,9 @@ public class PlayerManager : MonoBehaviour
     private void SetIsGrounded(bool newBoolVal)
     {
         if(IsGrounded && newBoolVal == false)
-        {
             TriggerOnUngroundedEvent();
-        }
         else if(!IsGrounded && newBoolVal == true)
-        {
             TriggerOnGroundedEvent();
-        }
         
         IsGrounded = newBoolVal;
     }
@@ -91,6 +94,8 @@ public class PlayerManager : MonoBehaviour
     public void TriggerOnGroundedEvent() {
         if(onGroundedEvent != null)
             onGroundedEvent();
+        
+        PlayOneShotSFX(landSfx);
     }
 
     public void TriggerOnUngroundedEvent() {

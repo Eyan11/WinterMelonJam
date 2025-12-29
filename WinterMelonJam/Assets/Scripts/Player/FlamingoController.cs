@@ -147,4 +147,10 @@ public class FlamingoController : MonoBehaviour
         gliding = holdingSpacebar;
         anim.SetBool("isGliding", gliding);
     }
+
+    // Called by animation event in run animation when foot hits ground
+    private void PlayFootstepSfx()
+    {
+        playerManager.PlayFootstepSfx();
+    }
 }

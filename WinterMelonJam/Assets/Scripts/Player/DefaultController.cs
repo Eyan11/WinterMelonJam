@@ -14,6 +14,7 @@ public class DefaultController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private AudioClip jumpSfx;
     private float canJumpTimer;
     private float jumpInputTimer = 0f;
 
@@ -53,6 +54,7 @@ public class DefaultController : MonoBehaviour
         canJumpTimer = -1f;
         jumpInputTimer = -1f;
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
+        playerManager.PlayOneShotSFX(jumpSfx);
     }
 
 
@@ -123,5 +125,11 @@ public class DefaultController : MonoBehaviour
 
         jumpInputTimer = -1f;
         canJumpTimer = -1f;
+    }
+
+    // Called by animation event in run animation when foot hits ground
+    private void PlayFootstepSfx()
+    {
+        playerManager.PlayFootstepSfx();
     }
 }
