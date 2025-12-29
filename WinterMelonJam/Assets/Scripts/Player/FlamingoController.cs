@@ -1,7 +1,7 @@
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 
 public class FlamingoController : MonoBehaviour
 {
@@ -9,18 +9,17 @@ public class FlamingoController : MonoBehaviour
     [SerializeField] private float flamingoMoveSpeed;
     [SerializeField] private float updraftPower;
     // LayerMask
-    private int floorMask;
-    private int interactableMask;
     private int groundedMask;
     // State management
-    private bool onGround;
     private bool gliding;
     private bool holdingSpacebar;
     private bool usedUpdraft;
     private bool updraftDeactivated;
     private float moveInput;
-    private RaycastHit2D[] hits = new RaycastHit2D[20];
     // Player info
+    private PlayerManager playerManager;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
     private Rigidbody2D body;
     private Vector3 scale;
 
@@ -31,9 +30,10 @@ public class FlamingoController : MonoBehaviour
     private void Awake()
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
 
-        floorMask = LayerMask.NameToLayer("Floor");
-        interactableMask = LayerMask.NameToLayer("Interactable");
         groundedMask = LayerMask.GetMask("Floor", "Interactable");
 
         scale = transform.localScale;
@@ -42,9 +42,10 @@ public class FlamingoController : MonoBehaviour
     // Flamingo movement
     private void FixedUpdate()
     {
-        GroundCheck();
-
         body.linearVelocityX = moveInput * flamingoMoveSpeed;
+
+        anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
+
         if (gliding)
         {
             if (updraftDeactivated == true) body.linearVelocityY = -0.2f;
@@ -56,42 +57,22 @@ public class FlamingoController : MonoBehaviour
     }
 
     // Called when entering this mask transformation
-    public void OnEnable() {}
+    public void OnEnable() 
+    {
+        playerManager.onGroundedEvent += OnGrounded;
+        playerManager.onUngroundedEvent += OnUngrounded;
+
+        anim.SetBool("isGrounded", playerManager.IsGrounded);
+        anim.SetBool("isMoving", false);
+    }
 
     // Called when leaving this mask transformation
-    public void OnDisable() {}
-
-    // **********************************************
-    // HELPER FUNCTIONS
-
-    private void SetOnGround()
+    public void OnDisable()
     {
-        onGround = true;
-        if (gliding)
-        {
-            gliding = false;
-            usedUpdraft = false;
-            updraftDeactivated = true;
-        }
+        playerManager.onGroundedEvent -= OnGrounded;
+        playerManager.onUngroundedEvent -= OnUngrounded;
     }
 
-    private void GroundCheck()
-    {
-        if (body.linearVelocity.y > 0.1)
-            return;
-
-        int objsOnGround = Physics2D.BoxCastAll(transform.position + Vector3.down * scale.y,
-            new Vector3(scale.x - 0.1f, 0.1f), 0, Vector2.zero, 0.1f, groundedMask
-        ).Length;
-
-        if (objsOnGround > 0)
-        {
-            SetOnGround();
-            return;
-        }
-        onGround = false;
-        gliding = holdingSpacebar;
-    }
 
     // **********************************************
     // EVENTS
@@ -101,6 +82,12 @@ public class FlamingoController : MonoBehaviour
     {
         if (gameObject.activeInHierarchy == false) return;
         moveInput = context.ReadValue<Vector2>().x;
+
+        if (moveInput != 0)
+        {
+            moveInput = Mathf.Sign(moveInput);
+            spriteRenderer.flipX = !(moveInput > 0);
+        }
     }
 
     // Uses InputAction to enable updraft ability once per glide
@@ -113,6 +100,7 @@ public class FlamingoController : MonoBehaviour
         updraftDeactivated = false;
 
         body.linearVelocityY = updraftPower;
+        Debug.Log("Using Updraft");
     }
 
     // Uses InputAction to allow for gliding ability
@@ -121,12 +109,38 @@ public class FlamingoController : MonoBehaviour
         if (gameObject.activeInHierarchy == false) return;
 
         if (context.canceled == false)
-        {
             holdingSpacebar = true;
-        }
         else
-        {
             holdingSpacebar = false;
+
+        if(!playerManager.IsGrounded)
+        {
+            gliding = holdingSpacebar;
+            anim.SetBool("isGliding", gliding);
         }
+
+    }
+
+    // Subscribed to on grounded action in player manager
+    private void OnGrounded()
+    {
+        anim.SetBool("isGrounded", true);
+
+        if (gliding)
+        {
+            gliding = false;
+            anim.SetBool("isGliding", gliding);
+            usedUpdraft = false;
+            updraftDeactivated = true;
+        }
+    }
+
+    // Subscribed to on ungrounded action in player manager
+    private void OnUngrounded()
+    {
+        anim.SetBool("isGrounded", false);
+
+        gliding = holdingSpacebar;
+        anim.SetBool("isGliding", gliding);
     }
 }

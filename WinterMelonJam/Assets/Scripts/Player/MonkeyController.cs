@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;      // IMPORTANT: make sure you have this to work with input system
-using System.Collections.Generic;
-using Unity.VisualScripting;  // Need to use List data structure
+using System.Collections.Generic;   // For List data structure
 
 
 public class MonkeyController : MonoBehaviour
@@ -18,17 +17,14 @@ public class MonkeyController : MonoBehaviour
     [Header ("Climbing")]
     [SerializeField] private float climbSpeed = 1f;
     [SerializeField] private float exitRopeJumpSpeed = 3f;
-    [SerializeField] private float groundCheckDist = 0.1f;
     private GameObject ropeObj;
     private Rope ropeComp;
     private int solidMask;
-    private RaycastHit2D[] hits = new RaycastHit2D[20];
     [SerializeField] private bool isClimbing = false;
     private float climbInput;
     private bool isUsingJumpHorVel = false;
 
     [Header ("Throwing")]
-    [SerializeField] private float throwSpeedMult = 0.5f;
     [SerializeField] private float throwObjHeightOffset = 1f;
     [SerializeField] private float minThrowSpeed = 5f;
     [SerializeField] private float maxThrowSpeed = 50f;
