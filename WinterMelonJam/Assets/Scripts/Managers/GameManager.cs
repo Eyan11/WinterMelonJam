@@ -100,6 +100,15 @@ public class GameManager : MonoBehaviour
         curLevelMaskSwitches++;
     }
 
+    public int GetLevelNumber()
+    {
+        int levelIndex = GetCurLevelIndex();
+        if (levelIndex != -1) return levelIndex + 1;
+
+        Debug.LogError("ERROR: Invalid level!");
+        return -1;
+    }
+
     public void RestartLevel()
     {
         curLevelMaskSwitches = 0;
@@ -109,6 +118,7 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         SaveScore();
-        SceneManager.LoadScene("LevelSelectScene");
+        // SceneManager.LoadScene("LevelSelectScene");
     }
+
 }

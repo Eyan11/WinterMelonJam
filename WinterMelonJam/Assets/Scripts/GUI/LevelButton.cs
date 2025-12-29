@@ -17,7 +17,6 @@ public class LevelButton : MonoBehaviour
     [SerializeField] private Sprite emptyStar;
     [SerializeField] private Sprite fullStar;
 
-    private GameManager gameManager;
     private Button levelButton;
     private Image imageFirstStar;
     private Image imageSecondStar;
@@ -33,8 +32,6 @@ public class LevelButton : MonoBehaviour
     // Only ran once every time the scene opens
     private void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-
         imageFirstStar = firstStar.GetComponent<Image>();
         imageSecondStar = secondStar.GetComponent<Image>();
         imageThirdStar = thirdStar.GetComponent<Image>();
@@ -43,7 +40,7 @@ public class LevelButton : MonoBehaviour
 
         SetEmptyStars();
 
-        bool unlocked = gameManager.GetSavedScore(levelToUnlock) > 0;
+        bool unlocked = GameManager.Instance.GetSavedScore(levelToUnlock) > 0;
         if (unlocked == false && overrideEnable == false) // Locked, no stars
         {
             
@@ -52,8 +49,7 @@ public class LevelButton : MonoBehaviour
         }
         else
         {
-            int stars = gameManager.GetSavedScore(level);
-            stars = 0; // TESTING
+            int stars = GameManager.Instance.GetSavedScore(level);
 
             if (stars >= 1) imageFirstStar.sprite = fullStar;
             if (stars >= 2) imageSecondStar.sprite = fullStar;

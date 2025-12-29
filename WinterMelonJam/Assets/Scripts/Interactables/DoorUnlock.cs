@@ -4,7 +4,15 @@ public class DoorUnlock : MonoBehaviour
 {
     
     [SerializeField] private KeyCollection doorKey;
-    
+    private GameMenu gameMenu;
+
+    private void Start()
+    {
+        gameMenu = FindFirstObjectByType<GameMenu>(FindObjectsInactive.Include);
+        if (gameMenu == null)
+            Debug.LogError("ERROR: No game menu set!");
+    }
+
     private void OnTriggerEnter2D(Collider2D coll)
     {
         // Complete level by unlocking a door with a key
@@ -27,6 +35,7 @@ public class DoorUnlock : MonoBehaviour
         if(GameManager.Instance != null)
         {
             GameManager.Instance.CompleteLevel();
+            gameMenu.EnableGameMenu();
         }
         else
             Debug.LogError("Cannot complete level because GameManager is not in the current scene!!!");

@@ -13,19 +13,17 @@ public class WorldLock : MonoBehaviour
     [Header("Unlocked Icon")]
     [SerializeField] private Sprite spriteIndicatorUnlocked;
 
-    private GameManager gameManager;
     private Image indicator;
     private Image icon;
 
     // Only ran once every time the scene opens
     private void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
 
         indicator = objIndicator.GetComponent<Image>();
         icon = objIcon.GetComponent<Image>();
 
-        int stars = gameManager.GetSavedScore(levelToCheck);
+        int stars = GameManager.Instance.GetSavedScore(levelToCheck);
         if (stars <= 0 && overrideEnable == false) // Locked, no stars
         {
             indicator.sprite = spriteIndicatorLock;
