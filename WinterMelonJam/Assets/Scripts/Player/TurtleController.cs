@@ -16,7 +16,11 @@ public class TurtleController : MonoBehaviour
     private float shellThrowDirection = 1;
     // Player info
     private float moveInput;
+    private PlayerManager playerManager;
     private Rigidbody2D body;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
+
 
     // **********************************************
     // UNITY ACTIONS
@@ -25,23 +29,54 @@ public class TurtleController : MonoBehaviour
     private void Awake()
     {
         body = transform.parent.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
     }
 
     private void FixedUpdate()
     {
-        if (CheckForShell()) body.linearVelocityX = moveInput * turtleNoShellMoveSpeed;
-        else body.linearVelocityX = moveInput * turtleNormalMoveSpeed;
+        if (CheckForShell()) 
+        {
+            body.linearVelocityX = moveInput * turtleNoShellMoveSpeed;
+            anim.SetFloat("moveSpeed", 2.5f);
+        }
+        else
+        {
+            body.linearVelocityX = moveInput * turtleNormalMoveSpeed;
+            anim.SetFloat("moveSpeed", 1f);
+        }
 
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        shellThrowDirection = (worldMousePos - transform.position).x;
-        shellThrowDirection = shellThrowDirection / Mathf.Abs(shellThrowDirection); // Normalizes
+        anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
     }
 
     // Called when entering this mask transformation
-    public void OnEnable() {}
+    public void OnEnable()
+    {
+        playerManager.onGroundedEvent += OnGrounded;
+        playerManager.onUngroundedEvent += OnUngrounded;
+
+        anim.SetBool("isGrounded", playerManager.IsGrounded);
+        anim.SetBool("isMoving", false);
+        anim.SetBool("isThrowing", false);
+    }
 
     // Called when leaving this mask transformation
-    public void OnDisable() {}
+    public void OnDisable()
+    {
+        playerManager.onGroundedEvent -= OnGrounded;
+        playerManager.onUngroundedEvent -= OnUngrounded;
+    }
+
+    private void OnGrounded()
+    {
+        anim.SetBool("isGrounded", true);
+    }
+
+    private void OnUngrounded()
+    {
+        anim.SetBool("isGrounded", false);
+    }
 
     // **********************************************
     // HELPER FUNCTIONS
@@ -60,6 +95,12 @@ public class TurtleController : MonoBehaviour
         if (gameObject.activeInHierarchy == false) return;
 
         moveInput = context.ReadValue<Vector2>().x;
+
+        if (moveInput != 0)
+        {
+            moveInput = Mathf.Sign(moveInput);
+            spriteRenderer.flipX = !(moveInput > 0);
+        }
     }
 
     // Uses InputAction to track when the interaction key is used; when used, try to charge
@@ -82,9 +123,16 @@ public class TurtleController : MonoBehaviour
             return;
         }
 
+        // Calculate shell throw direction
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        shellThrowDirection = (worldMousePos - transform.position).x;
+        shellThrowDirection = shellThrowDirection / Mathf.Abs(shellThrowDirection); // Normalizes
+
+        // Spawn and throw shell in throw direction
         shell = Instantiate(shellTemplate, transform.position, Quaternion.identity);
         Rigidbody2D shellBody = shell.GetComponent<Rigidbody2D>();
         shellBody.linearVelocityX = shellThrowDirection * shellThrowSpeed;
         destroyedShellEarly = false;
+        anim.SetTrigger("throwShell");
     }
 }
