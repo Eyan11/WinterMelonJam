@@ -12,7 +12,7 @@ public class MaskWheelManager : MonoBehaviour
     private bool lockWheel = false;
     public bool LockWheel { get { return lockWheel; } set { ToggleLock(value); } }
 
-    private MaskType selectedMask = MaskType.None;
+    private MaskType selectedMask = MaskType.Default;
     private GameObject selectedMaskButton;
 
     private GameObject[] masks = new GameObject[5];

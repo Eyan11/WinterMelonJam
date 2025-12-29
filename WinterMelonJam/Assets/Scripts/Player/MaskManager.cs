@@ -112,7 +112,7 @@ public class MaskManager : MonoBehaviour
             default:
                 curMask = MaskType.Default;
                 anim.SetBool("enterDefault", true);
-                Debug.LogError("Illegal mask input!");
+                Debug.LogError("Illegal mask input on switch!");
                 break;
         }
     }
@@ -150,7 +150,7 @@ public class MaskManager : MonoBehaviour
                 curMask = MaskType.Default;
                 defaultSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 defaultObj.SetActive(true);
-                Debug.LogError("Illegal mask input!");
+                Debug.LogError("Illegal mask input on finish!");
                 break;
         }
     }
