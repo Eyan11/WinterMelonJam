@@ -44,7 +44,6 @@ public class LevelButton : MonoBehaviour
         SetEmptyStars();
 
         bool unlocked = gameManager.GetSavedScore(levelToUnlock) > 0;
-        unlocked = false; // TESTING
         if (unlocked == false && overrideEnable == false) // Locked, no stars
         {
             
