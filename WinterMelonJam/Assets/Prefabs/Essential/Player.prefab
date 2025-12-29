@@ -388,7 +388,7 @@ MonoBehaviour:
   throwObjHeightOffset: 1
   minThrowSpeed: 150
   maxThrowSpeed: 1000
-  isThrowing: 0
+  chargeIncrement: 500
 --- !u!1 &2034059708840420919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1134,9 @@ MonoBehaviour:
   turtleNormalMoveSpeed: 1
   turtleNoShellMoveSpeed: 3
   shellThrowSpeed: 5
+  shellIncrement: 2
   shellTemplate: {fileID: 7415577588723904582, guid: b1722e248151686428c002617de960dd, type: 3}
+  arrowTemplate: {fileID: 3513324151496234107, guid: 4b79b81a9aeba0e488a5eb65995497df, type: 3}
 --- !u!1 &4900587880370665766
 GameObject:
   m_ObjectHideFlags: 0

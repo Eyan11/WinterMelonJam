@@ -44,4 +44,6 @@ public class Shell : MonoBehaviour
         // TODO: josue do the shell break jig dance thing i'm sleepy
         Destroy(gameObject);
     }
+
+    public float getMaxDistanceSquared() { return maxDistanceSquared; }
 }

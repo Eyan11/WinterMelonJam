@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,10 +10,19 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float turtleNormalMoveSpeed;
     [SerializeField] private float turtleNoShellMoveSpeed;
     [SerializeField] private float shellThrowSpeed;
+    [SerializeField] private float shellIncrement;
     [SerializeField] private GameObject shellTemplate;
+    [SerializeField] private GameObject arrowTemplate;
+    // Layer info
+    private int solidMask;
+    // Shell template info
+    private float shellMaxDist;
+    private Vector3 shellSize;
     // State management
     private bool destroyedShellEarly = false;
+    private bool aiming = false;
     private GameObject shell;
+    private GameObject arrow;
     private float shellThrowDirection = 1;
     // Player info
     private float moveInput;
@@ -32,6 +42,11 @@ public class TurtleController : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerManager = transform.parent.gameObject.GetComponent<PlayerManager>();
+
+        solidMask = LayerMask.GetMask("Default", "Interactables", "Floor");
+
+        shellMaxDist = Mathf.Sqrt(shellTemplate.GetComponent<Shell>().getMaxDistanceSquared());
+        shellSize = shellTemplate.GetComponent<Collider2D>().bounds.size;
     }
 
     private void FixedUpdate()
@@ -48,6 +63,25 @@ public class TurtleController : MonoBehaviour
         }
 
         anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
+
+        if (aiming == true)
+        {
+            // Calculate shell throw direction
+            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            shellThrowDirection = (worldMousePos - transform.position).x;
+            shellThrowDirection = Mathf.Sign(shellThrowDirection); // Normalizes
+
+            Vector3 angle = Vector3.right * shellThrowDirection;
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, shellSize, 0, angle, shellMaxDist, solidMask);
+            Vector3 baseShift = transform.position + Vector3.up * shellSize.y;
+            Debug.Log("Hit: " + (hit == true));
+            if (hit == false)
+                arrow.transform.position = baseShift + Vector3.right * shellThrowDirection * shellMaxDist;
+            else
+                arrow.transform.position = baseShift + Vector3.right * shellThrowDirection * hit.distance;
+
+            Debug.Log("Position: " + arrow.transform.position);
+        }
     }
 
     // Called when entering this mask transformation
@@ -96,7 +130,7 @@ public class TurtleController : MonoBehaviour
 
         moveInput = context.ReadValue<Vector2>().x;
 
-        if (moveInput != 0)
+        if (moveInput != 0 && aiming == false)
         {
             moveInput = Mathf.Sign(moveInput);
             spriteRenderer.flipX = !(moveInput > 0);
@@ -108,25 +142,39 @@ public class TurtleController : MonoBehaviour
     {
         // Prevents ability unless button was released and there is no shell
         if (gameObject.activeInHierarchy == false) return;
-        if (context.canceled == false)
+        if (context.canceled == false && CheckForShell() == true)
         {
-            if (CheckForShell() == false) return;
             Destroy(shell);
             shell = null;
             destroyedShellEarly = true;
             return;
         }
         // Only runs after the keystroke for destroying shell early
-        else if (context.canceled == true && destroyedShellEarly == true) 
+        else if (context.canceled == true) 
         {
-            destroyedShellEarly = false;
+            if (destroyedShellEarly == true)
+            {
+                destroyedShellEarly = false;
+                return;
+            }
+            else
+            {
+                Destroy(arrow);
+                arrow = null;
+            }
+        }
+        else if (CheckForShell() == false && destroyedShellEarly == false)
+        {
+            aiming = true;
+            if (arrow == null)
+            {
+                arrow = Instantiate(arrowTemplate, transform.position, Quaternion.LookRotation(Vector3.down));
+                arrow.transform.rotation = Quaternion.Euler(180f, 0, 0);
+            }
+
             return;
         }
-
-        // Calculate shell throw direction
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        shellThrowDirection = (worldMousePos - transform.position).x;
-        shellThrowDirection = shellThrowDirection / Mathf.Abs(shellThrowDirection); // Normalizes
+        aiming = false;
 
         // Spawn and throw shell in throw direction
         shell = Instantiate(shellTemplate, transform.position, Quaternion.identity);
