@@ -19,7 +19,6 @@ public class TurtleController : MonoBehaviour
     private float shellMaxDist;
     private Vector3 shellSize;
     // State management
-    private bool destroyedShellEarly = false;
     private bool aiming = false;
     private GameObject shell;
     private GameObject arrow;
@@ -46,7 +45,10 @@ public class TurtleController : MonoBehaviour
         solidMask = LayerMask.GetMask("Default", "Interactables", "Floor");
 
         shellMaxDist = Mathf.Sqrt(shellTemplate.GetComponent<Shell>().getMaxDistanceSquared());
-        shellSize = shellTemplate.GetComponent<Collider2D>().bounds.size;
+        // Need to do load up a dummy shell because you can't get data from an unloaded object
+        GameObject dummyShell = Instantiate(shellTemplate, Vector3.one * 10000, Quaternion.identity);
+        shellSize = dummyShell.GetComponent<Collider2D>().bounds.size;
+        Destroy(dummyShell);
     }
 
     private void FixedUpdate()
@@ -70,17 +72,15 @@ public class TurtleController : MonoBehaviour
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             shellThrowDirection = (worldMousePos - transform.position).x;
             shellThrowDirection = Mathf.Sign(shellThrowDirection); // Normalizes
+            spriteRenderer.flipX = !(shellThrowDirection > 0); // Sets turtle's physical direction to aim
 
-            Vector3 angle = Vector3.right * shellThrowDirection;
+            Vector2 angle = new Vector2(shellThrowDirection, 0);
             RaycastHit2D hit = Physics2D.BoxCast(transform.position, shellSize, 0, angle, shellMaxDist, solidMask);
             Vector3 baseShift = transform.position + Vector3.up * shellSize.y;
-            Debug.Log("Hit: " + (hit == true));
             if (hit == false)
                 arrow.transform.position = baseShift + Vector3.right * shellThrowDirection * shellMaxDist;
             else
                 arrow.transform.position = baseShift + Vector3.right * shellThrowDirection * hit.distance;
-
-            Debug.Log("Position: " + arrow.transform.position);
         }
     }
 
@@ -140,30 +140,20 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to track when the interaction key is used; when used, try to charge
     public void OnJump(InputAction.CallbackContext context)
     {
-        // Prevents ability unless button was released and there is no shell
         if (gameObject.activeInHierarchy == false) return;
-        if (context.canceled == false && CheckForShell() == true)
+
+        if (context.canceled == true && CheckForShell() == true)
         {
             Destroy(shell);
             shell = null;
-            destroyedShellEarly = true;
             return;
         }
-        // Only runs after the keystroke for destroying shell early
-        else if (context.canceled == true) 
+        else if (context.canceled == true && CheckForShell() == false) 
         {
-            if (destroyedShellEarly == true)
-            {
-                destroyedShellEarly = false;
-                return;
-            }
-            else
-            {
-                Destroy(arrow);
-                arrow = null;
-            }
+            Destroy(arrow);
+            arrow = null;
         }
-        else if (CheckForShell() == false && destroyedShellEarly == false)
+        else if (context.canceled == false && CheckForShell() == false)
         {
             aiming = true;
             if (arrow == null)
@@ -171,7 +161,10 @@ public class TurtleController : MonoBehaviour
                 arrow = Instantiate(arrowTemplate, transform.position, Quaternion.LookRotation(Vector3.down));
                 arrow.transform.rotation = Quaternion.Euler(180f, 0, 0);
             }
-
+            return;
+        }
+        else
+        {
             return;
         }
         aiming = false;
@@ -180,7 +173,8 @@ public class TurtleController : MonoBehaviour
         shell = Instantiate(shellTemplate, transform.position, Quaternion.identity);
         Rigidbody2D shellBody = shell.GetComponent<Rigidbody2D>();
         shellBody.linearVelocityX = shellThrowDirection * shellThrowSpeed;
-        destroyedShellEarly = false;
+        ObjectClipping clipping = shell.AddComponent<ObjectClipping>();
+        clipping.playerObj = transform.parent.gameObject;
         anim.SetTrigger("throwShell");
     }
 }
