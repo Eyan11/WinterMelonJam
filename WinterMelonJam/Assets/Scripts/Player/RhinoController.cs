@@ -110,12 +110,22 @@ public class RhinoController : MonoBehaviour
         anim.SetBool("isGrounded", false);
     }
 
+    // Subscribed to PlayerManager onDeathEvent
+    private void OnDeath()
+    {
+        this.enabled = false;
+        anim.SetBool("isGrounded", false);
+        anim.SetBool("isCharging", false);
+        anim.SetBool("isStunned", false);
+    }
+
 
     // Called when entering this mask transformation
     public void OnEnable()
     {
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
+        playerManager.onDeathEvent += OnDeath;
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
@@ -132,6 +142,7 @@ public class RhinoController : MonoBehaviour
     {
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
+        playerManager.onDeathEvent -= OnDeath;
     }
 
     // **********************************************

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MaskManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class MaskManager : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D body;
+    private PlayerManager playerManager;
     private MaskType curMask = MaskType.Default;
 
 
@@ -25,6 +27,7 @@ public class MaskManager : MonoBehaviour
     {
         anim = maskTransitionObj.GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
+        playerManager = GetComponent<PlayerManager>();
 
         defaultSpriteRend = defaultObj.GetComponent<SpriteRenderer>();
         monkeySpriteRend = monkeyObj.GetComponent<SpriteRenderer>();
@@ -147,7 +150,5 @@ public class MaskManager : MonoBehaviour
                 break;
         }
     }
-
-
 
 }

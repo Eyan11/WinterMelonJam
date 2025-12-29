@@ -59,6 +59,7 @@ public class FlamingoController : MonoBehaviour
     {
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
+        playerManager.onDeathEvent += OnDeath;
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
@@ -73,6 +74,7 @@ public class FlamingoController : MonoBehaviour
     {
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
+        playerManager.onDeathEvent -= OnDeath;
     }
 
 
@@ -104,7 +106,6 @@ public class FlamingoController : MonoBehaviour
         updraftDeactivated = false;
 
         body.linearVelocityY = updraftPower;
-        Debug.Log("Using Updraft");
     }
 
     // Uses InputAction to allow for gliding ability
@@ -146,6 +147,14 @@ public class FlamingoController : MonoBehaviour
 
         gliding = holdingSpacebar;
         anim.SetBool("isGliding", gliding);
+    }
+
+    // Subscribed to PlayerManager onDeathEvent
+    private void OnDeath()
+    {
+        this.enabled = false;
+        anim.SetBool("isGrounded", false);
+        anim.SetBool("isGliding", false);
     }
 
     // Called by animation event in run animation when foot hits ground

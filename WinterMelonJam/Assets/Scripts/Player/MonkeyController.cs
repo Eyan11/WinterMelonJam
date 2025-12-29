@@ -384,15 +384,25 @@ public class MonkeyController : MonoBehaviour
         anim.SetBool("isGrounded", false);
     }
 
+    // Subscribed to PlayerManager onDeathEvent
+    private void OnDeath()
+    {
+        this.enabled = false;
+        anim.SetBool("isGrounded", false);
+        anim.SetBool("isClimbing", false);
+        anim.SetBool("isThrowing", false);
+    }
+
     // Called when entering this mask transformation
     public void OnEnable()
     {
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
+        playerManager.onDeathEvent += OnDeath;
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
-        anim.SetBool("isClimbing", isClimbing);
-        anim.SetBool("isThrowing", isThrowing);
+        anim.SetBool("isClimbing", false);
+        anim.SetBool("isThrowing", false);
 
         if(moveInput != 0)
             spriteRenderer.flipX = !(moveInput > 0);
@@ -403,6 +413,7 @@ public class MonkeyController : MonoBehaviour
     {
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
+        playerManager.onDeathEvent -= OnDeath;
 
         isUsingJumpHorVel = false;
 

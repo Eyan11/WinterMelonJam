@@ -104,11 +104,19 @@ public class DefaultController : MonoBehaviour
         anim.SetBool("isGrounded", false);
     }
 
+    // Subscribed to PlayerManager onDeathEvent
+    private void OnDeath()
+    {
+        this.enabled = false;
+        anim.SetBool("isGrounded", false);
+    }
+
     // Called when entering this mask transformation
     private void OnEnable()
     {
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
+        playerManager.onDeathEvent += OnDeath;
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
@@ -122,6 +130,7 @@ public class DefaultController : MonoBehaviour
     {
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
+        playerManager.onDeathEvent -= OnDeath;
 
         jumpInputTimer = -1f;
         canJumpTimer = -1f;

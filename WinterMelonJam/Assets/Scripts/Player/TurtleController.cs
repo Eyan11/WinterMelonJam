@@ -89,10 +89,10 @@ public class TurtleController : MonoBehaviour
     {
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
+        playerManager.onDeathEvent += OnDeath;
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
-        anim.SetBool("isThrowing", false);
 
         if(CheckForShell())        
             anim.SetFloat("moveSpeed", 3);
@@ -108,6 +108,7 @@ public class TurtleController : MonoBehaviour
     {
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
+        playerManager.onDeathEvent -= OnDeath;
     }
 
     private void OnGrounded()
@@ -117,6 +118,13 @@ public class TurtleController : MonoBehaviour
 
     private void OnUngrounded()
     {
+        anim.SetBool("isGrounded", false);
+    }
+
+    // Subscribed to PlayerManager onDeathEvent
+    private void OnDeath()
+    {
+        this.enabled = false;
         anim.SetBool("isGrounded", false);
     }
 

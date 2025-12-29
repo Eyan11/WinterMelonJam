@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &181086705
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3660321435801537727, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_Name
+      value: Water Death Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5607a0506f526f449cf0004950995be, type: 3}
 --- !u!1 &496147816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1897,22 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
       value: 'UI/SwitchMasks[/Keyboard/q]'
       objectReference: {fileID: 0}
+    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: deathBaseImpulse.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: deathBaseImpulse.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: deathBaseRandomRange.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
+      propertyPath: deathBaseRandomRange.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034059708840420919, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_Name
       value: Flamingo
@@ -2000,3 +2073,4 @@ SceneRoots:
   - {fileID: 5342926125861573566}
   - {fileID: 3366836469753530670}
   - {fileID: 1396606698}
+  - {fileID: 181086705}
