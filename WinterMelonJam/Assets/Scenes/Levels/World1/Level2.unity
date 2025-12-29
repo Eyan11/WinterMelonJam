@@ -1372,6 +1372,10 @@ PrefabInstance:
       propertyPath: maskEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5902765179422981664, guid: 616d2cd17547dd9439964101fab2ec7f, type: 3}
+      propertyPath: sceneName
+      value: Level3
+      objectReference: {fileID: 0}
     - target: {fileID: 7980280442664759754, guid: 616d2cd17547dd9439964101fab2ec7f, type: 3}
       propertyPath: maskEnabled
       value: 0
