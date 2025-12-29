@@ -8,6 +8,9 @@ public class MaskStatus : MonoBehaviour
     private bool managerLock = false;
     private bool maskSelected = false;
     private Image sliceSelector;
+    private GameObject icon;
+    private RectTransform iconTransform;
+    private Vector2 originalIconSize;
     private Color originalColor;
     private Color transparentOriginalColor;
 
@@ -19,11 +22,14 @@ public class MaskStatus : MonoBehaviour
 
     private void ObtainData()
     {
+        icon = transform.GetChild(0).gameObject;
+        iconTransform = icon.GetComponent<RectTransform>();
+        originalIconSize = iconTransform.rect.size;
         sliceSelector = GetComponent<Image>();
         originalColor = sliceSelector.color;
         originalColor.a = 1; // Just incase its grabbing data while its off
         transparentOriginalColor = sliceSelector.color;
-        transparentOriginalColor.a = 0.4f;
+        transparentOriginalColor.a = 0.1f;
     }
 
     private void updateButton()
@@ -32,12 +38,22 @@ public class MaskStatus : MonoBehaviour
 
         if (maskEnabled && managerLock == false)
         {
-            if (maskSelected == true) sliceSelector.color = originalColor;
-            else sliceSelector.color = transparentOriginalColor;
+            icon.SetActive(true);
+            if (maskSelected == true)
+            {
+                sliceSelector.color = originalColor;
+                iconTransform.sizeDelta = originalIconSize * 1.5f;
+            }
+            else
+            {
+                sliceSelector.color = transparentOriginalColor;
+                iconTransform.sizeDelta = originalIconSize;
+            }
         }
         else
         {
-            sliceSelector.color = new Color(0, 0, 0, 20);
+            sliceSelector.color = new Color(0, 0, 0, 10);
+            icon.SetActive (false);
         }
     }
 
