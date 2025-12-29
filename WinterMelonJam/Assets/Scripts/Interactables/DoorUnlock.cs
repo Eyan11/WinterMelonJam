@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoorUnlock : MonoBehaviour
+public class DoorUnlock : PuzzleBase
 {
     
     [SerializeField] private KeyCollection doorKey;
@@ -18,15 +18,6 @@ public class DoorUnlock : MonoBehaviour
         // Complete level by unlocking a door with a key
         if (coll.CompareTag("Player") && doorKey.keyCollected==true)
             CompleteLevel();
-    }
-
-    public void OpenDoor()
-    {
-        this.gameObject.SetActive(false);
-    }
-    public void CloseDoor()
-    {
-        this.gameObject.SetActive(true);
     }
 
     private void CompleteLevel()

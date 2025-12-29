@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 
 public class PressurePlate : MonoBehaviour
 {
-    [SerializeField] private RopeMovement ropeMove;
-    [SerializeField] private DoorUnlock door;
-    [SerializeField] private PlatformTrigger platf;
+    //[SerializeField] private RopeMovement ropeMove;
+    //[SerializeField] private DoorUnlock door;
+    //[SerializeField] private PlatformTrigger platf;
+    [SerializeField] private PuzzleBase[] puzzleBases;
     public bool plateState = false;
     private Animator anim;
     
@@ -23,19 +24,23 @@ public class PressurePlate : MonoBehaviour
         {
             plateState = true;
             anim.SetBool("isPressed", plateState);
-            if (ropeMove != null)
+            //if (ropeMove != null)
+            //{
+            //    ropeMove.LowerRope();
+            //}
+            //else if (door != null)
+            //{
+            //    door.OpenDoor();
+            //}
+            //else if (platf != null)
+            //{
+            //    platf.platOn();
+            //}
+            foreach (var p in puzzleBases)
             {
-                ropeMove.LowerRope();
+                Debug.Log("attempting activate");
+                p.OnActivate();
             }
-            else if (door != null)
-            {
-                door.OpenDoor();
-            }
-            else if (platf != null)
-            {
-                platf.platOn();
-            }
-           
         }
     }
 
@@ -45,17 +50,22 @@ public class PressurePlate : MonoBehaviour
         {
             plateState = false;
             anim.SetBool("isPressed", plateState);
-            if (ropeMove != null)
+            //if (ropeMove != null)
+            //{
+            //    ropeMove.RaiseRope();
+            //}
+            //else if (door != null)
+            //{
+            //    door.CloseDoor();
+            //}
+            //else if (platf != null)
+            //{
+            //    platf.platOff();
+            //}
+            foreach (var p in puzzleBases)
             {
-                ropeMove.RaiseRope();
-            }
-            else if (door != null)
-            {
-                door.CloseDoor();
-            }
-            else if (platf != null)
-            {
-                platf.platOff();
+                Debug.Log("attempting deactivate");
+                p.OnDeactivate();
             }
         }
     }

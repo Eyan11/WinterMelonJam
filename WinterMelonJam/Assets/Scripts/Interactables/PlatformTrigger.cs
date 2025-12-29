@@ -1,25 +1,21 @@
 using UnityEngine;
 
-public class PlatformTrigger : MonoBehaviour
+public class PlatformTrigger : PuzzleBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] bool initialState = false;
+
+    private void Start()
     {
-        
+        this.gameObject.SetActive(initialState);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnActivate()
     {
-        
+        this.gameObject.SetActive(!initialState);
     }
 
-    public void platOn()
+    public override void OnDeactivate()
     {
-        this.gameObject.SetActive(true);
-    }
-    public void platOff()
-    {
-        this.gameObject.SetActive(false);
+        this .gameObject.SetActive(initialState);
     }
 }

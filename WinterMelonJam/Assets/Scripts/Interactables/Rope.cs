@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class Rope : MonoBehaviour
+public class Rope : PuzzleBase
 {
     [SerializeField] private bool horizontalMode;
-    public bool ropeEnabled = true;
-    private bool lastRopeState = true;
+    [SerializeField] private bool ropeInitiallyEnabled = true;
     private float minRopeBound;
     public float MinRopeBound { get { return minRopeBound; } }
     private float maxRopeBound;
@@ -24,20 +23,18 @@ public class Rope : MonoBehaviour
             minRopeBound = collider.bounds.min.x;
             maxRopeBound = collider.bounds.max.x;
         }
+
+        gameObject.SetActive(ropeInitiallyEnabled);
     }
 
-    private void Update()
+    public override void OnActivate()
     {
-        if (lastRopeState != ropeEnabled)
-        {
-            lastRopeState = ropeEnabled;
-            ToggleRope();
-        }
+        gameObject.SetActive(!ropeInitiallyEnabled);
     }
 
-    private void ToggleRope()
+    public override void OnDeactivate()
     {
-        // TEMP: this feature is unfinished, but the rope would essentially unfurl
+        gameObject.SetActive(ropeInitiallyEnabled);
     }
 
     public bool IsHorizontalMode() { return horizontalMode; }
