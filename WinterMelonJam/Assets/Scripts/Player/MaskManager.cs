@@ -49,6 +49,9 @@ public class MaskManager : MonoBehaviour
         maskTransitionObj.SetActive(true);
         body.linearVelocity = new Vector2(0f, body.linearVelocity.y);   // Stop x velocity
 
+        if(GameManager.Instance != null)
+            GameManager.Instance.SwitchMask();
+
         // Exit old mask
         switch(curMask)
         {

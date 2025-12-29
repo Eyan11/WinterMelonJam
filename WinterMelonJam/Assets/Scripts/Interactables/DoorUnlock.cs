@@ -5,26 +5,11 @@ public class DoorUnlock : MonoBehaviour
     
     [SerializeField] private KeyCollection doorKey;
     
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created   
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     private void OnTriggerEnter2D(Collider2D interactor)
     {
+        // Complete level by unlocking a door with a key
         if (doorKey.keyCollected==true)
-        {
-            this.gameObject.SetActive(false);
-        }
+            CompleteLevel();
     }
 
     public void OpenDoor()
@@ -34,6 +19,19 @@ public class DoorUnlock : MonoBehaviour
     public void CloseDoor()
     {
         this.gameObject.SetActive(true);
+    }
+
+    private void CompleteLevel()
+    {
+        this.gameObject.SetActive(false);
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteLevel();
+        }
+        else
+            Debug.LogError("Cannot complete level because GameManager is not in the current scene!!!");
+        
+
     }
 
 

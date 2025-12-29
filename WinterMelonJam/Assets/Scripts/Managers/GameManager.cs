@@ -4,8 +4,7 @@ using System.Collections.Generic;   // For dictionary
 
 public class GameManager : MonoBehaviour
 {
-    //global reference to this script
-    public static GameManager Instance;
+    public static GameManager Instance;    //global reference to this script
 
     [System.Serializable]
     private struct LevelStarInfo
@@ -32,11 +31,11 @@ public class GameManager : MonoBehaviour
 
 
     // Called when level is finished. Updates the level star score and returns true if it's a new high score.
-    private bool SaveScore(int levelNum)
+    private bool SaveScore()
     {
         // Get new score and reset mask switches
-        int levelIndex = levelNum-1;
-        int newLevelScore = GetScore(levelNum);
+        int levelIndex = GetCurLevelIndex();
+        int newLevelScore = GetScoreFromCurMaskSwitches(levelIndex);
         curLevelMaskSwitches = 0;
 
         // Set new score and return if it's a new high score or not
@@ -52,15 +51,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Returns score using current number of mask switches
-    public int GetScore(int levelNum)
+    // Returns score using current number of mask switches - SaveScore() helper method
+    private int GetScoreFromCurMaskSwitches(int levelIndex)
     {
-        int levelIndex = levelNum-1;
         if(curLevelMaskSwitches <= levelStarInfo[levelIndex].threeStar)
             return 3;
         else if(curLevelMaskSwitches <= levelStarInfo[levelIndex].twoStar)
             return 2;
         return 1;
+    }
+
+    // Returns the level number according to current scene name
+    private int GetCurLevelIndex()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (!sceneName.StartsWith("Level"))
+        {
+            Debug.LogError("Invalid level scene name: " + sceneName);
+            return -1;
+        }
+
+        string numberPart = sceneName.Substring(5); // after "Level"
+        
+        if (!int.TryParse(numberPart, out int levelNumber))
+        {
+            Debug.LogError("Could not parse level number from scene name: " + sceneName);
+            return -1;
+        }
+
+        return levelNumber - 1;
+    }
+
+
+
+    // *** Public Methods ***************************************************************
+
+    // Returns the score that is saved for the player, disregarding the current number of mask switches. For level select screen.
+    public int GetSavedScore(int levelNumber)
+    {
+        return levelStarScore[levelNumber - 1];
     }
 
 
@@ -70,16 +100,15 @@ public class GameManager : MonoBehaviour
         curLevelMaskSwitches++;
     }
 
-
     public void RestartLevel()
     {
         curLevelMaskSwitches = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void CompleteLevel(int levelNum)
+    public void CompleteLevel()
     {
-        SaveScore(levelNum);
+        SaveScore();
         SceneManager.LoadScene("LevelSelectScene");
     }
 }
