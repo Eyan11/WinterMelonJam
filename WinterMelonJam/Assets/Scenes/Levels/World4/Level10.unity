@@ -923,6 +923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5902765179422981664, guid: 616d2cd17547dd9439964101fab2ec7f, type: 3}
+      propertyPath: sceneName
+      value: LevelSelectScene
+      objectReference: {fileID: 0}
     - target: {fileID: 6631000652888321648, guid: 616d2cd17547dd9439964101fab2ec7f, type: 3}
       propertyPath: m_IsActive
       value: 1
