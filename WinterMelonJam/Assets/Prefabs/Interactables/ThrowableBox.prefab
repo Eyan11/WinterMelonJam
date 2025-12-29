@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277c13fe7a0e594c91ff55aa71ab7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowableBoxSfx
-  impactSound: {fileID: 8300000, guid: 8a89a267e25d1384caae59572ca84fa2, type: 3}
+  impactSound: {fileID: 8300000, guid: 294d5df436ba9d143855cfaadbcab43b, type: 3}
   minImpactVelocity: 2.5
 --- !u!82 &8802623068442167212
 AudioSource:

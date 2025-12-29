@@ -1652,6 +1652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowableBox
       objectReference: {fileID: 0}
+    - target: {fileID: 4904623153410634811, guid: 7385526eac2bc4547925d005addb56d1, type: 3}
+      propertyPath: impactSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 294d5df436ba9d143855cfaadbcab43b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
