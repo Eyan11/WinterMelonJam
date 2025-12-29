@@ -118,7 +118,6 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         SaveScore();
-        // SceneManager.LoadScene("LevelSelectScene");
     }
 
 }

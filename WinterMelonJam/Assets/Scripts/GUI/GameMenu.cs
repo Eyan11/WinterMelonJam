@@ -49,6 +49,8 @@ public class GameMenu : MonoBehaviour
         if (stars >= 1) imageFirstStar.sprite = fullStar;
         if (stars >= 2) imageSecondStar.sprite = fullStar;
         if (stars >= 3) imageThirdStar.sprite = fullStar;
+
+        Debug.Log("stars = " + stars);
     }
 
     public void TogglePauseMenu(bool state)
