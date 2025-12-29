@@ -1,7 +1,5 @@
-//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-//using UnityEngine.UIElements;
 
 public class FlamingoController : MonoBehaviour
 {
@@ -64,6 +62,10 @@ public class FlamingoController : MonoBehaviour
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
+        anim.SetBool("isGliding", false);
+
+        if(moveInput != 0)
+            spriteRenderer.flipX = !(moveInput > 0);
     }
 
     // Called when leaving this mask transformation
@@ -80,12 +82,14 @@ public class FlamingoController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (gameObject.activeInHierarchy == false) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
+
+            if (gameObject.activeInHierarchy == false) return;
+
             spriteRenderer.flipX = !(moveInput > 0);
         }
     }

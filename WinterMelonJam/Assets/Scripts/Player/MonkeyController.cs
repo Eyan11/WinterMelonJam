@@ -312,10 +312,23 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
-        if(!gameObject.activeInHierarchy)
-            return;
-
         moveInput = context.ReadValue<Vector2>().x;
+
+        if (moveInput != 0)
+        {
+            moveInput = Mathf.Sign(moveInput);
+            isUsingJumpHorVel = false;
+
+            if(!gameObject.activeInHierarchy) return;
+
+            if(isClimbing)
+                spriteRenderer.flipX = moveInput > 0;
+            else
+                spriteRenderer.flipX = !(moveInput > 0);
+        }
+
+        if(!gameObject.activeInHierarchy) return;
+
         if (ropeComp != null)
         {
             if (ropeComp.IsHorizontalMode() == false) // Vertical
@@ -323,16 +336,6 @@ public class MonkeyController : MonoBehaviour
             else climbInput = moveInput;
         }
         else climbInput = 0;
-
-        if (moveInput != 0)
-        {
-            moveInput = Mathf.Sign(moveInput);
-            isUsingJumpHorVel = false;
-            if(isClimbing)
-                spriteRenderer.flipX = moveInput > 0;
-            else
-                spriteRenderer.flipX = !(moveInput > 0);
-        }
 
         if (climbInput != 0)
             climbInput = Mathf.Sign(climbInput);
@@ -387,9 +390,12 @@ public class MonkeyController : MonoBehaviour
         playerManager.onGroundedEvent += OnGrounded;
         playerManager.onUngroundedEvent += OnUngrounded;
 
-        anim.SetBool("isGrounded", playerManager.IsGrounded);   // Initialize grounded anim bool
+        anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isClimbing", isClimbing);
         anim.SetBool("isThrowing", isThrowing);
+
+        if(moveInput != 0)
+            spriteRenderer.flipX = !(moveInput > 0);
     }
 
     // Called when leaving this mask transformation

@@ -56,7 +56,7 @@ public class TurtleController : MonoBehaviour
         if (CheckForShell()) 
         {
             body.linearVelocityX = moveInput * turtleNoShellMoveSpeed;
-            anim.SetFloat("moveSpeed", 2.5f);
+            anim.SetFloat("moveSpeed", 3f);
         }
         else
         {
@@ -93,6 +93,14 @@ public class TurtleController : MonoBehaviour
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
         anim.SetBool("isThrowing", false);
+
+        if(CheckForShell())        
+            anim.SetFloat("moveSpeed", 3);
+        else
+            anim.SetFloat("moveSpeed", 1);
+
+        if(moveInput != 0)
+            spriteRenderer.flipX = !(moveInput > 0);
     }
 
     // Called when leaving this mask transformation
@@ -126,13 +134,14 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (gameObject.activeInHierarchy == false) return;
-
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0 && aiming == false)
         {
             moveInput = Mathf.Sign(moveInput);
+
+            if (gameObject.activeInHierarchy == false) return;
+
             spriteRenderer.flipX = !(moveInput > 0);
         }
     }

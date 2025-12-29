@@ -120,7 +120,11 @@ public class RhinoController : MonoBehaviour
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
         anim.SetBool("isCharging", false);
+        anim.SetFloat("moveSpeed", 1);
         anim.SetBool("isStunned", false);
+
+        if(moveInput != 0)
+            spriteRenderer.flipX = !(moveInput > 0);
     }
 
     // Called when leaving this mask transformation
@@ -138,6 +142,7 @@ public class RhinoController : MonoBehaviour
         nextChargeTick = Time.fixedTime + chargeCooldownDuration;
         charging = false;
         anim.SetBool("isCharging", charging);
+        anim.SetFloat("moveSpeed", 1);
         if (stunned == false)
         {
             maskWheelManager.LockWheel = false;
@@ -153,17 +158,19 @@ public class RhinoController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (gameObject.activeInHierarchy == false) return;
-
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
-            if(!charging && !stunned)
-                spriteRenderer.flipX = !(moveInput > 0);    // Don't flip sprite while charging or stunned
+
             if(!charging)
                 chargeDirection = moveInput;
+
+            if (gameObject.activeInHierarchy == false) return;
+
+            if(!charging && !stunned)
+                spriteRenderer.flipX = !(moveInput > 0);    // Don't flip sprite while charging or stunned
         }
     }
 
@@ -179,6 +186,7 @@ public class RhinoController : MonoBehaviour
         chargeTimeLeft = maxChargeDuration;
         charging = true;
         anim.SetBool("isCharging", charging);
+        anim.SetFloat("moveSpeed", 3);
         maskWheelManager.LockWheel = true;
 
         // Play rhino charge vfx and sfx

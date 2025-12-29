@@ -63,15 +63,15 @@ public class DefaultController : MonoBehaviour
 
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
-    {
-        if(!gameObject.activeInHierarchy)
-            return;
-        
+    {        
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
+
+            if(!gameObject.activeInHierarchy) return;
+
             spriteRenderer.flipX = !(moveInput > 0);
         }
     }
@@ -110,6 +110,9 @@ public class DefaultController : MonoBehaviour
 
         anim.SetBool("isGrounded", playerManager.IsGrounded);
         anim.SetBool("isMoving", false);
+
+        if(moveInput != 0)
+            spriteRenderer.flipX = !(moveInput > 0);
     }
 
     // Called when leaving this mask transformation
