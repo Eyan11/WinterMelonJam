@@ -66,6 +66,8 @@ public class RhinoController : MonoBehaviour
 
             foreach (RaycastHit2D obj in objs)
             {
+                if (obj.transform.GetComponent<Rope>() != null) continue;
+
                 if (obj.transform.CompareTag("Breakable") == true) Destroy(obj.transform.gameObject);
                 else
                 {

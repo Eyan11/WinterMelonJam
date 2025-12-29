@@ -192,23 +192,6 @@ public class MonkeyController : MonoBehaviour
         body.linearVelocity = new Vector2(moveInput * exitRopeJumpHorSpeed, exitRopeJumpVertSpeed);
     }
 
-    //private bool ValidateThrowPosition(GameObject obj)
-    //{
-    //    if (obj == null)
-    //    {
-    //        Debug.LogError("ERROR: attempting to throw a null object!");
-    //        return false;
-    //    }
-    //    Vector3 lookPosition = transform.position - obj.transform.position;
-
-    //    // Checks if theres a clear path above the monkey for the box (clear line of sight)
-    //    BoxCollider2D collider = obj.transform.GetComponent<BoxCollider2D>();
-    //    RaycastHit2D hit = Physics2D.BoxCast(transform.position, collider.bounds.size - new Vector3(collider.bounds.size.x * 0.4f, 0, 0), 0, Vector3.up, throwObjHeightOffset, solidMask);
-    //    if (hit == true) return false;
-
-    //    return true;
-    //}
-
     private void StartThrowing(GameObject obj)
     {
         //if (ValidateThrowPosition(obj) == false) return;
@@ -380,7 +363,7 @@ public class MonkeyController : MonoBehaviour
         if (context.started && gameObject.activeInHierarchy)
         {
             if (isClimbing) return; // No climbing while throwing
-            else if (isThrowing) return; // Throwing is handled with the jump button
+            else if (isThrowing) DropObject(); // Drops
             else CheckForThrowables();
         }
     }
