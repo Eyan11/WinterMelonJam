@@ -7,6 +7,7 @@ public class SwitchScene : MonoBehaviour
 
     public void SwitchFromScene()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(sceneName);
     }
 }
