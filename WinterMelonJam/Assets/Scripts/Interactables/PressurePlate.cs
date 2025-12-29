@@ -6,21 +6,15 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private RopeMovement ropeMove;
     [SerializeField] private DoorUnlock door;
     [SerializeField] private PlatformTrigger platf;
-    public bool plateState;
+    public bool plateState = false;
+    private Animator anim;
     
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        plateState = false;
+        anim = transform.GetChild(0).GetComponent<Animator>();
     }
     
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
 
     private void OnTriggerEnter2D(Collider2D interactor)
@@ -28,7 +22,7 @@ public class PressurePlate : MonoBehaviour
         if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable") || interactor.CompareTag("Shell"))
         {
             plateState = true;
-            GetComponent<SpriteRenderer>().color = Color.blue; 
+            anim.SetBool("isPressed", plateState);
             if (ropeMove != null)
             {
                 ropeMove.LowerRope();
@@ -50,7 +44,7 @@ public class PressurePlate : MonoBehaviour
         if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable") || interactor.CompareTag("Shell"))
         {
             plateState = false;
-            GetComponent<SpriteRenderer>().color = Color.red;
+            anim.SetBool("isPressed", plateState);
             if (ropeMove != null)
             {
                 ropeMove.RaiseRope();
