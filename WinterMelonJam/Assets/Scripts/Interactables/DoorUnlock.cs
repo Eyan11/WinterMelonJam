@@ -5,10 +5,10 @@ public class DoorUnlock : MonoBehaviour
     
     [SerializeField] private KeyCollection doorKey;
     
-    private void OnTriggerEnter2D(Collider2D interactor)
+    private void OnTriggerEnter2D(Collider2D coll)
     {
         // Complete level by unlocking a door with a key
-        if (doorKey.keyCollected==true)
+        if (coll.CompareTag("Player") && doorKey.keyCollected==true)
             CompleteLevel();
     }
 
@@ -30,8 +30,6 @@ public class DoorUnlock : MonoBehaviour
         }
         else
             Debug.LogError("Cannot complete level because GameManager is not in the current scene!!!");
-        
-
     }
 
 
