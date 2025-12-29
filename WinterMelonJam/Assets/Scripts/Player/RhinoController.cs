@@ -9,10 +9,8 @@ public class RhinoController : MonoBehaviour
     [SerializeField] private float stunDuration;
     [SerializeField] private float maxChargeDuration;
     [SerializeField] private float chargeCooldownDuration;
-    // Charge VFX Info
-    [Header("Charge VFX Info")]
     [SerializeField] private AudioClip rhinoChargeSfx;
-    private Animator vfxAnim;
+    [SerializeField] private AudioClip rhinoStunSfx;
     // Managers 
     MaskWheelManager maskWheelManager;
     private PlayerManager playerManager;
@@ -30,6 +28,7 @@ public class RhinoController : MonoBehaviour
     private Rigidbody2D body;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    private Animator vfxAnim;
 
     // **********************************************
     // UNITY ACTIONS
@@ -73,6 +72,7 @@ public class RhinoController : MonoBehaviour
                     stunTimeLeft = stunDuration;
                     stunned = true;
                     anim.SetBool("isStunned", stunned);
+                    playerManager.PlayOneShotSFX(rhinoStunSfx);
                     DeactivateCharge();
                 }
             }

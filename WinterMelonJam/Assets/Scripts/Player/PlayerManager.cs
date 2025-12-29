@@ -77,7 +77,6 @@ public class PlayerManager : MonoBehaviour
         deathImpulse.x += UnityEngine.Random.Range(-deathBaseRandomRange.x, deathBaseRandomRange.x);
         deathImpulse.y += UnityEngine.Random.Range(-deathBaseRandomRange.y, deathBaseRandomRange.y);
         deathImpulse.x *= UnityEngine.Random.value < 0.5f ? -1f : 1f;       // Randomly flip horizontal direction
-        Debug.Log("death impulse: " + deathImpulse);
         body.AddForce(deathImpulse, ForceMode2D.Impulse);
 
         this.enabled = false;   // prevent landing sfx

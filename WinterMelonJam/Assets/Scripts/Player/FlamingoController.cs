@@ -6,6 +6,7 @@ public class FlamingoController : MonoBehaviour
     // Flamingo speeds, mid-air jump power settings
     [SerializeField] private float flamingoMoveSpeed;
     [SerializeField] private float updraftPower;
+    [SerializeField] private AudioClip flamingoFlapSfx;
     // LayerMask
     private int groundedMask;
     // State management
@@ -103,6 +104,7 @@ public class FlamingoController : MonoBehaviour
         if (context.started == false || gliding == false || usedUpdraft == true) return;
 
         usedUpdraft = true;
+        playerManager.PlayOneShotSFX(flamingoFlapSfx);
         updraftDeactivated = false;
 
         body.linearVelocityY = updraftPower;

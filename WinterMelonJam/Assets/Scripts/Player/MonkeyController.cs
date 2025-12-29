@@ -17,6 +17,7 @@ public class MonkeyController : MonoBehaviour
     [Header ("Climbing")]
     [SerializeField] private float climbSpeed = 1f;
     [SerializeField] private float exitRopeJumpSpeed = 3f;
+    [SerializeField] private AudioClip exitRopeJumpSfx;
     private GameObject ropeObj;
     private Rope ropeComp;
     private int solidMask;
@@ -29,6 +30,7 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float minThrowSpeed = 5f;
     [SerializeField] private float maxThrowSpeed = 50f;
     [SerializeField] private float chargeIncrement = 500f;
+    [SerializeField] private AudioClip throwSfx;
     private bool isThrowing = false;
     private bool isCharging = false;
     private int excludePlayerMask;
@@ -38,8 +40,6 @@ public class MonkeyController : MonoBehaviour
     private GameObject throwObj;
     private Rigidbody2D throwBody;
     private Collider2D throwCollider;
-
-
 
 
     private void Awake()
@@ -180,6 +180,7 @@ public class MonkeyController : MonoBehaviour
     {
         UnsetRope();
         anim.SetBool("isClimbing", isClimbing);
+        playerManager.PlayOneShotSFX(exitRopeJumpSfx);
         spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
 
@@ -241,6 +242,7 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+        playerManager.PlayOneShotSFX(throwSfx);
         throwVector.Normalize();
         throwVector *= chargePower;
         //Debug.Log("magnitude before update: " + throwMagnitude);

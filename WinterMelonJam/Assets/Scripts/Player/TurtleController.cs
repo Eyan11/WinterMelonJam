@@ -13,6 +13,7 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float shellIncrement;
     [SerializeField] private GameObject shellTemplate;
     [SerializeField] private GameObject arrowTemplate;
+    [SerializeField] private AudioClip throwSfx;
     // Layer info
     private int solidMask;
     // Shell template info
@@ -193,6 +194,7 @@ public class TurtleController : MonoBehaviour
         ObjectClipping clipping = shell.AddComponent<ObjectClipping>();
         clipping.playerObj = transform.parent.gameObject;
         anim.SetTrigger("throwShell");
+        playerManager.PlayOneShotSFX(throwSfx);
     }
 
     // Called by animation event in run animation when foot hits ground

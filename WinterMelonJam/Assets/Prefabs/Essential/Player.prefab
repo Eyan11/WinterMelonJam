@@ -134,6 +134,7 @@ MonoBehaviour:
   maxChargeDuration: 5
   chargeCooldownDuration: 4
   rhinoChargeSfx: {fileID: 0}
+  rhinoStunSfx: {fileID: 8300000, guid: c7d54a889f8678e4898b4214facc5b67, type: 3}
 --- !u!1 &1138395777529678598
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,11 +383,13 @@ MonoBehaviour:
   moveSpeed: 2
   climbSpeed: 2
   exitRopeJumpSpeed: 3
+  exitRopeJumpSfx: {fileID: 8300000, guid: 57ccc8de6ba37ce488d77343eabc7be6, type: 3}
   isClimbing: 0
   throwObjHeightOffset: 1
   minThrowSpeed: 150
   maxThrowSpeed: 1000
   chargeIncrement: 500
+  throwSfx: {fileID: 8300000, guid: 69758cc50b48462489336d986e8a57ae, type: 3}
 --- !u!1 &2034059708840420919
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GiraffeController
   flamingoMoveSpeed: 3
   updraftPower: 5
+  flamingoFlapSfx: {fileID: 8300000, guid: 4b04c79a1856eaa40a8c890394c21057, type: 3}
 --- !u!1 &2239850967413529913
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +895,8 @@ MonoBehaviour:
   groundCheckDist: 0.1
   landSfx: {fileID: 8300000, guid: 904cbef0ccb3893418d5c1ed07b42344, type: 3}
   footstepSfx: {fileID: 8300000, guid: af81287ed2004bd43b563120cfc9f5c7, type: 3}
+  deathBaseImpulse: {x: 3, y: 6}
+  deathBaseRandomRange: {x: 0.5, y: 1}
 --- !u!114 &8262892819088414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,6 +915,7 @@ MonoBehaviour:
   turtleObj: {fileID: 4771825767330161082}
   flamingoObj: {fileID: 2034059708840420919}
   maskTransitionObj: {fileID: 6914028591761858070}
+  exitMaskSfx: {fileID: 8300000, guid: fd79a692224b00b43a606ea2c4904fd4, type: 3}
 --- !u!82 &3527225657143480341
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1139,6 +1146,7 @@ MonoBehaviour:
   shellIncrement: 2
   shellTemplate: {fileID: 7415577588723904582, guid: b1722e248151686428c002617de960dd, type: 3}
   arrowTemplate: {fileID: 3513324151496234107, guid: 4b79b81a9aeba0e488a5eb65995497df, type: 3}
+  throwSfx: {fileID: 8300000, guid: 69758cc50b48462489336d986e8a57ae, type: 3}
 --- !u!1 &4900587880370665766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1290,7 @@ GameObject:
   - component: {fileID: 1092984097927503934}
   - component: {fileID: 4063676928564617137}
   - component: {fileID: 2849913343585589290}
+  - component: {fileID: 5924129997235032996}
   m_Layer: 6
   m_Name: Mask Transition
   m_TagString: Untagged
@@ -1385,3 +1394,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5924129997235032996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6914028591761858070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5901b5d9fe8fa834c9f99836946c6343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneShotSFX
+  source: {fileID: 3527225657143480341}
+  clip: {fileID: 8300000, guid: 07bca0a516d28c34f83e1e543a3981e4, type: 3}

@@ -1897,22 +1897,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
       value: 'UI/SwitchMasks[/Keyboard/q]'
       objectReference: {fileID: 0}
-    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: deathBaseImpulse.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: deathBaseImpulse.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: deathBaseRandomRange.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369688069137811454, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
-      propertyPath: deathBaseRandomRange.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2034059708840420919, guid: 0139323e8b8d33b4b8eb8350d124fcb8, type: 3}
       propertyPath: m_Name
       value: Flamingo

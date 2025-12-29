@@ -9,6 +9,7 @@ public class MaskManager : MonoBehaviour
     [SerializeField] private GameObject turtleObj;
     [SerializeField] private GameObject flamingoObj;
     [SerializeField] private GameObject maskTransitionObj;
+    [SerializeField] private AudioClip exitMaskSfx;
 
     private SpriteRenderer defaultSpriteRend;
     private SpriteRenderer monkeySpriteRend;
@@ -54,6 +55,9 @@ public class MaskManager : MonoBehaviour
 
         if(GameManager.Instance != null)
             GameManager.Instance.SwitchMask();
+
+        if(curMask != MaskType.Default)    // If player has to remove their mask, play exit mask sfx
+            playerManager.PlayOneShotSFX(exitMaskSfx);
 
         // Exit old mask
         switch(curMask)
