@@ -33,9 +33,9 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float minThrowSpeed = 5f;
     [SerializeField] private float maxThrowSpeed = 50f;
     [SerializeField] private float chargeIncrement = 500f;
-    [SerializeField] private bool isThrowing = false;
-    private int excludePlayerMask;
+    private bool isThrowing = false;
     private bool isCharging = false;
+    private int excludePlayerMask;
     private Camera cam;
     private Vector2 throwVector = Vector2.zero;
     private float chargePower = 0f;    
@@ -155,7 +155,6 @@ public class MonkeyController : MonoBehaviour
         {
             chargePower += chargeIncrement * Time.deltaTime;
             chargePower = Mathf.Clamp(chargePower, minThrowSpeed, maxThrowSpeed);
-            //Debug.Log(chargePower);
         }
     }
 
@@ -234,6 +233,8 @@ public class MonkeyController : MonoBehaviour
         anim.SetBool("isThrowing", isThrowing);
         throwBody.gravityScale = 1f;
         throwCollider.forceSendLayers = Physics2D.AllLayers;
+        ObjectClipping throwClip = throwObj.AddComponent<ObjectClipping>();
+        throwClip.playerObj = transform.parent.gameObject;
         throwCollider = null;
         throwBody = null;
         throwObj = null;
@@ -356,7 +357,7 @@ public class MonkeyController : MonoBehaviour
         {
             ThrowObject();
         }
-        else if (isCharging == false)
+        else if (isThrowing && isCharging == false)
         {
             isCharging = true;
             chargePower = minThrowSpeed;
