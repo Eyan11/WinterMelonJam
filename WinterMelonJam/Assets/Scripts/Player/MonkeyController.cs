@@ -16,7 +16,8 @@ public class MonkeyController : MonoBehaviour
 
     [Header ("Climbing")]
     [SerializeField] private float climbSpeed = 1f;
-    [SerializeField] private float exitRopeJumpSpeed = 3f;
+    [SerializeField] private float exitRopeJumpVertSpeed = 3f;
+    [SerializeField] private float exitRopeJumpHorSpeed = 3f;
     [SerializeField] private AudioClip exitRopeJumpSfx;
     private GameObject ropeObj;
     private Rope ropeComp;
@@ -67,10 +68,11 @@ public class MonkeyController : MonoBehaviour
 
         if(isClimbing)
             ClimbingUpdate();
-        else if(isThrowing)
-            ThrowingUpdate();
         else
             MovementUpdate();
+        
+        if(isThrowing)
+            ThrowingUpdate();
     }
 
     private Vector3 CalculateThrowWithOffsetVector()
@@ -128,14 +130,7 @@ public class MonkeyController : MonoBehaviour
     private void MovementUpdate()
     {
         if(isUsingJumpHorVel)
-        {
-            // If grounded, stop using the jump velocity
-            if(playerManager.IsGrounded)
-            {
-                isUsingJumpHorVel = false;
-                body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
-            }
-        }
+            body.linearVelocity = new Vector2(moveInput * exitRopeJumpHorSpeed, body.linearVelocity.y);
         else
             body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
 
@@ -152,8 +147,6 @@ public class MonkeyController : MonoBehaviour
 
             float angle = Mathf.Atan2(throwVector.y, throwVector.x) * Mathf.Rad2Deg;
             arrowBaseTran.rotation = Quaternion.Euler(0f, 0f, angle);
-            
-            MovementUpdate();
         }
         else if (chargePower < maxThrowSpeed)
         {
@@ -196,7 +189,7 @@ public class MonkeyController : MonoBehaviour
         spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
 
-        body.linearVelocity = new Vector2(moveInput * moveSpeed, exitRopeJumpSpeed);
+        body.linearVelocity = new Vector2(moveInput * exitRopeJumpHorSpeed, exitRopeJumpVertSpeed);
     }
 
     //private bool ValidateThrowPosition(GameObject obj)
@@ -333,7 +326,6 @@ public class MonkeyController : MonoBehaviour
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
-            isUsingJumpHorVel = false;
 
             if(!gameObject.activeInHierarchy) return;
 
@@ -392,6 +384,7 @@ public class MonkeyController : MonoBehaviour
 
     private void OnGrounded()
     {
+        isUsingJumpHorVel = false;
         anim.SetBool("isGrounded", true);
     }
 
