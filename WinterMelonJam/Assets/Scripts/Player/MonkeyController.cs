@@ -287,7 +287,6 @@ public class MonkeyController : MonoBehaviour
         foreach (Collider2D hit in collList)
         {
             hitObj = hit.transform.gameObject;
-            Debug.Log(hitObj.name + " has a tag of " + hitObj.tag);
             if (hitObj.CompareTag("Throwable"))
             {
                 StartThrowing(hit.gameObject);
@@ -296,15 +295,13 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
-
-
     // *** Events *************************************************************
 
 
     // Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (Time.timeScale <= 0.01f) return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
@@ -318,8 +315,6 @@ public class MonkeyController : MonoBehaviour
             else
                 spriteRenderer.flipX = !(moveInput > 0);
         }
-
-        if(!gameObject.activeInHierarchy) return;
 
         if (ropeComp != null)
         {
@@ -336,8 +331,7 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Jump event.
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (Time.timeScale <= 0.01f) return;
-        if (gameObject.activeInHierarchy == false) return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         if (context.started)
         {
             if (isClimbing)
@@ -359,8 +353,8 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Interact event.
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (Time.timeScale <= 0.01f) return;
-        if (context.started && gameObject.activeInHierarchy)
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
+        if (context.started)
         {
             if (isClimbing) return; // No climbing while throwing
             else if (isThrowing) DropObject(); // Drops

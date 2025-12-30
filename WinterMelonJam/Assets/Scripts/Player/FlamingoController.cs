@@ -85,15 +85,12 @@ public class FlamingoController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (Time.timeScale <= 0.01f) return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
-
-            if (gameObject.activeInHierarchy == false) return;
-
             spriteRenderer.flipX = !(moveInput > 0);
         }
     }
@@ -101,8 +98,7 @@ public class FlamingoController : MonoBehaviour
     // Uses InputAction to enable updraft ability once per glide
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (Time.timeScale <= 0.01f) return;
-        if (gameObject.activeInHierarchy == false) return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         if (context.started == false || gliding == false || usedUpdraft == true) return;
 
         usedUpdraft = true;
@@ -115,8 +111,7 @@ public class FlamingoController : MonoBehaviour
     // Uses InputAction to allow for gliding ability
     public void OnJump(InputAction.CallbackContext context) 
     {
-        if (Time.timeScale <= 0.01f) return;
-        if (gameObject.activeInHierarchy == false) return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
 
         if (context.canceled == false)
             holdingSpacebar = true;

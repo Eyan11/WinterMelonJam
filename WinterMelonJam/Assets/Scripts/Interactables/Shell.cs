@@ -11,10 +11,15 @@ public class Shell : MonoBehaviour
     private bool platformMode = false;
     public float lifetime;
     private Vector3 shellStartPos;
+    private ContactFilter2D contactFilter;
+    private bool isTouching => body.IsTouching(contactFilter);
 
     // Sets the life time to max
     private void Awake()
     {
+        contactFilter = new ContactFilter2D();
+        contactFilter.layerMask = LayerMask.GetMask("Default", "Interactable", "Floor");
+
         collider = GetComponent<BoxCollider2D>();
         body = GetComponent<Rigidbody2D>();
         lifetime = maxLifetime;
@@ -24,12 +29,14 @@ public class Shell : MonoBehaviour
     // FixedUpdate is called once per frame to check on platform validity and when to break
     private void FixedUpdate()
     {
+
+
         if (platformMode)
         {
             lifetime -= Time.fixedDeltaTime;
             if (lifetime < 0) BreakShell();
         }
-        else if ((shellStartPos - transform.position).sqrMagnitude >= maxDistanceSquared || Mathf.Abs(body.linearVelocityX) < 0.5f)
+        else if ((shellStartPos - transform.position).sqrMagnitude >= maxDistanceSquared || isTouching)
         {
             body.linearVelocity = Vector3.zero;
             body.bodyType = RigidbodyType2D.Static;

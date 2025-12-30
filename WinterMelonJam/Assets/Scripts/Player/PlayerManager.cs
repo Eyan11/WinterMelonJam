@@ -154,9 +154,21 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Called when restart button is pressed from PlayerInput
-    public void OnRestart()
+    public void OnRestart(InputAction.CallbackContext context)
     {
+        // Only run during the initial phase, otherwise it might call it a lot (helps prevent multiple calls)
+        if (context.started != true) return;
+
         GameManager.Instance.RestartLevel();    // Make sure GameManager prefab is in your level for this to work
     }
 
+    // *** Static functions *******************************************
+
+    public static bool IsValidContext(GameObject refObj)
+    {
+        if (Time.timeScale <= 0.01f) return false; // Paused
+        if (refObj.activeInHierarchy == false) return false; // Deactivated
+
+        return true;
+    }
 }

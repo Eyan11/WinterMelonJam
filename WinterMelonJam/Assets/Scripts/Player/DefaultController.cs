@@ -65,7 +65,8 @@ public class DefaultController : MonoBehaviour
 
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
-    {        
+    {
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
@@ -81,8 +82,7 @@ public class DefaultController : MonoBehaviour
     // Uses InputAction to get the jump input
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(!gameObject.activeInHierarchy)
-            return;
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
         
         if(context.started)
         {
