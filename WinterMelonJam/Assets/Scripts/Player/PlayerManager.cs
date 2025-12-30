@@ -11,15 +11,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private AudioClip footstepSfx;
     [SerializeField] private Vector2 deathBaseImpulse = new Vector2(5f, 10f);
     [SerializeField] private Vector2 deathBaseRandomRange = new Vector2(2f, 3f);
+    [SerializeField] private float floorAngle = 90f;
+    [SerializeField] private float floorNormalAlpha = 1f;
 
     private AudioSource audioSource;
     private Rigidbody2D body;
     private BoxCollider2D coll;
-    public bool IsGrounded {get; private set;}  // Public getter
-    private Vector2 groundBoxSize;
-    private int floorMask;
-    private int interactableMask;
-    private RaycastHit2D[] hits = new RaycastHit2D[20];
+    private ContactFilter2D contactFilter;
+    private bool oldIsGroundedState;
+    public bool IsGrounded => body?.IsTouching(contactFilter) ?? false; // Lambda wizardry
 
     //list of observers for events
     public event Action onGroundedEvent;
@@ -32,16 +32,17 @@ public class PlayerManager : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
-        //groundBoxSize = coll.bounds.size - Vector2.right * 0.1f;
-        floorMask = LayerMask.NameToLayer("Floor");
-        interactableMask = LayerMask.NameToLayer("Interactable");
+
+        contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(LayerMask.GetMask("Floor", "Interactable"));
+        contactFilter.SetNormalAngle(floorAngle - floorNormalAlpha, floorAngle + floorNormalAlpha);
 
         if (GameManager.Instance == null) Debug.Log("ERROR: No GameManager instance!");
     }
 
     private void Update()
     {
-        GroundCheck();
+        CheckIsGrounded();
     }
 
     // Plays a specific audio clip once without looping on the player
@@ -88,55 +89,20 @@ public class PlayerManager : MonoBehaviour
         return true;
     }
 
-
-    // Determine if player is grounded and set the grounded variable
-    private void GroundCheck()
-    {
-        if(body.linearVelocity.y > 0.1)
-        {
-            SetIsGrounded(false);
-            return;
-        }
-        
-        int numHits = coll.Cast(Vector2.down, hits, groundCheckDist);
-
-        for(int i = 0; i < numHits; i++)
-        {
-            if(hits[i].transform.gameObject.layer == floorMask)
-            {
-                SetIsGrounded(true);
-                return;
-            }
-            else if(hits[i].transform.gameObject.layer == interactableMask)
-            {
-                if(hits[i].transform.gameObject.CompareTag("Breakable") || 
-                    hits[i].transform.gameObject.CompareTag("Non-Breakable") ||
-                    hits[i].transform.gameObject.CompareTag("Throwable"))
-                {
-                    SetIsGrounded(true);
-                    return;
-                }
-            }
-        }
-        SetIsGrounded(false);
-    }
-
-
     // Set IsGrounded and trigger event when value is changed
-    private void SetIsGrounded(bool newBoolVal)
+    private void CheckIsGrounded()
     {
-        if(IsGrounded && newBoolVal == false)
-            TriggerOnUngroundedEvent();
-        else if(!IsGrounded && newBoolVal == true)
+        if(IsGrounded && !oldIsGroundedState)
             TriggerOnGroundedEvent();
-        
-        IsGrounded = newBoolVal;
+        else if(!IsGrounded && oldIsGroundedState)
+            TriggerOnUngroundedEvent();
     }
 
 
     // *** Event Triggers *******************************************
 
     public void TriggerOnGroundedEvent() {
+        oldIsGroundedState = true;
         if(onGroundedEvent != null)
             onGroundedEvent();
         
@@ -144,6 +110,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void TriggerOnUngroundedEvent() {
+        oldIsGroundedState = false;
         if(onUngroundedEvent != null)
             onUngroundedEvent();
     }

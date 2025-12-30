@@ -29,8 +29,6 @@ public class Shell : MonoBehaviour
     // FixedUpdate is called once per frame to check on platform validity and when to break
     private void FixedUpdate()
     {
-
-
         if (platformMode)
         {
             lifetime -= Time.fixedDeltaTime;

@@ -243,7 +243,7 @@ public class MonkeyController : MonoBehaviour
         throwCollider = null;
         throwBody = null;
         throwObj = null;
-        Debug.Log("Final Throw Speed: " + throwVector);
+        //Debug.Log("Final Throw Speed: " + throwVector);
     }
 
     private List<Collider2D> GetSortedInteractables()
