@@ -93,9 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e26a6e5248911409ac3ca4c4388da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PressurePlate
-  ropeMove: {fileID: 0}
-  door: {fileID: 0}
-  platf: {fileID: 0}
+  puzzleBases: []
   plateState: 0
 --- !u!50 &6095822621870953890
 Rigidbody2D:

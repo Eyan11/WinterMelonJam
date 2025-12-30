@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;  // For Action reference (events)
 using UnityEngine.InputSystem;
-using System.Runtime.CompilerServices; // Needed for PlayerInput reference to disable input
+using System.Runtime.CompilerServices;
+using System.Drawing; // Needed for PlayerInput reference to disable input
 
 public class PlayerManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D body;
     private BoxCollider2D coll;
     public bool IsGrounded {get; private set;}  // Public getter
+    private Vector2 groundBoxSize;
     private int floorMask;
     private int interactableMask;
     private RaycastHit2D[] hits = new RaycastHit2D[20];
@@ -30,8 +32,11 @@ public class PlayerManager : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        //groundBoxSize = coll.bounds.size - Vector2.right * 0.1f;
         floorMask = LayerMask.NameToLayer("Floor");
         interactableMask = LayerMask.NameToLayer("Interactable");
+
+        if (GameManager.Instance == null) Debug.Log("ERROR: No GameManager instance!");
     }
 
     private void Update()
@@ -104,7 +109,9 @@ public class PlayerManager : MonoBehaviour
             }
             else if(hits[i].transform.gameObject.layer == interactableMask)
             {
-                if(hits[i].transform.gameObject.CompareTag("Breakable") || hits[i].transform.gameObject.CompareTag("Non-Breakable"))
+                if(hits[i].transform.gameObject.CompareTag("Breakable") || 
+                    hits[i].transform.gameObject.CompareTag("Non-Breakable") ||
+                    hits[i].transform.gameObject.CompareTag("Throwable"))
                 {
                     SetIsGrounded(true);
                     return;

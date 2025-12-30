@@ -20,7 +20,10 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D interactor)
     {
-        if (interactor.CompareTag("Player") || interactor.CompareTag("Non-Breakable") || interactor.CompareTag("Shell"))
+        if (interactor.CompareTag("Player") || 
+            interactor.CompareTag("Non-Breakable") || 
+            interactor.CompareTag("Shell") ||
+            interactor.CompareTag("Throwable"))
         {
             plateState = true;
             anim.SetBool("isPressed", plateState);

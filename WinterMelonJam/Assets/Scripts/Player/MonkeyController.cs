@@ -287,8 +287,8 @@ public class MonkeyController : MonoBehaviour
         foreach (Collider2D hit in collList)
         {
             hitObj = hit.transform.gameObject;
-
-            if (hitObj.CompareTag("Non-Breakable"))
+            Debug.Log(hitObj.name + " has a tag of " + hitObj.tag);
+            if (hitObj.CompareTag("Throwable"))
             {
                 StartThrowing(hit.gameObject);
                 return;

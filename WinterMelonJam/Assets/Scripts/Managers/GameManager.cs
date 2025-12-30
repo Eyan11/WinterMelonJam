@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;  // To open scenes
-using System.Collections.Generic;  // For dictionary
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;    //global reference to this script
+    private enum InstancePhase { Uninitialized, Started, Finished };
+    private static InstancePhase phase = InstancePhase.Uninitialized;
+    private static GameManager instance;
+    public static GameManager Instance { get { return GetInstance(); } private set { instance = value; } }    //global reference to this script
 
     [System.Serializable]
     private struct LevelStarInfo
@@ -18,6 +21,34 @@ public class GameManager : MonoBehaviour
 
     private int[] levelStarScore = new int[12];    // The actual star score player achieved
     private int curLevelMaskSwitches = 0;
+
+    // Coroutine for waiting for a valid GameManager instance
+    private static IEnumerator WaitForInstance()
+    {
+        yield return new WaitUntil(() => instance != null);
+    }
+
+    // Attempts to get GameManager instance; if it doesn't exist, get it from the prefab
+    private static GameManager GetInstance()
+    {
+        if (instance != null && phase == InstancePhase.Uninitialized) phase = InstancePhase.Finished;
+        // Debounce
+        if (phase != InstancePhase.Uninitialized)
+        {
+            if (phase == InstancePhase.Started) WaitForInstance();
+            return instance;
+        }
+        phase = InstancePhase.Started;
+
+        GameObject prefabManager = Resources.Load("GameManager") as GameObject;
+        GameObject newManager = Instantiate(prefabManager);
+        newManager.transform.parent = null;
+        instance = newManager.GetComponent<GameManager>();
+        instance.name = prefabManager.name;
+
+        phase = InstancePhase.Finished;
+        return instance;
+    }
 
     private void Awake() {
         if (Instance == null)
@@ -119,5 +150,4 @@ public class GameManager : MonoBehaviour
     {
         SaveScore();
     }
-
 }
