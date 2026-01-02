@@ -38,8 +38,11 @@ public class CollisionTileParity : MonoBehaviour
 
         boxCollider.size = baseSprite.size;
         boxCollider.offset = Vector2.zero;
+        if (secondarySprites.Length == 0) return; 
         foreach (var sprite in secondarySprites)
         {
+            if (sprite.secondarySprite == null) continue;
+
             Vector2 newSize = baseSprite.size;
             if (sprite.lockXSize) newSize.x = sprite.secondarySprite.size.x;
             if (sprite.lockYSize) newSize.y = sprite.secondarySprite.size.y;
