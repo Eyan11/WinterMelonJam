@@ -1,12 +1,10 @@
 using UnityEngine;
 using System;  // For Action reference (events)
-using UnityEngine.InputSystem;
-using System.Runtime.CompilerServices;
-using System.Drawing; // Needed for PlayerInput reference to disable input
+using UnityEngine.InputSystem; // Needed for PlayerInput reference to disable input
+
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private float groundCheckDist = 0.1f;
     [SerializeField] private AudioClip landSfx;
     [SerializeField] private AudioClip footstepSfx;
     [SerializeField] private Vector2 deathBaseImpulse = new Vector2(5f, 10f);

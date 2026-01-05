@@ -17,6 +17,7 @@ public class DefaultController : MonoBehaviour
     [SerializeField] private AudioClip jumpSfx;
     private float canJumpTimer;
     private float jumpInputTimer = 0f;
+    private bool hasJumped = false;
 
 
 
@@ -45,12 +46,13 @@ public class DefaultController : MonoBehaviour
         canJumpTimer -= Time.deltaTime;
         jumpInputTimer -= Time.deltaTime;
 
-        if(jumpInputTimer > 0f && canJumpTimer > 0f)
+        if(!hasJumped && jumpInputTimer > 0f && (canJumpTimer > 0f || playerManager.IsGrounded))
             Jump();
     }
 
     /** Applies jump settings and jump force **/
     private void Jump() {
+        hasJumped = true;
         canJumpTimer = -1f;
         jumpInputTimer = -1f;
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
@@ -88,13 +90,14 @@ public class DefaultController : MonoBehaviour
         {
             jumpInputTimer = jumpBufferTime;
 
-            if(playerManager.IsGrounded || canJumpTimer > 0f)
+            if(!hasJumped && (playerManager.IsGrounded || canJumpTimer > 0f))
                 Jump();
         }
     }
 
     private void OnGrounded()
     {
+        hasJumped = false;
         anim.SetBool("isGrounded", true);
     }
 
