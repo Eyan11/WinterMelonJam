@@ -301,20 +301,22 @@ public class MonkeyController : MonoBehaviour
     // Called by the InputAction component on the Move event.
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (PlayerManager.IsValidContext(gameObject) == false) return;
+        // Not checking if valid here because moveInput needs to be up to date in case player transforms and wants keeps holding move input
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
 
-            if(!gameObject.activeInHierarchy) return;
+            if (PlayerManager.IsValidContext(gameObject) == false) return;
 
             if(isClimbing)
                 spriteRenderer.flipX = moveInput > 0;
             else
                 spriteRenderer.flipX = !(moveInput > 0);
         }
+
+        if (PlayerManager.IsValidContext(gameObject) == false) return;
 
         if (ropeComp != null)
         {

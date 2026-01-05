@@ -85,12 +85,15 @@ public class FlamingoController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (PlayerManager.IsValidContext(gameObject) == false) return;
+        // Not checking if valid here because moveInput needs to be up to date in case player transforms and wants keeps holding move input
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0)
         {
             moveInput = Mathf.Sign(moveInput);
+
+            if (PlayerManager.IsValidContext(gameObject) == false) return;
+
             spriteRenderer.flipX = !(moveInput > 0);
         }
     }

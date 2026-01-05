@@ -13,9 +13,11 @@ public class MaskStatus : MonoBehaviour
     private Vector2 originalIconSize;
     private Color originalColor;
     private Color transparentOriginalColor;
+    private PlayClickSfx playClickSfx;
 
     private void Awake()
     {
+        playClickSfx = this.transform.parent.transform.parent.GetComponent<PlayClickSfx>();
         ObtainData();
         updateButton();
     }
@@ -41,6 +43,8 @@ public class MaskStatus : MonoBehaviour
             icon.SetActive(true);
             if (maskSelected == true)
             {
+                if(playClickSfx != null)
+                    playClickSfx.PlayClickSFX();
                 sliceSelector.color = originalColor;
                 iconTransform.sizeDelta = originalIconSize * 1.5f;
             }

@@ -21,7 +21,7 @@ public class KeyCollection : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D interactor)
     {
-        if (interactor.CompareTag("Player") || interactor.CompareTag("Shell") || interactor.CompareTag("Non-Breakable"))
+        if (interactor.CompareTag("Player") || interactor.CompareTag("Shell") || interactor.CompareTag("Throwable"))
         {
             keyCollected = true;
             this.gameObject.SetActive(false);

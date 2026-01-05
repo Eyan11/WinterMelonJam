@@ -92,4 +92,5 @@ public class MaskWheelManager : MonoBehaviour
         lockWheel = status;
         MaskStatus.setManagerLock(lockWheel);
     }
+
 }

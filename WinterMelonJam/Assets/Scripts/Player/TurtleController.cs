@@ -1,6 +1,5 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
+using Unity.VisualScripting;  // For shell obj IsDestroyed check
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -143,14 +142,14 @@ public class TurtleController : MonoBehaviour
     // Uses InputAction to get the movement direction
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (PlayerManager.IsValidContext(gameObject) == false) return;
+        // Not checking if valid here because moveInput needs to be up to date in case player transforms and wants keeps holding move input
         moveInput = context.ReadValue<Vector2>().x;
 
         if (moveInput != 0 && aiming == false)
         {
             moveInput = Mathf.Sign(moveInput);
 
-            if (gameObject.activeInHierarchy == false) return;
+            if (PlayerManager.IsValidContext(gameObject) == false) return;
 
             spriteRenderer.flipX = !(moveInput > 0);
         }
@@ -160,7 +159,6 @@ public class TurtleController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (PlayerManager.IsValidContext(gameObject) == false) return;
-        if (gameObject.activeInHierarchy == false) return;
 
         if (context.canceled == true && CheckForShell() == true)
         {

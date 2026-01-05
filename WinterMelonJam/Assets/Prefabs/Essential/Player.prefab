@@ -133,7 +133,7 @@ MonoBehaviour:
   stunDuration: 2
   maxChargeDuration: 5
   chargeCooldownDuration: 4
-  rhinoChargeSfx: {fileID: 0}
+  rhinoChargeSfx: {fileID: 8300000, guid: 69c073b6854e8854e90b8730d6bed818, type: 3}
   rhinoStunSfx: {fileID: 8300000, guid: c7d54a889f8678e4898b4214facc5b67, type: 3}
 --- !u!1 &744598968683097865
 GameObject:
@@ -987,11 +987,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c7eec85290a4c42b18514f495d7ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  groundCheckDist: 0.1
   landSfx: {fileID: 8300000, guid: 904cbef0ccb3893418d5c1ed07b42344, type: 3}
   footstepSfx: {fileID: 8300000, guid: af81287ed2004bd43b563120cfc9f5c7, type: 3}
   deathBaseImpulse: {x: 3, y: 6}
   deathBaseRandomRange: {x: 0.5, y: 1}
+  floorAngle: 90
+  floorNormalAlpha: 1
 --- !u!114 &8262892819088414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
