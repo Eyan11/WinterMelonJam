@@ -20,7 +20,10 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float exitRopeJumpVertSpeed = 3f;
     [SerializeField] private float exitRopeJumpHorSpeed = 3f;
     [SerializeField] private AudioClip exitRopeJumpSfx;
+    [SerializeField] private float checkRopeInterval = 0.2f;
+    private float checkRopeTimer;
     private GameObject ropeObj;
+    private Collider2D prevRopeCol;
     private Rope ropeComp;
     private int solidMask;
     [SerializeField] private bool isClimbing = false;
@@ -74,6 +77,17 @@ public class MonkeyController : MonoBehaviour
         
         if(isThrowing)
             ThrowingUpdate();
+
+        // Auto climb rope check
+        if(!playerManager.IsGrounded && !isThrowing)
+        {
+            checkRopeTimer -= Time.deltaTime;
+            if(checkRopeTimer < 0f)
+            {
+                checkRopeTimer = checkRopeInterval;
+                CheckForRope();
+            }
+        }
     }
 
     private Vector3 CalculateThrowWithOffsetVector()
@@ -164,21 +178,27 @@ public class MonkeyController : MonoBehaviour
     {
         isClimbing = true;
         anim.SetBool("isClimbing", isClimbing);
+
         ropeObj = coll.gameObject;
+        prevRopeCol = coll;
         ropeComp = ropeObj.GetComponent<Rope>();
         spriteRenderer.flipX = moveInput > 0;
+        climbInput = 0;
+
+        playerManager.SetJumpSettings(false, 0f);   // Let monkey handle jumping off a rope
         body.gravityScale = 0f;
         body.linearVelocity = Vector2.zero;
-        climbInput = 0;
         transform.parent.transform.position = CalculateClimbingPosition();
     }
 
     private void UnsetRope()
     {
         isClimbing = false;
+        anim.SetBool("isClimbing", isClimbing);
+
         ropeObj = null;
         ropeComp = null;
-        anim.SetBool("isClimbing", isClimbing);
+
         body.gravityScale = 1f;
     }
 
@@ -187,19 +207,21 @@ public class MonkeyController : MonoBehaviour
         UnsetRope();
         anim.SetBool("isClimbing", isClimbing);
         playerManager.PlayOneShotSFX(exitRopeJumpSfx);
+
         spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
 
+        playerManager.SetJumpSettings(true, jumpSpeed);   // Allow manager to handle jumping again
         body.linearVelocity = new Vector2(moveInput * exitRopeJumpHorSpeed, exitRopeJumpVertSpeed);
     }
 
     private void StartThrowing(GameObject obj)
     {
-        //if (ValidateThrowPosition(obj) == false) return;
-
         isThrowing = true;
         chargePower = minThrowSpeed;
         anim.SetBool("isThrowing", isThrowing);
+        playerManager.SetJumpSettings(false, 0f);    // Prevent jumping when throwing
+
         arrowBaseTran.gameObject.SetActive(true);
         arrowVisualsTran.localPosition = new Vector3(minArrowDist, 0f, 0f);
         body.linearVelocity = Vector2.zero;
@@ -218,11 +240,14 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+
         arrowBaseTran.gameObject.SetActive(false);
         throwBody.gravityScale = 1f;
         throwCollider.forceSendLayers = Physics2D.AllLayers;
         ObjectClipping throwClip = throwObj.AddComponent<ObjectClipping>();
         throwClip.playerObj = transform.parent.gameObject;
+
+        playerManager.SetJumpSettings(true, jumpSpeed);    // Allow jumping again after dropping object
         throwCollider = null;
         throwBody = null;
         throwObj = null;
@@ -233,6 +258,7 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+
         arrowBaseTran.gameObject.SetActive(false);
         playerManager.PlayOneShotSFX(throwSfx);
         throwVector.Normalize();
@@ -241,10 +267,11 @@ public class MonkeyController : MonoBehaviour
         throwBody.gravityScale = 1f;
         throwBody.AddForce(throwVector, ForceMode2D.Impulse);
         throwCollider.forceSendLayers = Physics2D.AllLayers;
+
+        playerManager.SetJumpSettings(true, jumpSpeed);    // Allow jumping again after dropping object
         throwCollider = null;
         throwBody = null;
         throwObj = null;
-        //Debug.Log("Final Throw Speed: " + throwVector);
     }
 
     private List<Collider2D> GetSortedInteractables()
@@ -269,6 +296,11 @@ public class MonkeyController : MonoBehaviour
     {
         List<Collider2D> collList = GetSortedInteractables();
         GameObject hitObj = null;
+
+        // Don't let player climb previously climbed rope unless it goes out of range
+        if(prevRopeCol != null && !collList.Remove(prevRopeCol))
+            prevRopeCol = null;
+
         foreach (Collider2D hit in collList)
         {
             hitObj = hit.transform.gameObject;
@@ -335,12 +367,9 @@ public class MonkeyController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (PlayerManager.IsValidContext(gameObject) == false) return;
-        if (context.started)
+        if (context.started && isClimbing == true)
         {
-            if (isClimbing)
-                ExitRope();
-            else if (isThrowing) return; // No throwing while climbing
-            else CheckForRope();
+            ExitRope();
         }
         else if (context.canceled && isThrowing == true) // Throwing
         {
@@ -373,6 +402,7 @@ public class MonkeyController : MonoBehaviour
 
     private void OnUngrounded()
     {
+        prevRopeCol = null;
         anim.SetBool("isGrounded", false);
     }
 
@@ -412,7 +442,7 @@ public class MonkeyController : MonoBehaviour
         playerManager.onDeathEvent -= OnDeath;
 
         isUsingJumpHorVel = false;
-        playerManager.SetJumpSettings(true, 0f);
+        playerManager.SetJumpSettings(false, 0f);
 
         if(isClimbing)
             UnsetRope();

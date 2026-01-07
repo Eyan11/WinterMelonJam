@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ac7d5aa6cb27409f60188fb3d8f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyController
-  interactRadius: 0.75
+  interactRadius: 0.5
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -478,6 +478,7 @@ MonoBehaviour:
   exitRopeJumpVertSpeed: 3
   exitRopeJumpHorSpeed: 3
   exitRopeJumpSfx: {fileID: 8300000, guid: 57ccc8de6ba37ce488d77343eabc7be6, type: 3}
+  checkRopeInterval: 0.2
   isClimbing: 0
   throwObjHeightOffset: 1
   minThrowSpeed: 150
