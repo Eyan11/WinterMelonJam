@@ -473,6 +473,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   moveSpeed: 2
+  jumpSpeed: 5
   climbSpeed: 2
   exitRopeJumpVertSpeed: 3
   exitRopeJumpHorSpeed: 3
@@ -613,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GiraffeController
   flamingoMoveSpeed: 3
+  jumpSpeed: 7
   updraftPower: 5
   flamingoFlapSfx: {fileID: 8300000, guid: 4b04c79a1856eaa40a8c890394c21057, type: 3}
 --- !u!1 &2239850967413529913
@@ -860,8 +862,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7417940281614989215}
-        m_TargetAssemblyTypeName: DefaultController, Assembly-CSharp
+      - m_Target: {fileID: 1369688069137811454}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -955,19 +957,7 @@ MonoBehaviour:
     m_ActionId: 6ef2cb6d-e72c-49ba-b335-2b3a9e74099e
     m_ActionName: 'UI/SwitchMasks[/Keyboard/q]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1369688069137811454}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OnRestart
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: a5be14d6-f015-43c6-9a00-c8a8a1a19fba
     m_ActionName: 'Player/Restart[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -987,12 +977,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c7eec85290a4c42b18514f495d7ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  landSfx: {fileID: 8300000, guid: 904cbef0ccb3893418d5c1ed07b42344, type: 3}
-  footstepSfx: {fileID: 8300000, guid: af81287ed2004bd43b563120cfc9f5c7, type: 3}
-  deathBaseImpulse: {x: 3, y: 6}
-  deathBaseRandomRange: {x: 0.5, y: 1}
   floorAngle: 90
   floorNormalAlpha: 1
+  coyoteTime: 0.2
+  jumpBufferTime: 0.1
+  deathBaseImpulse: {x: 3, y: 6}
+  deathBaseRandomRange: {x: 0.5, y: 1}
+  footstepSfx: {fileID: 8300000, guid: af81287ed2004bd43b563120cfc9f5c7, type: 3}
+  jumpSfx: {fileID: 8300000, guid: 57ccc8de6ba37ce488d77343eabc7be6, type: 3}
+  landSfx: {fileID: 8300000, guid: 904cbef0ccb3893418d5c1ed07b42344, type: 3}
 --- !u!114 &8262892819088414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1404,9 +1397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultController
   moveSpeed: 3
   jumpSpeed: 6
-  coyoteTime: 0.2
-  jumpBufferTime: 0.2
-  jumpSfx: {fileID: 8300000, guid: 57ccc8de6ba37ce488d77343eabc7be6, type: 3}
 --- !u!1 &6914028591761858070
 GameObject:
   m_ObjectHideFlags: 0

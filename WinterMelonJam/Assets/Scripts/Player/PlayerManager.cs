@@ -5,19 +5,34 @@ using UnityEngine.InputSystem; // Needed for PlayerInput reference to disable in
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip landSfx;
-    [SerializeField] private AudioClip footstepSfx;
-    [SerializeField] private Vector2 deathBaseImpulse = new Vector2(5f, 10f);
-    [SerializeField] private Vector2 deathBaseRandomRange = new Vector2(2f, 3f);
+    [Header ("Ground Check")]
     [SerializeField] private float floorAngle = 90f;
     [SerializeField] private float floorNormalAlpha = 1f;
-
-    private AudioSource audioSource;
-    private Rigidbody2D body;
-    private BoxCollider2D coll;
-    private ContactFilter2D contactFilter;
     private bool oldIsGroundedState;
     public bool IsGrounded => body?.IsTouching(contactFilter) ?? false; // Lambda wizardry
+    private ContactFilter2D contactFilter;
+
+    [Header ("Jump")]
+    [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    private float canJumpTimer = 0f;
+    private float jumpInputTimer = 0f;
+    private bool hasJumped = false;
+    private bool isJumpAllowed = false;
+    private float jumpSpeed = 0f;
+
+    [Header ("Death")]
+    [SerializeField] private Vector2 deathBaseImpulse = new Vector2(5f, 10f);
+    [SerializeField] private Vector2 deathBaseRandomRange = new Vector2(2f, 3f);
+
+    [Header ("SFX")]
+    [SerializeField] private AudioClip footstepSfx;
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip landSfx;
+    private AudioSource audioSource;
+
+    private Rigidbody2D body;
+    private BoxCollider2D coll;
 
     //list of observers for events
     public event Action onGroundedEvent;
@@ -41,6 +56,8 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         CheckIsGrounded();
+        if(isJumpAllowed)
+            JumpCalculations();
     }
 
     // Plays a specific audio clip once without looping on the player
@@ -48,6 +65,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (clip != null)
             audioSource.PlayOneShot(clip);
+    }
+
+    // Toggles jump on and off and updates jump speed since some masks are not allowed to jump
+    public void SetJumpSettings(bool newIsJumpAllowed, float newJumpSpeed)
+    {
+        isJumpAllowed = newIsJumpAllowed;
+        jumpSpeed = newJumpSpeed;
     }
 
     // Called by the animal controllers when a foot hits the ground in their respective run animations
@@ -96,19 +120,40 @@ public class PlayerManager : MonoBehaviour
             TriggerOnUngroundedEvent();
     }
 
+    /** Handles jump input and calling Jump() **/
+    private void JumpCalculations() {
+        canJumpTimer -= Time.deltaTime;
+        jumpInputTimer -= Time.deltaTime;
+
+        if(!hasJumped && jumpInputTimer > 0f && (canJumpTimer > 0f || IsGrounded))
+            Jump();
+    }
+
+    /** Applies jump settings and jump force **/
+    private void Jump() {
+        hasJumped = true;
+        canJumpTimer = -1f;
+        jumpInputTimer = -1f;
+        body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
+        PlayOneShotSFX(jumpSfx);
+    }
+
 
     // *** Event Triggers *******************************************
 
     public void TriggerOnGroundedEvent() {
         oldIsGroundedState = true;
+        hasJumped = false;
+        PlayOneShotSFX(landSfx);
+
         if(onGroundedEvent != null)
             onGroundedEvent();
-        
-        PlayOneShotSFX(landSfx);
     }
 
     public void TriggerOnUngroundedEvent() {
         oldIsGroundedState = false;
+        canJumpTimer = coyoteTime; 
+
         if(onUngroundedEvent != null)
             onUngroundedEvent();
     }
@@ -125,6 +170,21 @@ public class PlayerManager : MonoBehaviour
         if (context.started != true) return;
 
         GameManager.Instance.RestartLevel();    // Make sure GameManager prefab is in your level for this to work
+    }
+
+    // Uses InputAction to get the jump input
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(isJumpAllowed == false) return;
+        if (IsValidContext(gameObject) == false) return;
+        
+        if(context.started)
+        {
+            jumpInputTimer = jumpBufferTime;
+
+            if(!hasJumped && (IsGrounded || canJumpTimer > 0f))
+                Jump();
+        }
     }
 
     // *** Static functions *******************************************

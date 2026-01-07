@@ -8,6 +8,7 @@ public class MonkeyController : MonoBehaviour
     [SerializeField] private float interactRadius = 0.5f;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float jumpSpeed = 5f;
     private PlayerManager playerManager;
     private Rigidbody2D body;
     private Animator anim;
@@ -399,6 +400,8 @@ public class MonkeyController : MonoBehaviour
 
         if(moveInput != 0)
             spriteRenderer.flipX = !(moveInput > 0);
+
+        playerManager.SetJumpSettings(true, jumpSpeed);
     }
 
     // Called when leaving this mask transformation
@@ -409,15 +412,12 @@ public class MonkeyController : MonoBehaviour
         playerManager.onDeathEvent -= OnDeath;
 
         isUsingJumpHorVel = false;
+        playerManager.SetJumpSettings(true, 0f);
 
         if(isClimbing)
-        {
             UnsetRope();
-        }
         else if(isThrowing)
-        {
             DropObject();
-        }
     }
 
     // Called by animation event in run animation when foot hits ground

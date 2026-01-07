@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 public class FlamingoController : MonoBehaviour
 {
     // Flamingo speeds, mid-air jump power settings
-    [SerializeField] private float flamingoMoveSpeed;
-    [SerializeField] private float updraftPower;
+    [SerializeField] private float flamingoMoveSpeed = 3f;
+    [SerializeField] private float jumpSpeed = 7f;
+    [SerializeField] private float updraftPower = 5f;
     [SerializeField] private AudioClip flamingoFlapSfx;
     // LayerMask
     private int groundedMask;
@@ -47,7 +48,7 @@ public class FlamingoController : MonoBehaviour
 
         if (gliding)
         {
-            if (updraftDeactivated == true) body.linearVelocityY = -0.2f;
+            if (updraftDeactivated == true && body.linearVelocityY < 0f) body.linearVelocityY = -0.2f;
             else if (body.linearVelocityY < -0.2f)
             {
                 updraftDeactivated = true;
@@ -68,6 +69,8 @@ public class FlamingoController : MonoBehaviour
 
         if(moveInput != 0)
             spriteRenderer.flipX = !(moveInput > 0);
+
+        playerManager.SetJumpSettings(true, jumpSpeed);
     }
 
     // Called when leaving this mask transformation
@@ -76,6 +79,8 @@ public class FlamingoController : MonoBehaviour
         playerManager.onGroundedEvent -= OnGrounded;
         playerManager.onUngroundedEvent -= OnUngrounded;
         playerManager.onDeathEvent -= OnDeath;
+
+        playerManager.SetJumpSettings(false, 0f);
     }
 
 
@@ -126,7 +131,6 @@ public class FlamingoController : MonoBehaviour
             gliding = holdingSpacebar;
             anim.SetBool("isGliding", gliding);
         }
-
     }
 
     // Subscribed to on grounded action in player manager

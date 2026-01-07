@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;  // IMPORTANT: make sure you have this to work wi
 
 public class DefaultController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 3f;
     private PlayerManager playerManager;
     private Rigidbody2D body;
     private Animator anim;
@@ -11,13 +11,7 @@ public class DefaultController : MonoBehaviour
     private float moveInput;
 
     [Header ("Jump")]
-    [SerializeField] private float jumpSpeed = 10f;
-    [SerializeField] private float coyoteTime = 0.2f;
-    [SerializeField] private float jumpBufferTime = 0.1f;
-    [SerializeField] private AudioClip jumpSfx;
-    private float canJumpTimer;
-    private float jumpInputTimer = 0f;
-    private bool hasJumped = false;
+    [SerializeField] private float jumpSpeed = 6f;
 
 
 
@@ -35,31 +29,7 @@ public class DefaultController : MonoBehaviour
         body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
 
         anim.SetBool("isMoving", Mathf.Abs(body.linearVelocity.x) > 0.01);
-
-        JumpCalculations();
     }
-
-
-
-    /** Handles jump input and calling Jump() **/
-    private void JumpCalculations() {
-        canJumpTimer -= Time.deltaTime;
-        jumpInputTimer -= Time.deltaTime;
-
-        if(!hasJumped && jumpInputTimer > 0f && (canJumpTimer > 0f || playerManager.IsGrounded))
-            Jump();
-    }
-
-    /** Applies jump settings and jump force **/
-    private void Jump() {
-        hasJumped = true;
-        canJumpTimer = -1f;
-        jumpInputTimer = -1f;
-        body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
-        playerManager.PlayOneShotSFX(jumpSfx);
-    }
-
-
 
 
     // *** Events *************************************************************
@@ -81,29 +51,13 @@ public class DefaultController : MonoBehaviour
         }
     }
 
-    // Uses InputAction to get the jump input
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (PlayerManager.IsValidContext(gameObject) == false) return;
-        
-        if(context.started)
-        {
-            jumpInputTimer = jumpBufferTime;
-
-            if(!hasJumped && (playerManager.IsGrounded || canJumpTimer > 0f))
-                Jump();
-        }
-    }
-
     private void OnGrounded()
     {
-        hasJumped = false;
         anim.SetBool("isGrounded", true);
     }
 
     private void OnUngrounded()
     {
-        canJumpTimer = coyoteTime; 
         anim.SetBool("isGrounded", false);
     }
 
@@ -126,6 +80,8 @@ public class DefaultController : MonoBehaviour
 
         if(moveInput != 0)
             spriteRenderer.flipX = !(moveInput > 0);
+
+        playerManager.SetJumpSettings(true, jumpSpeed);
     }
 
     // Called when leaving this mask transformation
@@ -135,8 +91,7 @@ public class DefaultController : MonoBehaviour
         playerManager.onUngroundedEvent -= OnUngrounded;
         playerManager.onDeathEvent -= OnDeath;
 
-        jumpInputTimer = -1f;
-        canJumpTimer = -1f;
+        playerManager.SetJumpSettings(false, 0f);
     }
 
     // Called by animation event in run animation when foot hits ground
