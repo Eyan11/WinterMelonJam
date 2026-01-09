@@ -32,12 +32,13 @@ public class MonkeyController : MonoBehaviour
 
     [Header ("Throwing")]
     [SerializeField] private float throwObjHeightOffset = 1f;
-    [SerializeField] private float minThrowSpeed = 5f;
-    [SerializeField] private float maxThrowSpeed = 50f;
-    [SerializeField] private float chargeIncrement = 500f;
+    [SerializeField] private float minThrowSpeed = 3f;
+    [SerializeField] private float maxThrowSpeed = 15f;
+    [SerializeField] private float chargeIncrement = 8f;
     [SerializeField] private AudioClip throwSfx;
     [SerializeField] private float minArrowDist = 20f;
     [SerializeField] private float maxArrowDist = 100f;
+    private ThrowTrajectory throwTrajectoryScript;
     private Transform arrowBaseTran;
     private Transform arrowVisualsTran;
     private bool isThrowing = false;
@@ -45,6 +46,7 @@ public class MonkeyController : MonoBehaviour
     private int excludePlayerMask;
     private Camera cam;
     private Vector2 throwVector = Vector2.zero;
+    private Vector2 curThrowVel = Vector3.zero;
     private float chargePower = 0f;    
     private GameObject throwObj;
     private Rigidbody2D throwBody;
@@ -62,6 +64,7 @@ public class MonkeyController : MonoBehaviour
         cam = Camera.main;
         solidMask = LayerMask.GetMask("Floor", "Default");
         excludePlayerMask = ~LayerMask.GetMask("Player");
+        throwTrajectoryScript = GetComponent<ThrowTrajectory>();
     }
 
 
@@ -92,7 +95,9 @@ public class MonkeyController : MonoBehaviour
 
     private Vector3 CalculateThrowWithOffsetVector()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, throwCollider.bounds.size - new Vector3(throwCollider.bounds.size.x * 0.4f, 0, 0), 0, Vector3.up, throwObjHeightOffset, solidMask);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, 
+            throwCollider.bounds.size - new Vector3(throwCollider.bounds.size.x * 0.4f, 0, 0), 
+            0, Vector3.up, throwObjHeightOffset, solidMask);
         float height = throwObjHeightOffset;
         if (hit == true) height = hit.distance;
 
@@ -159,6 +164,11 @@ public class MonkeyController : MonoBehaviour
             Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
             Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseScreenPosition);
             throwVector = new Vector2(mouseWorldPosition.x - transform.position.x, mouseWorldPosition.y - transform.position.y);
+            
+            // Track throw velocity for throw trajectory line
+            throwVector.Normalize();
+            curThrowVel = throwVector * minThrowSpeed;
+            throwTrajectoryScript.UpdateThrowTrajectory(curThrowVel, throwObj.transform.position);
 
             float angle = Mathf.Atan2(throwVector.y, throwVector.x) * Mathf.Rad2Deg;
             arrowBaseTran.rotation = Quaternion.Euler(0f, 0f, angle);
@@ -167,6 +177,10 @@ public class MonkeyController : MonoBehaviour
         {
             chargePower += chargeIncrement * Time.deltaTime;
             chargePower = Mathf.Clamp(chargePower, minThrowSpeed, maxThrowSpeed);
+            
+            // Track throw velocity for throw trajectory line
+            curThrowVel = throwVector * chargePower;
+            throwTrajectoryScript.UpdateThrowTrajectory(curThrowVel, throwObj.transform.position);
 
             float chargePercent = (chargePower - minThrowSpeed) / (maxThrowSpeed - minThrowSpeed);
             float arrowIncrement = minArrowDist + (chargePercent * (maxArrowDist - minArrowDist));
@@ -231,12 +245,15 @@ public class MonkeyController : MonoBehaviour
         throwBody.gravityScale = 0f;
         throwCollider = throwObj.GetComponent<Collider2D>();
         throwCollider.forceSendLayers = excludePlayerMask;
+        throwCollider.enabled = false;  // Prevent throw trajectory from hitting box
 
         LockThrowObject();
+        throwTrajectoryScript.StartThrowTrajectory();
     }
 
     private void DropObject()
     {
+        throwTrajectoryScript.StopThrowTrajectory();
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
@@ -244,6 +261,7 @@ public class MonkeyController : MonoBehaviour
         arrowBaseTran.gameObject.SetActive(false);
         throwBody.gravityScale = 1f;
         throwCollider.forceSendLayers = Physics2D.AllLayers;
+        throwCollider.enabled = true;
         ObjectClipping throwClip = throwObj.AddComponent<ObjectClipping>();
         throwClip.playerObj = transform.parent.gameObject;
 
@@ -255,18 +273,18 @@ public class MonkeyController : MonoBehaviour
 
     private void ThrowObject()
     {
+        throwTrajectoryScript.StopThrowTrajectory();
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
 
         arrowBaseTran.gameObject.SetActive(false);
         playerManager.PlayOneShotSFX(throwSfx);
-        throwVector.Normalize();
-        throwVector *= chargePower;
 
         throwBody.gravityScale = 1f;
-        throwBody.AddForce(throwVector, ForceMode2D.Impulse);
+        throwBody.linearVelocity = curThrowVel;
         throwCollider.forceSendLayers = Physics2D.AllLayers;
+        throwCollider.enabled = true;
 
         playerManager.SetJumpSettings(true, jumpSpeed);    // Allow jumping again after dropping object
         throwCollider = null;

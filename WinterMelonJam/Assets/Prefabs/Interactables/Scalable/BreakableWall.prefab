@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1109867963640490933}
   - component: {fileID: 11648594987866362}
   - component: {fileID: 9022279896127548012}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: BreakableWall
   m_TagString: Breakable
   m_Icon: {fileID: 0}
@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollisionTileParity
   activeInRuntime: 0
   transformScaleLock: {x: 1, y: 1, z: 1}
+  secondarySprites: []
