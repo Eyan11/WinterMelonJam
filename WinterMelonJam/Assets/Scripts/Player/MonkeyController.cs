@@ -186,6 +186,7 @@ public class MonkeyController : MonoBehaviour
     {
         isClimbing = true;
         anim.SetBool("isClimbing", isClimbing);
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.MonkeyClimb);
 
         ropeObj = coll.gameObject;
         prevRopeCol = coll;
@@ -215,6 +216,7 @@ public class MonkeyController : MonoBehaviour
         UnsetRope();
         anim.SetBool("isClimbing", isClimbing);
         playerManager.PlayOneShotSFX(exitRopeJumpSfx);
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.Monkey);
 
         spriteRenderer.flipX = !(moveInput > 0);
         isUsingJumpHorVel = true;
@@ -229,6 +231,7 @@ public class MonkeyController : MonoBehaviour
         chargePower = minThrowSpeed;
         anim.SetBool("isThrowing", isThrowing);
         playerManager.SetJumpSettings(false, 0f);    // Prevent jumping when throwing
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.MonkeyThrow);
 
         arrowBaseTran.position = Vector3.zero;
         arrowBaseTran.gameObject.SetActive(true);
@@ -250,6 +253,7 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.Monkey);
 
         arrowBaseTran.gameObject.SetActive(false);
         throwBody.gravityScale = 1f;
@@ -269,6 +273,7 @@ public class MonkeyController : MonoBehaviour
         isThrowing = false;
         isCharging = false;
         anim.SetBool("isThrowing", isThrowing);
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.Monkey);
 
         arrowBaseTran.gameObject.SetActive(false);
         playerManager.PlayOneShotSFX(throwSfx);

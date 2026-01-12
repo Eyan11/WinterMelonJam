@@ -129,27 +129,33 @@ public class MaskManager : MonoBehaviour
             case MaskType.Default:
                 defaultSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 defaultObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Default);
                 break;
             case MaskType.Monkey:
                 monkeySpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 monkeyObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Monkey);
                 break;
             case MaskType.Rhino:
                 rhinoSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 rhinoObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Rhino);
                 break;
             case MaskType.Turtle:
                 turtleSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 turtleObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Turtle);
                 break;
             case MaskType.Flamingo:
                 flamingoSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 flamingoObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Flamingo);
                 break;
             default:
                 curMask = MaskType.Default;
                 defaultSpriteRend.flipX = maskTransitionSpriteRend.flipX;
                 defaultObj.SetActive(true);
+                CanvasManager.Instance.SwitchControlsUI(ControlsType.Default);
                 Debug.LogError("Illegal mask input on finish!");
                 break;
         }

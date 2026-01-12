@@ -1,17 +1,29 @@
 using UnityEngine;
 using TMPro;  // Needed to reference level text component
 
+public enum ControlsType { None, Default, Monkey, MonkeyThrow, MonkeyClimb, Rhino, Turtle, Flamingo}
+
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private AudioClip clickSfx;
     [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text controlsText;
     private AudioSource audioSource;
     private bool paused = false;
 
+    public static CanvasManager Instance { get; private set; }
+
     private void Awake()
     {
+        // Only allow one canvas manager to exist in the scene
+        if (Instance != null && Instance != this)
+            Destroy(this.gameObject);
+        else
+            Instance = this;
+
         audioSource = GetComponent<AudioSource>();
         levelText.text = GameManager.Instance.GetLevelNumber().ToString();
+        SwitchControlsUI(ControlsType.Default);
     }
 
 
@@ -43,4 +55,48 @@ public class CanvasManager : MonoBehaviour
         
         GameManager.Instance.RestartLevel();
     }
+
+
+    // Updates the UI that displays the controls for the current mask
+    public void SwitchControlsUI(ControlsType newControls)
+    {
+        switch(newControls)
+        {
+            case ControlsType.None:
+                controlsText.text = "";
+                break;
+            case ControlsType.Default:
+                //controlsText.text = "Move - A & D \nJump - Space";
+                controlsText.text = "";
+                break;
+            case ControlsType.Monkey:
+                //controlsText.text = "Move - A & D \nJump - Space \nPickup - Left Mouse Button";
+                controlsText.text = "Pickup Box - Left Mouse Button";
+                break;
+            case ControlsType.MonkeyThrow:
+                //controlsText.text = "Move - A & D \nThrow - Space (hold to charge) \nDrop - Left Mouse Button";
+                controlsText.text = "Throw - Hold Space to Charge \nDrop - Left Mouse Button";
+                break;
+            case ControlsType.MonkeyClimb:
+                //controlsText.text = "Climb - W & S \nJump - Space";
+                controlsText.text = "Jump - Space";
+                break;
+            case ControlsType.Rhino:
+                //controlsText.text = "Move - A & D \nCharge - Space";
+                controlsText.text = "Charge - Space";
+                break;
+            case ControlsType.Turtle:
+                //controlsText.text = "Move - A & D \nThrow Shell - Space";
+                controlsText.text = "Throw Shell - Hold Space to Aim";
+                break;
+            case ControlsType.Flamingo:
+                //controlsText.text = "Move - A & D \nGlide - Hold Space \nUpdraft - Left Mouse Button";
+                controlsText.text = "Glide - Hold Space \nUpdraft - Left Mouse Button";
+                break;
+
+        }
+        //controlsText.text += "\nSwitch Masks - Hold Right Mouse Button";
+    }
+
+
 }
