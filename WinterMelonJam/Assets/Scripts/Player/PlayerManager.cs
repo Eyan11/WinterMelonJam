@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         contactFilter = new ContactFilter2D();
-        contactFilter.SetLayerMask(LayerMask.GetMask("Floor", "Interactable"));
+        contactFilter.SetLayerMask(LayerMask.GetMask("Floor", "Throwable"));
         contactFilter.SetNormalAngle(floorAngle - floorNormalAlpha, floorAngle + floorNormalAlpha);
 
         if (GameManager.Instance == null) Debug.Log("ERROR: No GameManager instance!");
