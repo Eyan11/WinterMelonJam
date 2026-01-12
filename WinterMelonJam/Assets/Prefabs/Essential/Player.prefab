@@ -160,13 +160,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744598968683097865}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6570199729562092542}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2526022838144353595
 SpriteRenderer:
   serializedVersion: 2
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -626087476257909385, guid: ae1e89445d6f10f488631e9332d91b24, type: 3}
+  m_Sprite: {fileID: -86533524470452288, guid: 8b4bb17f83e9e154184f3f6055f99cd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -373,8 +373,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.06, y: 0.06, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6570199729562092542}
+  m_Children: []
   m_Father: {fileID: 6767575252822721815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3511526556862740257
@@ -487,8 +486,7 @@ MonoBehaviour:
   maxThrowSpeed: 15
   chargeIncrement: 8
   throwSfx: {fileID: 8300000, guid: 69758cc50b48462489336d986e8a57ae, type: 3}
-  minArrowDist: 20
-  maxArrowDist: 80
+  arrowBaseTran: {fileID: 6570199729562092542}
 --- !u!114 &3576883674269182422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,11 +500,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowTrajectory
   lineRendResolution: 15
-  trajectoryMinYPos: -8
   lineCastResolution: 15
+  trajectoryMinYPos: -8
   solidLayers:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 1281
 --- !u!120 &2181846371134065317
 LineRenderer:
   serializedVersion: 3
@@ -515,7 +513,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002174383957274292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -790,6 +788,7 @@ Transform:
   - {fileID: 8671833542026736296}
   - {fileID: 102308885717086902}
   - {fileID: 1092984097927503934}
+  - {fileID: 6570199729562092542}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2628776560970141113
@@ -1243,7 +1242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6570199729562092542}
   m_Layer: 6
-  m_Name: Arrow Base
+  m_Name: Monkey Arrow Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1257,13 +1256,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3110235017814474842}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9043738799266036271}
-  m_Father: {fileID: 7149685031828932262}
+  m_Father: {fileID: 6767575252822721815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4771825767330161082
 GameObject:

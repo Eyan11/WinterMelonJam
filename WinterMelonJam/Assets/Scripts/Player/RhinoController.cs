@@ -39,7 +39,7 @@ public class RhinoController : MonoBehaviour
         body = transform.parent.GetComponent<Rigidbody2D>();
 
         scale = transform.parent.GetComponent<Collider2D>().bounds.size;
-        solidMask = LayerMask.GetMask("Floor", "Default", "Collidable Interactables");
+        solidMask = LayerMask.GetMask("Floor", "Default", "Breakable", "Throwable");
         maskWheelManager = FindFirstObjectByType<MaskWheelManager>();
         anim = GetComponent<Animator>();
         vfxAnim = transform.GetChild(0).gameObject.GetComponent<Animator>();

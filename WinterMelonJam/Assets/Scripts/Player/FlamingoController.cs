@@ -137,12 +137,12 @@ public class FlamingoController : MonoBehaviour
     private void OnGrounded()
     {
         anim.SetBool("isGrounded", true);
+        usedUpdraft = false;
 
         if (gliding)
         {
             gliding = false;
             anim.SetBool("isGliding", gliding);
-            usedUpdraft = false;
             updraftDeactivated = true;
         }
     }
