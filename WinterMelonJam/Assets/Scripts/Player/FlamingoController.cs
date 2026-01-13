@@ -138,6 +138,7 @@ public class FlamingoController : MonoBehaviour
     {
         anim.SetBool("isGrounded", true);
         usedUpdraft = false;
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.Flamingo);
 
         if (gliding)
         {
@@ -154,6 +155,7 @@ public class FlamingoController : MonoBehaviour
 
         gliding = holdingSpacebar;
         anim.SetBool("isGliding", gliding);
+        CanvasManager.Instance.SwitchControlsUI(ControlsType.FlamingoFly);
     }
 
     // Subscribed to PlayerManager onDeathEvent

@@ -743,8 +743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GiraffeController
   flamingoMoveSpeed: 3
-  jumpSpeed: 7
-  updraftPower: 5
+  jumpSpeed: 5
+  updraftPower: 6
   flamingoFlapSfx: {fileID: 8300000, guid: 4b04c79a1856eaa40a8c890394c21057, type: 3}
 --- !u!1 &2239850967413529913
 GameObject:
@@ -1086,10 +1086,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6ef2cb6d-e72c-49ba-b335-2b3a9e74099e
     m_ActionName: 'UI/SwitchMasks[/Keyboard/q]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a5be14d6-f015-43c6-9a00-c8a8a1a19fba
-    m_ActionName: 'Player/Restart[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

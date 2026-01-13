@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;  // Needed to reference level text component
 
-public enum ControlsType { None, Default, Monkey, MonkeyThrow, MonkeyClimb, Rhino, Turtle, Flamingo}
+public enum ControlsType { None, Default, Monkey, MonkeyThrow, MonkeyClimb, Rhino, Turtle, Flamingo, FlamingoFly}
 
 public class CanvasManager : MonoBehaviour
 {
@@ -66,36 +66,30 @@ public class CanvasManager : MonoBehaviour
                 controlsText.text = "";
                 break;
             case ControlsType.Default:
-                //controlsText.text = "Move - A & D \nJump - Space";
                 controlsText.text = "";
                 break;
             case ControlsType.Monkey:
-                //controlsText.text = "Move - A & D \nJump - Space \nPickup - Left Mouse Button";
                 controlsText.text = "Pickup Box - Left Mouse Button";
                 break;
             case ControlsType.MonkeyThrow:
-                //controlsText.text = "Move - A & D \nThrow - Space (hold to charge) \nDrop - Left Mouse Button";
                 controlsText.text = "Throw - Hold Space to Charge \nDrop - Left Mouse Button";
                 break;
             case ControlsType.MonkeyClimb:
-                //controlsText.text = "Climb - W & S \nJump - Space";
                 controlsText.text = "Jump - Space";
                 break;
             case ControlsType.Rhino:
-                //controlsText.text = "Move - A & D \nCharge - Space";
                 controlsText.text = "Charge - Space";
                 break;
             case ControlsType.Turtle:
-                //controlsText.text = "Move - A & D \nThrow Shell - Space";
                 controlsText.text = "Throw Shell - Hold Space to Aim";
                 break;
             case ControlsType.Flamingo:
-                //controlsText.text = "Move - A & D \nGlide - Hold Space \nUpdraft - Left Mouse Button";
+                controlsText.text = "Glide - Hold Space";
+                break;
+            case ControlsType.FlamingoFly:
                 controlsText.text = "Glide - Hold Space \nUpdraft - Left Mouse Button";
                 break;
-
         }
-        //controlsText.text += "\nSwitch Masks - Hold Right Mouse Button";
     }
 
 
