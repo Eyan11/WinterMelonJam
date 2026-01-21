@@ -61,18 +61,18 @@ MonoBehaviour:
   - threeStar: 2
     twoStar: 3
     oneStar: 5
-  - threeStar: 0
-    twoStar: 0
-    oneStar: 0
+  - threeStar: 3
+    twoStar: 4
+    oneStar: 5
   - threeStar: 8
     twoStar: 9
     oneStar: 10
   - threeStar: 4
     twoStar: 5
     oneStar: 6
-  - threeStar: 0
-    twoStar: 0
-    oneStar: 0
+  - threeStar: 4
+    twoStar: 5
+    oneStar: 6
   - threeStar: 7
     twoStar: 9
     oneStar: 10
