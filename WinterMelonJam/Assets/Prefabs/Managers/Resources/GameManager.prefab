@@ -47,20 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   levelStarInfo:
   - threeStar: 2
-    twoStar: 4
-    oneStar: 6
+    twoStar: 3
+    oneStar: 4
   - threeStar: 2
     twoStar: 3
     oneStar: 4
   - threeStar: 2
     twoStar: 3
-    oneStar: 5
+    oneStar: 4
   - threeStar: 4
     twoStar: 5
-    oneStar: 7
+    oneStar: 6
   - threeStar: 2
     twoStar: 3
-    oneStar: 5
+    oneStar: 4
   - threeStar: 3
     twoStar: 4
     oneStar: 5
@@ -74,14 +74,14 @@ MonoBehaviour:
     twoStar: 5
     oneStar: 6
   - threeStar: 7
-    twoStar: 9
-    oneStar: 10
-  - threeStar: 0
-    twoStar: 0
-    oneStar: 0
-  - threeStar: 0
-    twoStar: 0
-    oneStar: 0
+    twoStar: 8
+    oneStar: 9
+  - threeStar: 6
+    twoStar: 7
+    oneStar: 8
+  - threeStar: 4
+    twoStar: 5
+    oneStar: 6
 --- !u!82 &2780393005778299442
 AudioSource:
   m_ObjectHideFlags: 0

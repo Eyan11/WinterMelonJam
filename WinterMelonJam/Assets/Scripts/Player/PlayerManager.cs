@@ -87,11 +87,11 @@ public class PlayerManager : MonoBehaviour
         
         TriggerOnDeathEvent();              // Tell animal controllers to deactivate themselves
 
-        // Set both colliders to triggers
-        coll.isTrigger = true;
+        // Disable both colliders to prevent collision with doors
+        coll.enabled = false; 
         CapsuleCollider2D capsuleColl = GetComponent<CapsuleCollider2D>();
         if(capsuleColl != null)
-            capsuleColl.isTrigger = true;
+            capsuleColl.enabled = false;
         
         // Disable input
         PlayerInput input = GetComponent<PlayerInput>();
