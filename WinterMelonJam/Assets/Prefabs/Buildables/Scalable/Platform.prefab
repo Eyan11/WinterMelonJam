@@ -180,4 +180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionTileParity
   activeInRuntime: 0
-  transformScaleLock: {x: 1, y: 1, z: 1}
+  transformScaleLock: {x: 1, y: 2, z: 1}
+  secondarySprites: []
