@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 15, y: 15}
   m_EdgeRadius: 0
 --- !u!114 &6745897551898613597
 MonoBehaviour:
@@ -151,4 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccae9cc3ad496a5479de4abf08cf8961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyCollection
-  keyCollected: 0
+  doorUnlock: {fileID: 0}
