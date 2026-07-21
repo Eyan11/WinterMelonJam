@@ -956,11 +956,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.84
+      value: 4.8400006
       objectReference: {fileID: 0}
     - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8655993063209774178, guid: a5607a0506f526f449cf0004950995be, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1318,11 +1318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3628425935588322119, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02071333
+      value: -0.02108717
       objectReference: {fileID: 0}
     - target: {fileID: 3628425935588322119, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.2207613
+      value: 5.4281898
       objectReference: {fileID: 0}
     - target: {fileID: 3982206512699921883, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_Size.x
@@ -1330,15 +1330,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982206512699921883, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_Size.y
-      value: 9.628696
+      value: 9.060155
       objectReference: {fileID: 0}
     - target: {fileID: 3982206512699921883, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_Offset.x
-      value: -0.019397259
+      value: -0.019397736
       objectReference: {fileID: 0}
     - target: {fileID: 3982206512699921883, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: m_Offset.y
-      value: 4.6079035
+      value: 4.507529
       objectReference: {fileID: 0}
     - target: {fileID: 4495441662590702832, guid: 6c35737181ac1ae4ab37e976e87fd694, type: 3}
       propertyPath: Target.TrackingTarget
