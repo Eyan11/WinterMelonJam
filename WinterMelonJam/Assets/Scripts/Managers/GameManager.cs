@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
     {
         curLevelMaskSwitches = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public void CompleteLevel()
