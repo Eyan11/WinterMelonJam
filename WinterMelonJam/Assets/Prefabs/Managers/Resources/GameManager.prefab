@@ -73,9 +73,9 @@ MonoBehaviour:
   - threeStar: 4
     twoStar: 5
     oneStar: 6
-  - threeStar: 7
-    twoStar: 8
-    oneStar: 9
+  - threeStar: 6
+    twoStar: 7
+    oneStar: 8
   - threeStar: 6
     twoStar: 7
     oneStar: 8
